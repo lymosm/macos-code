@@ -1,0 +1,21 @@
+//
+//  test_driverkit.iig
+//  test-driverkit
+//
+//  Created by lymos on 2022/9/25.
+//
+
+#ifndef test_driverkit_h
+#define test_driverkit_h
+
+#include <Availability.h>
+#include <DriverKit/IOService.iig>
+
+class test_driverkit: public IOService
+{
+public:
+    virtual kern_return_t
+    Start(IOService * provider) override;
+};
+
+#endif /* test_driverkit_h */

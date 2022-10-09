@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E708A1A28E050CA0076571D /* DriverKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E708A1928E050CA0076571D /* DriverKit.framework */; };
+		1E708A1D28E050CA0076571D /* test_driverkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E708A1C28E050CA0076571D /* test_driverkit.cpp */; };
+		1E708A1F28E050CA0076571D /* test_driverkit.iig in Sources */ = {isa = PBXBuildFile; fileRef = 1E708A1E28E050CA0076571D /* test_driverkit.iig */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1E708A1628E050CA0076571D /* com.test-driverkit.test-driverkit.dext */ = {isa = PBXFileReference; explicitFileType = "wrapper.driver-extension"; includeInIndex = 0; path = "com.test-driverkit.test-driverkit.dext"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E708A1928E050CA0076571D /* DriverKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DriverKit.framework; path = Library/Frameworks/DriverKit.framework; sourceTree = DEVELOPER_DIR; };
+		1E708A1C28E050CA0076571D /* test_driverkit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_driverkit.cpp; sourceTree = "<group>"; };
+		1E708A1E28E050CA0076571D /* test_driverkit.iig */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.iig; path = test_driverkit.iig; sourceTree = "<group>"; };
+		1E708A2028E050CA0076571D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E708A2128E050CA0076571D /* test_driverkit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = test_driverkit.entitlements; sourceTree = "<group>"; };
+		1E708A2928E051BC0076571D /* test_driverkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_driverkit.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E708A1328E050CA0076571D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E708A1A28E050CA0076571D /* DriverKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E708A0C28E050CA0076571D = {
+			isa = PBXGroup;
+			children = (
+				1E708A1B28E050CA0076571D /* test-driverkit */,
+				1E708A1828E050CA0076571D /* Frameworks */,
+				1E708A1728E050CA0076571D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1E708A1728E050CA0076571D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E708A1628E050CA0076571D /* com.test-driverkit.test-driverkit.dext */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E708A1828E050CA0076571D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E708A1928E050CA0076571D /* DriverKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1E708A1B28E050CA0076571D /* test-driverkit */ = {
+			isa = PBXGroup;
+			children = (
+				1E708A1C28E050CA0076571D /* test_driverkit.cpp */,
+				1E708A1E28E050CA0076571D /* test_driverkit.iig */,
+				1E708A2028E050CA0076571D /* Info.plist */,
+				1E708A2128E050CA0076571D /* test_driverkit.entitlements */,
+				1E708A2928E051BC0076571D /* test_driverkit.h */,
+			);
+			path = "test-driverkit";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1E708A1128E050CA0076571D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1E708A1528E050CA0076571D /* test-driverkit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E708A2428E050CA0076571D /* Build configuration list for PBXNativeTarget "test-driverkit" */;
+			buildPhases = (
+				1E708A1128E050CA0076571D /* Headers */,
+				1E708A1228E050CA0076571D /* Sources */,
+				1E708A1328E050CA0076571D /* Frameworks */,
+				1E708A1428E050CA0076571D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "test-driverkit";
+			productName = "test-driverkit";
+			productReference = 1E708A1628E050CA0076571D /* com.test-driverkit.test-driverkit.dext */;
+			productType = "com.apple.product-type.driver-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E708A0D28E050CA0076571D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					1E708A1528E050CA0076571D = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = 1E708A1028E050CA0076571D /* Build configuration list for PBXProject "test-driverkit" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1E708A0C28E050CA0076571D;
+			productRefGroup = 1E708A1728E050CA0076571D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E708A1528E050CA0076571D /* test-driverkit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E708A1428E050CA0076571D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E708A1228E050CA0076571D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E708A1F28E050CA0076571D /* test_driverkit.iig in Sources */,
+				1E708A1D28E050CA0076571D /* test_driverkit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1E708A2228E050CA0076571D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DRIVERKIT_DEPLOYMENT_TARGET = 20.2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = driverkit;
+			};
+			name = Debug;
+		};
+		1E708A2328E050CA0076571D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DRIVERKIT_DEPLOYMENT_TARGET = 20.2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = driverkit;
+			};
+			name = Release;
+		};
+		1E708A2528E050CA0076571D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "test-driverkit/test_driverkit.entitlements";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "test-driverkit/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test-driverkit.test-driverkit";
+				PRODUCT_NAME = "$(inherited)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1E708A2628E050CA0076571D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "test-driverkit/test_driverkit.entitlements";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "test-driverkit/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test-driverkit.test-driverkit";
+				PRODUCT_NAME = "$(inherited)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E708A1028E050CA0076571D /* Build configuration list for PBXProject "test-driverkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E708A2228E050CA0076571D /* Debug */,
+				1E708A2328E050CA0076571D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E708A2428E050CA0076571D /* Build configuration list for PBXNativeTarget "test-driverkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E708A2528E050CA0076571D /* Debug */,
+				1E708A2628E050CA0076571D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E708A0D28E050CA0076571D /* Project object */;
+}
