@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
- "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleIdentifier</key>
-  <string>com.lymos.AsusFnKeyInjector</string>
-
-  <key>CFBundleVersion</key>
-  <string>1.0.0</string>
-
-  <key>CFBundleExecutable</key>
-  <string>AsusFnKeyInjector</string>
-
-  <key>OSBundleLibraries</key>
-  <dict>
-    <key>com.apple.kpi.iokit</key>
-    <string>18.0.0</string>
-    <key>com.apple.kpi.libkern</key>
-    <string>18.0.0</string>
-    <key>com.apple.iokit.IOHIDSystem</key>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.yourname.driver.AsusFnKeyInjector</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>AsusFnKeyInjector</string>
+    <key>CFBundlePackageType</key>
+    <string>KEXT</string>
+    <key>CFBundleShortVersionString</key>
     <string>1.0.0</string>
-  </dict>
-
-  <key>IOKitPersonalities</key>
-  <dict>
-    <key>AsusFnKeyInjector</key>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    <key>IOKitPersonalities</key>
     <dict>
-      <key>IOClass</key>
-      <string>AsusFnKeyInjector</string>
-      <key>IOProviderClass</key>
-      <string>IOHIKeyboard</string>
-      <key>CFBundleIdentifier</key>
-      <string>com.lymos.AsusFnKeyInjector</string>
+        <key>AsusFnKeyInjector</key>
+        <dict>
+            <key>CFBundleIdentifier</key>
+            <string>com.yourname.driver.AsusFnKeyInjector</string>
+            <key>IOClass</key>
+            <string>AsusFnKeyInjector</string>
+            <key>IOMatchCategory</key>
+            <string>AsusFnKeyInjector</string>
+            <key>IOProviderClass</key>
+            <string>IOACPIPlatformDevice</string>
+            <key>IONameMatch</key>
+            <string>ATKD</string> <!-- ASUS ACPI 设备通常为 ATKD -->
+        </dict>
     </dict>
-  </dict>
+    <key>OSBundleLibraries</key>
+    <dict>
+        <key>com.apple.kpi.iokit</key>
+        <string>20.5.0</string>
+        <key>com.apple.kpi.libkern</key>
+        <string>20.5.0</string>
+        <key>com.apple.iokit.IOHIDFamily</key>
+        <string>1.8.0</string>
+        <key>com.apple.iokit.IOACPIFamily</key>
+        <string>1.0.0</string>
+    </dict>
 </dict>
 </plist>
-
