@@ -7,4 +7,6 @@ xcuserdata
 xcshareddata
 project.xcworkspace
 VoodooInput
+/MacKernelSDK
 bin
+Lilu.kext

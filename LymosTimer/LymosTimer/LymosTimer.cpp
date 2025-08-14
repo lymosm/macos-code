@@ -138,9 +138,10 @@ bool LymosTimer::start(IOService *provider) {
         return false;
 
     setProperty("VersionInfo", kextVersion);
-
-    ADDPR(debugEnabled) = checkKernelArgument("-brkeysdbg") || checkKernelArgument("-liludbgall");
+    // ADDPR(debugEnabled) = checkKernelArgument("-brkeysdbg") || checkKernelArgument("-liludbgall");
+    ADDPR(debugEnabled) = true;
     PE_parse_boot_argn("liludelay", &ADDPR(debugPrintDelay), sizeof(ADDPR(debugPrintDelay)));
+    DBGLOG("LymosTimer", " %s start ing", provider->getName());
 
     workLoop = IOWorkLoop::workLoop();
     commandGate = IOCommandGate::commandGate(this);
@@ -148,6 +149,7 @@ bool LymosTimer::start(IOService *provider) {
         SYSLOG("brkeys", "failed to add commandGate");
         return false;
     }
+    DBGLOG("LymosTimer", " %s start ing 2", provider->getName());
 
     _notificationServices = OSSet::withCapacity(1);
     _deliverNotification = OSSymbol::withCString(kDeliverNotifications);
@@ -155,6 +157,7 @@ bool LymosTimer::start(IOService *provider) {
         SYSLOG("brkeys", "failed to add notification service");
         return false;
     }
+    DBGLOG("LymosTimer", " %s start ing 3", provider->getName());
 
     OSDictionary * propertyMatch = propertyMatching(_deliverNotification, kOSBooleanTrue);
     if (propertyMatch) {

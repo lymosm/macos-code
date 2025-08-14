@@ -310,7 +310,7 @@
 					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
 				);
 				MODULE_NAME = as.acidanthera.BrightnessKeys;
-				PRODUCT_BUNDLE_IDENTIFIER = as.acidanthera.BrightnessKeys;
+				PRODUCT_BUNDLE_IDENTIFIER = lymos.LymosTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
@@ -333,7 +333,7 @@
 					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
 				);
 				MODULE_NAME = as.acidanthera.BrightnessKeys;
-				PRODUCT_BUNDLE_IDENTIFIER = as.acidanthera.BrightnessKeys;
+				PRODUCT_BUNDLE_IDENTIFIER = lymos.LymosTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
