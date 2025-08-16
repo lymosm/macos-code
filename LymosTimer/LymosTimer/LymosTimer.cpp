@@ -12,6 +12,8 @@ uint32_t ADDPR(debugPrintDelay) = 0;
 
 #define kDeliverNotifications   "RM,deliverNotifications"
 
+
+
 // Constants for keyboards
 enum
 {
@@ -133,6 +135,14 @@ void LymosTimer::getBrightnessPanel() {
     DeviceInfo::deleter(info);
 }
 
+IOReturn LymosTimer::IOHibernateSystemWake(void)
+{
+    // IOReturn result = FunctionCast(IOHibernateSystemWake, callbackHBFX->orgIOHibernateSystemWake)();
+    DBGLOG("lymosdebug", " Wake");
+    // return result;
+    return true;
+}
+
 bool LymosTimer::start(IOService *provider) {
     if (!super::start(provider))
         return false;
@@ -141,7 +151,7 @@ bool LymosTimer::start(IOService *provider) {
     // ADDPR(debugEnabled) = checkKernelArgument("-brkeysdbg") || checkKernelArgument("-liludbgall");
     ADDPR(debugEnabled) = true;
     PE_parse_boot_argn("liludelay", &ADDPR(debugPrintDelay), sizeof(ADDPR(debugPrintDelay)));
-    DBGLOG("LymosTimer", " %s start ing", provider->getName());
+    DBGLOG("lymosdebug", " %s start ing", provider->getName());
 
     workLoop = IOWorkLoop::workLoop();
     commandGate = IOCommandGate::commandGate(this);
@@ -149,7 +159,25 @@ bool LymosTimer::start(IOService *provider) {
         SYSLOG("brkeys", "failed to add commandGate");
         return false;
     }
-    DBGLOG("LymosTimer", " %s start ing 2", provider->getName());
+    DBGLOG("lymosdebug", " %s start ing 2", provider->getName());
+    
+    // 使用显式 cast 避开 IOPMrootDomain 不可见的问题
+    IOService *rootDomain = reinterpret_cast<IOService*>(IOService::getPMRootDomain());
+    if (rootDomain) {
+        powerNotifier = rootDomain->registerInterest(gIOGeneralInterest,
+                                                     powerEventHandler,
+                                                     this, 0);
+        if (!powerNotifier) {
+            SYSLOG("lymosdebug", "failed to register PM rootDomain interest");
+        } else {
+            DBGLOG("lymosdebug", "PM rootDomain interest registered");
+        }
+    } else {
+        DBGLOG("lymosdebug", "PM rootDomain not found");
+    }
+
+
+
 
     _notificationServices = OSSet::withCapacity(1);
     _deliverNotification = OSSymbol::withCString(kDeliverNotifications);
@@ -157,7 +185,6 @@ bool LymosTimer::start(IOService *provider) {
         SYSLOG("brkeys", "failed to add notification service");
         return false;
     }
-    DBGLOG("LymosTimer", " %s start ing 3", provider->getName());
 
     OSDictionary * propertyMatch = propertyMatching(_deliverNotification, kOSBooleanTrue);
     if (propertyMatch) {
@@ -195,6 +222,11 @@ bool LymosTimer::start(IOService *provider) {
 }
 
 void LymosTimer::stop(IOService *provider) {
+    
+    if (powerNotifier) {
+            powerNotifier->remove();
+            powerNotifier = nullptr;
+        }
     //
     // Release ACPI provider for panel and PS2K ACPI device
     //
@@ -220,9 +252,45 @@ void LymosTimer::stop(IOService *provider) {
     workLoop->removeEventSource(commandGate);
     OSSafeReleaseNULL(commandGate);
     OSSafeReleaseNULL(workLoop);
+    
+    
 
     super::stop(provider);
 }
+
+IOReturn LymosTimer::powerEventHandler(void *target, void *refCon, UInt32 messageType,
+                                       IOService *provider, void *messageArgument, vm_size_t argSize)
+{
+    DBGLOG("lymosdebug", "powerEventHandler");
+    auto self = OSDynamicCast(LymosTimer, reinterpret_cast<OSMetaClassBase*>(target));
+    if (!self) {
+        DBGLOG("lymosdebug", "powerEventHandler: cannot cast target");
+        return kIOReturnError;
+    }
+
+    switch (messageType) {
+        case kIOMessageSystemWillSleep:
+            DBGLOG("lymosdebug", "System will sleep (kIOMessageSystemWillSleep)");
+            break;
+
+        case kIOMessageCanSystemSleep:
+            DBGLOG("lymosdebug", "System can sleep (kIOMessageCanSystemSleep)");
+            break;
+
+        case kIOMessageSystemHasPoweredOn:
+            DBGLOG("lymosdebug", "System has powered on (wake)");
+            break;
+
+        default:
+            DBGLOG("lymosdebug", "Power event received type=0x%08x", messageType);
+            break;
+    }
+
+    return kIOReturnSuccess;
+}
+
+
+
 
 IOReturn LymosTimer::_panelNotification(void *target, void *refCon, UInt32 messageType, IOService *provider, void *messageArgument, vm_size_t argSize) {
     if (messageType == kIOACPIMessageDeviceNotification) {

@@ -8,6 +8,11 @@
 #include <IOKit/acpi/IOACPIPlatformDevice.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/IODeviceTreeSupport.h>
+#include <IOKit/pwr_mgt/IOPMPowerSource.h>
+#include <IOKit/IOMessage.h>       // 为 kIOMessageSystemWillSleep 等常量
+
+
+
 
 
 //
@@ -27,10 +32,15 @@
 #define kIOACPILCDPanel                 0x0400  // Internal/Integrated Digital Flat Panel
 
 #define kIOACPILegacyPanel              0x0110  // Integrated LCD Panel #1 using a common, backwards compatible ID
+class IOPMrootDomain; // 前向声明
 
 class LymosTimer : public IOHIKeyboard {
     OSDeclareDefaultStructors(LymosTimer)
 private:
+    
+    IONotifier *powerNotifier {nullptr};
+        static IOReturn powerEventHandler(void *target, void *refCon, UInt32 messageType, IOService *provider, void *messageArgument, vm_size_t argSize);
+    
     // ACPI support for panel brightness
     IOACPIPlatformDevice *      _panel {nullptr};
     IOACPIPlatformDevice *      _panelFallback {nullptr};
@@ -47,6 +57,8 @@ private:
     IONotifier *_terminateNotify {nullptr};
     OSSet *_notificationServices {nullptr};
     const OSSymbol *_deliverNotification {nullptr};
+    
+    static IOReturn     IOHibernateSystemWake(void);
 
     void dispatchMessageGated(int* message, void* data);
     bool notificationHandler(void * refCon, IOService * newService, IONotifier * notifier);
