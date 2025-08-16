@@ -12,8 +12,6 @@ uint32_t ADDPR(debugPrintDelay) = 0;
 
 #define kDeliverNotifications   "RM,deliverNotifications"
 
-
-
 // Constants for keyboards
 enum
 {
@@ -135,6 +133,9 @@ void LymosTimer::getBrightnessPanel() {
     DeviceInfo::deleter(info);
 }
 
+
+
+
 IOReturn LymosTimer::IOHibernateSystemWake(void)
 {
     // IOReturn result = FunctionCast(IOHibernateSystemWake, callbackHBFX->orgIOHibernateSystemWake)();
@@ -162,20 +163,23 @@ bool LymosTimer::start(IOService *provider) {
     DBGLOG("lymosdebug", " %s start ing 2", provider->getName());
     
     // 使用显式 cast 避开 IOPMrootDomain 不可见的问题
-    IOService *rootDomain = reinterpret_cast<IOService*>(IOService::getPMRootDomain());
-    if (rootDomain) {
-        powerNotifier = rootDomain->registerInterest(gIOGeneralInterest,
-                                                     powerEventHandler,
-                                                     this, 0);
-        if (!powerNotifier) {
-            SYSLOG("lymosdebug", "failed to register PM rootDomain interest");
-        } else {
-            DBGLOG("lymosdebug", "PM rootDomain interest registered");
+    // ✨ 创建唤醒后延时定时器
+        postWakeTimer = IOTimerEventSource::timerEventSource(this, &LymosTimer::postWakeTimerFired);
+        if (!postWakeTimer || workLoop->addEventSource(postWakeTimer) != kIOReturnSuccess) {
+            SYSLOG("lymosdebug", "failed to create/attach postWakeTimer");
+            return false;
         }
-    } else {
-        DBGLOG("lymosdebug", "PM rootDomain not found");
-    }
 
+        // ✨ 注册 PM rootDomain interest（你之前的实现可以替换成下面这段）
+        IOService *rootDomain = reinterpret_cast<IOService*>(IOService::getPMRootDomain());
+        if (rootDomain) {
+            powerNotifier = rootDomain->registerInterest(gIOGeneralInterest, powerEventHandler, this, 0);
+            if (!powerNotifier) {
+                SYSLOG("lymosdebug", "failed to register PM rootDomain interest");
+            } else {
+                DBGLOG("lymosdebug", "PM rootDomain interest registered");
+            }
+        }
 
 
 
@@ -223,7 +227,13 @@ bool LymosTimer::start(IOService *provider) {
 
 void LymosTimer::stop(IOService *provider) {
     
-    if (powerNotifier) {
+    if (postWakeTimer) {
+            postWakeTimer->cancelTimeout();
+            workLoop->removeEventSource(postWakeTimer);
+            OSSafeReleaseNULL(postWakeTimer);
+        }
+
+        if (powerNotifier) {
             powerNotifier->remove();
             powerNotifier = nullptr;
         }
@@ -279,6 +289,8 @@ IOReturn LymosTimer::powerEventHandler(void *target, void *refCon, UInt32 messag
 
         case kIOMessageSystemHasPoweredOn:
             DBGLOG("lymosdebug", "System has powered on (wake)");
+            // ✨ 唤醒后 2 秒再做同步（可按需调 delay）
+                        self->schedulePostWakeSync(2000);
             break;
 
         default:
@@ -289,7 +301,48 @@ IOReturn LymosTimer::powerEventHandler(void *target, void *refCon, UInt32 messag
     return kIOReturnSuccess;
 }
 
+void LymosTimer::schedulePostWakeSync(uint32_t delayMs) {
+    if (!postWakeTimer) return;
+    // 如果短时间内多次唤醒/重复触发，先取消旧的
+    postWakeTimer->cancelTimeout();
+    postWakeTimer->setTimeoutMS(delayMs);
+    DBGLOG("lymosdebug", "post-wake time sync scheduled in %u ms", delayMs);
+}
 
+void LymosTimer::postWakeTimerFired(OSObject *owner, IOTimerEventSource *sender) {
+    auto self = OSDynamicCast(LymosTimer, owner);
+    if (!self || !self->commandGate) return;
+    self->commandGate->runAction(
+        OSMemberFunctionCast(IOCommandGate::Action, self, &LymosTimer::performTimeSyncGated)
+    );
+}
+
+void LymosTimer::performTimeSyncGated() {
+    // 记录唤醒时间（可用于诊断）
+    uint64_t uptime = 0;
+    clock_get_uptime(&uptime);
+    setProperty("LastWakeUptime", (uint64_t)uptime, 64);
+
+    clock_sec_t sec; clock_usec_t usec;
+    clock_get_calendar_microtime(&sec, &usec);
+    setProperty("LastWakeCalendarSec", (uint64_t)sec, 64);
+    setProperty("LastWakeCalendarUSec", (uint64_t)usec, 64);
+
+    // ✨ 调用可选的外部时间同步实现
+        DBGLOG("lymosdebug", "invoking LymosTimeSync_Perform()");
+        LymosTimeSync_Perform();
+        DBGLOG("lymosdebug", "time sync complete");
+    
+}
+
+void LymosTimer::LymosTimeSync_Perform(void) {
+    // 这里执行真正的时间同步：例如
+    // - 重新从 RTC 读取并校准你的驱动内部计时
+    // - 触发用户态 daemon 做 NTP 校准（通过 IOUserClient 通知）
+    // - 重新对齐你的硬件/固件时基
+    // 示例只做日志：
+    DBGLOG("lymosdebug", "LymosTimeSync: perform time sync after wake\n");
+}
 
 
 IOReturn LymosTimer::_panelNotification(void *target, void *refCon, UInt32 messageType, IOService *provider, void *messageArgument, vm_size_t argSize) {

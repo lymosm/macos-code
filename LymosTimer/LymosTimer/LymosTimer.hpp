@@ -10,6 +10,7 @@
 #include <IOKit/IODeviceTreeSupport.h>
 #include <IOKit/pwr_mgt/IOPMPowerSource.h>
 #include <IOKit/IOMessage.h>       // 为 kIOMessageSystemWillSleep 等常量
+#include <IOKit/IOTimerEventSource.h> // 新增
 
 
 
@@ -37,9 +38,22 @@ class IOPMrootDomain; // 前向声明
 class LymosTimer : public IOHIKeyboard {
     OSDeclareDefaultStructors(LymosTimer)
 private:
+    // ✨ 唤醒后延时任务
+    IOTimerEventSource *postWakeTimer {nullptr};
+
+        // ✨ power/PM
+        IONotifier *powerNotifier {nullptr};
+        static IOReturn powerEventHandler(void *target, void *refCon, UInt32 messageType,
+                                          IOService *provider, void *messageArgument, vm_size_t argSize);
+
+        // ✨ 定时器回调 + 实际执行逻辑（在 gate 内）
+        static void postWakeTimerFired(OSObject *owner, IOTimerEventSource *sender);
+        void performTimeSyncGated();
+
+        // ✨ 通过 commandGate 在 gate 中调用
+        void schedulePostWakeSync(uint32_t delayMs = 2000);
     
-    IONotifier *powerNotifier {nullptr};
-        static IOReturn powerEventHandler(void *target, void *refCon, UInt32 messageType, IOService *provider, void *messageArgument, vm_size_t argSize);
+    void LymosTimeSync_Perform(void);
     
     // ACPI support for panel brightness
     IOACPIPlatformDevice *      _panel {nullptr};
