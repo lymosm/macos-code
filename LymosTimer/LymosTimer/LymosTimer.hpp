@@ -11,10 +11,7 @@
 #include <IOKit/pwr_mgt/IOPMPowerSource.h>
 #include <IOKit/IOMessage.h>       // 为 kIOMessageSystemWillSleep 等常量
 #include <IOKit/IOTimerEventSource.h> // 新增
-
-
-
-
+#include "LymosTimerUserClient.hpp"
 
 //
 // ACPI message and device type for brightness keys.
@@ -55,6 +52,11 @@ private:
     
     void LymosTimeSync_Perform(void);
     
+    OSSet* _userClients = nullptr;   // 保存所有连接的 user client
+    LymosTimerUserClient* userClient {nullptr};
+    friend class LymosTimerUserClient; // 让 user client 能访问需要的接口
+
+    
     // ACPI support for panel brightness
     IOACPIPlatformDevice *      _panel {nullptr};
     IOACPIPlatformDevice *      _panelFallback {nullptr};
@@ -79,6 +81,10 @@ private:
     void notificationHandlerGated(IOService * newService, IONotifier * notifier);
 
 public:
+    
+    virtual IOReturn newUserClient(task_t owningTask, void* securityID, UInt32 type,
+                                   OSDictionary* properties, IOUserClient** handler) override;
+
     IORegistryEntry* getDeviceByAddress(IORegistryEntry *parent, UInt64 address, UInt64 mask = 0xFFFFFFFF);
     void getBrightnessPanel();
     static IOReturn _panelNotification(void *target, void *refCon, UInt32 messageType, IOService *provider, void *messageArgument, vm_size_t argSize);

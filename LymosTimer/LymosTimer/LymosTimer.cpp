@@ -6,6 +6,12 @@
 #include <Headers/kern_devinfo.hpp>
 #include <Headers/kern_version.hpp>
 #include "LymosTimer.hpp"
+#include <sys/proc.h>
+#include <sys/systm.h>
+#include <libkern/libkern.h>
+#include <kern/task.h>
+#include <kern/thread.h>
+
 
 bool ADDPR(debugEnabled) = false;
 uint32_t ADDPR(debugPrintDelay) = 0;
@@ -59,6 +65,53 @@ IORegistryEntry* LymosTimer::getDeviceByAddress(IORegistryEntry *parent, UInt64 
     }
     OSSafeReleaseNULL(iter);
     return child;
+}
+
+// newUserClient: 允许一个用户态连接
+IOReturn LymosTimer::newUserClient(task_t owningTask, void* securityID, UInt32 type,
+                                   OSDictionary* properties, IOUserClient** handler)
+{
+    DBGLOG("lymosdebug", " LymosTimer::newUserClienthhh");
+    /*
+    if (userClient) {
+        DBGLOG("lymosdebug", " LymosTimer::userClient in");
+        // 只允许单一 client；需要多 client 可改为 OSSet 维护
+        return kIOReturnExclusiveAccess;
+    }
+
+    auto uc = OSTypeAlloc(LymosTimerUserClient);
+    if (!uc) return kIOReturnNoMemory;
+
+    if (!uc->initWithTask(owningTask, securityID, type, properties) ||
+        !uc->attach(this) || !uc->start(this)) {
+        DBGLOG("lymosdebug", " LymosTimer::newUserClient initWithTask");
+        uc->release();
+        return kIOReturnInternalError;
+    }
+    DBGLOG("lymosdebug", " LymosTimer::newUserClient kIOReturnSuccess");
+    userClient = uc;
+    *handler = uc;
+    return kIOReturnSuccess;
+     */
+    
+    if (!_userClients) {
+        _userClients = OSSet::withCapacity(2); // 初始容量可调
+    }
+
+    auto uc = OSTypeAlloc(LymosTimerUserClient);
+    if (!uc) return kIOReturnNoMemory;
+
+    if (!uc->initWithTask(owningTask, securityID, type, properties) ||
+        !uc->attach(this) || !uc->start(this)) {
+        uc->release();
+        return kIOReturnInternalError;
+    }
+
+    // 加入集合
+    _userClients->setObject(uc);
+    *handler = uc;
+    return kIOReturnSuccess;
+
 }
 
 void LymosTimer::getBrightnessPanel() {
@@ -134,8 +187,6 @@ void LymosTimer::getBrightnessPanel() {
 }
 
 
-
-
 IOReturn LymosTimer::IOHibernateSystemWake(void)
 {
     // IOReturn result = FunctionCast(IOHibernateSystemWake, callbackHBFX->orgIOHibernateSystemWake)();
@@ -180,6 +231,16 @@ bool LymosTimer::start(IOService *provider) {
                 DBGLOG("lymosdebug", "PM rootDomain interest registered");
             }
         }
+    
+    /*
+    LymosTimerUserClient* uc = OSTypeAlloc(LymosTimerUserClient);
+    if (uc && uc->initWithTask(kernel_task, nullptr, 0, nullptr)) {
+        DBGLOG("lymosdebug", "LymosTimerUserClient registered in");
+        uc->attach(this);
+        uc->start(this);
+        userClient = uc; // 保存全局引用
+    }
+     */
 
 
 
@@ -237,6 +298,21 @@ void LymosTimer::stop(IOService *provider) {
             powerNotifier->remove();
             powerNotifier = nullptr;
         }
+    
+    if (_userClients) {
+        OSCollectionIterator* iter = OSCollectionIterator::withCollection(_userClients);
+        if (iter) {
+            IOUserClient* client;
+            while ((client = OSDynamicCast(IOUserClient, iter->getNextObject()))) {
+                client->detach(this);
+                client->release();
+            }
+            iter->release();
+        }
+        _userClients->flushCollection();
+    }
+
+
     //
     // Release ACPI provider for panel and PS2K ACPI device
     //
@@ -271,7 +347,7 @@ void LymosTimer::stop(IOService *provider) {
 IOReturn LymosTimer::powerEventHandler(void *target, void *refCon, UInt32 messageType,
                                        IOService *provider, void *messageArgument, vm_size_t argSize)
 {
-    DBGLOG("lymosdebug", "powerEventHandler");
+    // DBGLOG("lymosdebug", "powerEventHandler");
     auto self = OSDynamicCast(LymosTimer, reinterpret_cast<OSMetaClassBase*>(target));
     if (!self) {
         DBGLOG("lymosdebug", "powerEventHandler: cannot cast target");
@@ -290,7 +366,7 @@ IOReturn LymosTimer::powerEventHandler(void *target, void *refCon, UInt32 messag
         case kIOMessageSystemHasPoweredOn:
             DBGLOG("lymosdebug", "System has powered on (wake)");
             // ✨ 唤醒后 2 秒再做同步（可按需调 delay）
-                        self->schedulePostWakeSync(2000);
+                        self->schedulePostWakeSync(10000);
             break;
 
         default:
@@ -341,6 +417,27 @@ void LymosTimer::LymosTimeSync_Perform(void) {
     // - 触发用户态 daemon 做 NTP 校准（通过 IOUserClient 通知）
     // - 重新对齐你的硬件/固件时基
     // 示例只做日志：
+    // 通知用户态：1 = 需要进行网络时间同步
+    /*
+        if (userClient) {
+            userClient->postEvent(1);
+            DBGLOG("lymosdebug", "posted wake event to user client");
+        } else {
+            DBGLOG("lymosdebug", "no user client connected; skip userland sync");
+        }
+     */
+    
+    if (_userClients && _userClients->getCount() > 0) {
+        OSCollectionIterator* i = OSCollectionIterator::withCollection(_userClients);
+        if (i) {
+            while (auto client = OSDynamicCast(LymosTimerUserClient, i->getNextObject())) {
+                DBGLOG("lymosdebug", "posted wake event to user client");
+                client->postEvent(1);
+            }
+            i->release();
+        }
+    }
+
     DBGLOG("lymosdebug", "LymosTimeSync: perform time sync after wake\n");
 }
 

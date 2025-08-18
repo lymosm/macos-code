@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E80419E2E51755A00DA2495 /* LymosTimerUserClient.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1E80419D2E51755600DA2495 /* LymosTimerUserClient.hpp */; };
+		1E8041A02E51757100DA2495 /* LymosTimerUserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E80419F2E51756E00DA2495 /* LymosTimerUserClient.cpp */; };
 		1EDF77512E5038AD00B8E922 /* LymosHID2ACPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EDF77502E5038A900B8E922 /* LymosHID2ACPI.hpp */; };
 		1EDF77532E5038C200B8E922 /* LymosHID2ACPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDF77522E5038C000B8E922 /* LymosHID2ACPI.cpp */; };
 		3573FE3225223B8500DFC9F4 /* LymosTimer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* LymosTimer.hpp */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E80419D2E51755600DA2495 /* LymosTimerUserClient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LymosTimerUserClient.hpp; sourceTree = "<group>"; };
+		1E80419F2E51756E00DA2495 /* LymosTimerUserClient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LymosTimerUserClient.cpp; sourceTree = "<group>"; };
 		1EDF77502E5038A900B8E922 /* LymosHID2ACPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LymosHID2ACPI.hpp; sourceTree = "<group>"; };
 		1EDF77522E5038C000B8E922 /* LymosHID2ACPI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LymosHID2ACPI.cpp; sourceTree = "<group>"; };
 		3573FE2E25223B8500DFC9F4 /* LymosTimer.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LymosTimer.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,6 +27,11 @@
 		3573FE3525223B8500DFC9F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		358E312E2523A1E400C409AD /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E8041A12E51791A00DA2495 /* Daemon */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Daemon; sourceTree = "<group>"; };
+		1E8041A32E517A5A00DA2495 /* Script */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Script; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3573FE2B25223B8500DFC9F4 /* Frameworks */ = {
@@ -39,6 +48,8 @@
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
+				1E8041A32E517A5A00DA2495 /* Script */,
+				1E8041A12E51791A00DA2495 /* Daemon */,
 				3573FE3025223B8500DFC9F4 /* LymosTimer */,
 				3573FE2F25223B8500DFC9F4 /* Products */,
 				358E312D2523A1E400C409AD /* Frameworks */,
@@ -56,6 +67,8 @@
 		3573FE3025223B8500DFC9F4 /* LymosTimer */ = {
 			isa = PBXGroup;
 			children = (
+				1E80419F2E51756E00DA2495 /* LymosTimerUserClient.cpp */,
+				1E80419D2E51755600DA2495 /* LymosTimerUserClient.hpp */,
 				1EDF77522E5038C000B8E922 /* LymosHID2ACPI.cpp */,
 				1EDF77502E5038A900B8E922 /* LymosHID2ACPI.hpp */,
 				3573FE3125223B8500DFC9F4 /* LymosTimer.hpp */,
@@ -82,6 +95,7 @@
 			files = (
 				3573FE3225223B8500DFC9F4 /* LymosTimer.hpp in Headers */,
 				1EDF77512E5038AD00B8E922 /* LymosHID2ACPI.hpp in Headers */,
+				1E80419E2E51755A00DA2495 /* LymosTimerUserClient.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDF77532E5038C200B8E922 /* LymosHID2ACPI.cpp in Sources */,
+				1E8041A02E51757100DA2495 /* LymosTimerUserClient.cpp in Sources */,
 				3573FE3425223B8500DFC9F4 /* LymosTimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
