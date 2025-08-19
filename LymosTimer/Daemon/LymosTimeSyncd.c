@@ -1,9 +1,16 @@
-// LymosTimeSyncd.c — 调试版：每2秒心跳日志 + 打印关键变量
+// LymosTimeSyncd_msgloop.c
+// 可靠通知接收：专用 mach_msg() 线程 + IODataQueueAllocateNotificationPort
+//
+// 编译：clang -framework IOKit -framework CoreFoundation -o LymosTimeSyncd LymosTimeSyncd_msgloop.c
+// 运行：sudo ./LymosTimeSyncd
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <time.h>
+#include <pthread.h>
+#include <signal.h>
 #include <mach/mach.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
@@ -14,11 +21,12 @@
 
 static io_connect_t g_conn = IO_OBJECT_NULL;
 static IODataQueueMemory *g_queue = NULL;
-static CFMachPortRef g_cfNotifyPort = NULL;
-static CFRunLoopSourceRef g_notifySource = NULL;
-static mach_port_t g_notifyPort = MACH_PORT_NULL;
 static mach_vm_address_t g_queueAddr = 0;
 static mach_vm_size_t g_queueSize = 0;
+
+static mach_port_t g_notifyPort = MACH_PORT_NULL;
+static pthread_t g_msgThread;
+static volatile int g_running = 1;
 
 static void log_now(const char *tag, const char *fmt, ...) {
     time_t now = time(NULL);
@@ -33,7 +41,6 @@ static void log_now(const char *tag, const char *fmt, ...) {
     va_end(ap);
 }
 
-// 把队列里的事件全部取空
 static void drain_queue(void) {
     if (!g_queue) return;
     while (IODataQueueDataAvailable(g_queue)) {
@@ -47,28 +54,95 @@ static void drain_queue(void) {
         log_now("LymosTimeSyncd", "Dequeued event %llu", (unsigned long long)event);
         if (event == 1) {
             log_now("LymosTimeSyncd", "wake event -> syncing time");
-            int ret = system("/usr/bin/sntp -sS time.apple.com");
+            int ret = system("/usr/bin/sntp -sS ntp.aliyun.com");
             log_now("LymosTimeSyncd", "sntp returned %d", ret);
         }
     }
 }
 
-// 内核发来消息时的回调
-static void queue_port_callback(CFMachPortRef port, void *msg, CFIndex size, void *info) {
-    (void)port; (void)msg; (void)size; (void)info;
-    log_now("LymosTimeSyncd", "queue_port_callback fired, draining queue");
-    drain_queue();
+// 专用消息接收线程：阻塞在 mach_msg()，有消息就 drain_queue()
+// 改进：在超时分支也主动 drain_queue()，作为对丢失通知的兜底措施。
+static void* msg_loop(void* arg) {
+    (void)arg;
+
+    // mach_msg buffer：用联合体保证对齐
+    typedef union {
+        mach_msg_header_t head;
+        uint8_t bytes[512]; // 扩大一些以防消息变大
+    } msg_buf_t;
+
+    msg_buf_t msg;
+    const mach_msg_timeout_t timeout_ms = 10000; // 超时 2000 ms，超时时会主动 drain
+
+    while (g_running) {
+        // 清零 buffer
+        memset(&msg, 0, sizeof(msg));
+
+        kern_return_t kr = mach_msg(
+            &msg.head,
+            MACH_RCV_MSG | MACH_RCV_TIMEOUT,
+            0,
+            sizeof(msg),
+            g_notifyPort,
+            /*timeout_ms*/ timeout_ms,
+            MACH_PORT_NULL
+        );
+
+        if (kr == KERN_SUCCESS) {
+            // 收到任意消息都去尝试 drain（IODataQueue 的通知是“队列可读”的信号）
+            log_now("MsgLoop", "mach_msg received -> draining queue");
+            drain_queue();
+        } else if (kr == MACH_RCV_TIMED_OUT) {
+            // 超时作为备份：主动 drain 一次，防止在睡眠/唤醒期间丢失通知导致队列堆积
+            // log_now("MsgLoop", "mach_msg timed out -> backup drain");
+            drain_queue();
+            continue;
+        } else if (kr == MACH_RCV_INVALID_NAME || kr == MACH_RCV_PORT_DIED) {
+            log_now("MsgLoop", "mach_msg recv port invalid/died: 0x%x", kr);
+            break;
+        } else {
+            log_now("MsgLoop", "mach_msg recv error: 0x%x -- will attempt to drain and continue", kr);
+            // 出错但端口未死，尝试一次 drain 后继续
+            drain_queue();
+            // 轻微休眠避免忙循环
+            usleep(100 * 1000);
+        }
+    }
+    log_now("MsgLoop", "exiting msg loop");
+    return NULL;
 }
 
-// 心跳定时器：每2秒打印一次调试信息
-static void heartbeat_callback(CFRunLoopTimerRef timer, void *info) {
-    (void)timer; (void)info;
-    log_now("Heartbeat",
-        "g_conn=0x%x g_queue=%p g_notifyPort=0x%x g_cfNotifyPort=%p queueAddr=%p queueSize=%llu",
-        g_conn, g_queue, g_notifyPort, g_cfNotifyPort,
-        (void*)g_queueAddr, (unsigned long long)g_queueSize);
-    // 顺便尝试 drain（避免丢事件）
-    drain_queue();
+static void cleanup(void) {
+    log_now("LymosTimeSyncd", "cleanup called");
+    g_running = 0;
+
+    // 等接收线程退出
+    if (g_msgThread) {
+        pthread_join(g_msgThread, NULL);
+        g_msgThread = 0;
+    }
+
+    if (g_queueAddr && g_conn != IO_OBJECT_NULL) {
+        IOConnectUnmapMemory64(g_conn, 0, mach_task_self(), g_queueAddr);
+        g_queueAddr = 0;
+        g_queue = NULL;
+    }
+    if (g_conn != IO_OBJECT_NULL) {
+        IOServiceClose(g_conn);
+        g_conn = IO_OBJECT_NULL;
+    }
+    if (g_notifyPort != MACH_PORT_NULL) {
+        mach_port_deallocate(mach_task_self(), g_notifyPort);
+        g_notifyPort = MACH_PORT_NULL;
+    }
+}
+
+// 信号处理：收到 SIGINT/SIGTERM 时干净退出
+static void sig_handler(int sig) {
+    (void)sig;
+    log_now("LymosTimeSyncd", "signal received, shutting down...");
+    g_running = 0;
+    // wake 主线程（pause 会被信号唤醒），接收线程会在下一次 mach_msg 超时或收到消息时退出
 }
 
 int main(void) {
@@ -76,6 +150,17 @@ int main(void) {
         fprintf(stderr, "LymosTimeSyncd: must run as root!\n");
         return 1;
     }
+
+    atexit(cleanup);
+
+    // 安装信号处理
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = sig_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGINT, &sa, NULL);
+    sigaction(SIGTERM, &sa, NULL);
 
     log_now("LymosTimeSyncd", "waiting for %s provider...", SERVICE_NAME);
     io_service_t service = IO_OBJECT_NULL;
@@ -97,61 +182,46 @@ int main(void) {
     }
     log_now("LymosTimeSyncd", "opened provider and obtained connection (user client)");
 
-    // 1) 创建通知端口
-    kr = mach_port_allocate(mach_task_self(), MACH_PORT_RIGHT_RECEIVE, &g_notifyPort);
-    if (kr != KERN_SUCCESS) {
-        log_now("LymosTimeSyncd", "mach_port_allocate failed: 0x%x", kr);
-        IOServiceClose(g_conn);
-        return 1;
-    }
-    log_now("LymosTimeSyncd", "notifyPort=0x%x allocated", g_notifyPort);
-
-    // 2) 把通知端口告诉内核
-    kr = IOConnectSetNotificationPort(g_conn, g_notifyPort, 0, 0);
-    if (kr != KERN_SUCCESS) {
-        log_now("LymosTimeSyncd", "IOConnectSetNotificationPort failed: 0x%x", kr);
-        mach_port_deallocate(mach_task_self(), g_notifyPort);
-        IOServiceClose(g_conn);
-        return 1;
-    }
-
-    // 3) 映射共享队列内存
+    // 映射共享队列
     kr = IOConnectMapMemory64(g_conn, 0, mach_task_self(), &g_queueAddr, &g_queueSize, kIOMapAnywhere);
     if (kr != KERN_SUCCESS) {
         log_now("LymosTimeSyncd", "IOConnectMapMemory64 failed: 0x%x", kr);
-        mach_port_deallocate(mach_task_self(), g_notifyPort);
-        IOServiceClose(g_conn);
         return 1;
     }
     g_queue = (IODataQueueMemory *)g_queueAddr;
-    log_now("LymosTimeSyncd", "queue mapped at %p, size=%llu", (void*)g_queueAddr, (unsigned long long)g_queueSize);
+    log_now("LymosTimeSyncd", "queue mapped at %p, size=%llu",
+            (void*)g_queueAddr, (unsigned long long)g_queueSize);
 
-    // 清残留事件
-    drain_queue();
-
-    // 4) CFMachPort 包装通知端口
-    CFMachPortContext ctx = {0};
-    g_cfNotifyPort = CFMachPortCreateWithPort(kCFAllocatorDefault, g_notifyPort, queue_port_callback, &ctx, false);
-    if (!g_cfNotifyPort) {
-        log_now("LymosTimeSyncd", "CFMachPortCreateWithPort failed");
-        IOConnectUnmapMemory64(g_conn, 0, mach_task_self(), g_queueAddr);
-        mach_port_deallocate(mach_task_self(), g_notifyPort);
-        IOServiceClose(g_conn);
+    // 关键：使用 IODataQueue 自带的 helper 生成通知端口
+    g_notifyPort = IODataQueueAllocateNotificationPort();
+    if (g_notifyPort == MACH_PORT_NULL) {
+        log_now("LymosTimeSyncd", "IODataQueueAllocateNotificationPort failed");
         return 1;
     }
-    g_notifySource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, g_cfNotifyPort, 0);
-    CFRunLoopAddSource(CFRunLoopGetCurrent(), g_notifySource, kCFRunLoopDefaultMode);
+    log_now("LymosTimeSyncd", "notifyPort=0x%x allocated (IODataQueue helper)", g_notifyPort);
 
-    // 5) 加心跳定时器（每2秒触发一次）
-    CFRunLoopTimerContext tctx = {0};
-    CFRunLoopTimerRef timer = CFRunLoopTimerCreate(kCFAllocatorDefault,
-                                CFAbsoluteTimeGetCurrent() + 2.0,
-                                2.0, 0, 0,
-                                heartbeat_callback, &tctx);
-    CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopDefaultMode);
+    // 把通知端口交给内核（selector/type 用 0；若你的 UserClient 另有 type 约定，保持一致）
+    kr = IOConnectSetNotificationPort(g_conn, g_notifyPort, 0, 0);
+    if (kr != KERN_SUCCESS) {
+        log_now("LymosTimeSyncd", "IOConnectSetNotificationPort failed: 0x%x", kr);
+        return 1;
+    }
 
-    log_now("LymosTimeSyncd", "entering CFRunLoop with heartbeat...");
-    CFRunLoopRun();
+    // 先清空一次残留事件
+    drain_queue();
 
+    // 起接收线程，在 mach_msg 上阻塞
+    int perr = pthread_create(&g_msgThread, NULL, msg_loop, NULL);
+    if (perr != 0) {
+        log_now("LymosTimeSyncd", "pthread_create failed: %d", perr);
+        return 1;
+    }
+
+    log_now("LymosTimeSyncd", "message loop thread started; press Ctrl+C to quit");
+    // 主线程闲置。收到 SIGINT/SIGTERM 后会退出（pause 会被信号中断）
+    while (g_running) pause();
+
+    log_now("LymosTimeSyncd", "main exiting");
     return 0;
 }
+
