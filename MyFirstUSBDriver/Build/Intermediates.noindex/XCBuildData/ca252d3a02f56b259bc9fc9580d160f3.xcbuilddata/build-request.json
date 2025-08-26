@@ -1,0 +1,58 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "fda4db776698c696d6d65cb735594136290f6f80238d1259d7c1b553cb18d9ba"
+    }
+  ],
+  "containerPath" : "/Volumes/dev/macos-dev/macos-code/MyFirstUSBDriver/MyFirstUSBDriver.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx15.5",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64h",
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Volumes/dev/macos-dev/macos-code/MyFirstUSBDriver/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Volumes/dev/macos-dev/macos-code/MyFirstUSBDriver/Build/Products",
+      "derivedDataPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/MyFirstUSBDriver-brhpuaidxxlffnbrnhbcgnkcwyff/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/MyFirstUSBDriver-brhpuaidxxlffnbrnhbcgnkcwyff/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Volumes/dev/macos-dev/macos-code/MyFirstUSBDriver/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
