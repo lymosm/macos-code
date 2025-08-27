@@ -1,45 +1,19 @@
+//
+//  main.h
+//  AsusATKD
+//
+//  Created by lymos on 2025/8/27.
+//
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <IOKit/hid/IOHIDManager.h>
 #include <CoreFoundation/CoreFoundation.h>
-#include <IOKit/graphics/IOGraphicsLib.h>
 
 #define ASUS_VID 0x0b05
 #define ASUS_PID 0x1854
-
-static io_service_t get_display_service() {
-    io_iterator_t iter;
-    io_service_t service = 0;
-    if (IOServiceGetMatchingServices(kIOMasterPortDefault,
-                                     IOServiceMatching("IODisplayConnect"),
-                                     &iter) == kIOReturnSuccess) {
-        service = IOIteratorNext(iter); // 取第一个显示器
-        IOObjectRelease(iter);
-    }
-    return service;
-}
-
-static void adjust_brightness(float delta) {
-    io_service_t service = get_display_service();
-    if (!service) {
-        printf("tommydebug: no display service found\n");
-        return;
-    }
-
-    float current = 0.0;
-    IODisplayGetFloatParameter(service, kNilOptions, CFSTR(kIODisplayBrightnessKey), &current);
-
-    float newval = current + delta;
-    if (newval > 1.0) newval = 1.0;
-    if (newval < 0.0) newval = 0.0;
-
-    IODisplaySetFloatParameter(service, kNilOptions, CFSTR(kIODisplayBrightnessKey), newval);
-
-    printf("tommydebug: brightness changed from %.2f to %.2f\n", current, newval);
-
-    IOObjectRelease(service);
-}
 
 // HID 输入报告回调
 static void handle_input(void* context,
@@ -54,14 +28,7 @@ static void handle_input(void* context,
 
     printf("tommydebug: usage=0x%x pressed=%ld\n", scancode, (long)pressed);
 
-    // ⚡ 根据 usage 选择动作
-    if (pressed) {
-        if (scancode == 0x20) {         // 假设 Fn+F6 -> 增加亮度
-            adjust_brightness(+0.1f);
-        } else if (scancode == 0x10) {  // 假设 Fn+F5 -> 减少亮度
-            adjust_brightness(-0.1f);
-        }
-    }
+    // TODO: 在这里根据 Fn 键 usage 调用亮度调节 / 背光调节函数
 }
 
 // 创建匹配字典
