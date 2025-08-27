@@ -1,47 +1,95 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <dlfcn.h>
 #include <IOKit/hid/IOHIDManager.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/graphics/IOGraphicsLib.h>
+#include <ApplicationServices/ApplicationServices.h>  // CGEvent
 
 #define ASUS_VID 0x0b05
 #define ASUS_PID 0x1854
 
+static int force_keymap = 0;  // 是否强制键盘映射
+
+// --- DisplayServices 私有 API ---
+typedef int (*DisplayServicesSetBrightnessPtr)(uint32_t display, float brightness);
+static DisplayServicesSetBrightnessPtr pSet = NULL;
+
+static void init_display_services() {
+    void *handle = dlopen("/System/Library/PrivateFrameworks/DisplayServices.framework/DisplayServices", RTLD_LAZY);
+    if (!handle) {
+        printf("tommydebug: cannot open DisplayServices.framework\n");
+        return;
+    }
+    pSet = (DisplayServicesSetBrightnessPtr)dlsym(handle, "DisplayServicesSetBrightness");
+    if (!pSet) {
+        printf("tommydebug: cannot resolve DisplayServicesSetBrightness\n");
+    } else {
+        printf("tommydebug: DisplayServices ready\n");
+    }
+}
+
+// --- IODisplay 调整亮度 ---
 static io_service_t get_display_service() {
-    io_iterator_t iter;
+    io_iterator_t it;
     io_service_t service = 0;
-    if (IOServiceGetMatchingServices(kIOMasterPortDefault,
+    if (IOServiceGetMatchingServices(kIOMainPortDefault,
                                      IOServiceMatching("IODisplayConnect"),
-                                     &iter) == kIOReturnSuccess) {
-        service = IOIteratorNext(iter); // 取第一个显示器
-        IOObjectRelease(iter);
+                                     &it) == KERN_SUCCESS) {
+        service = IOIteratorNext(it);
+        IOObjectRelease(it);
     }
     return service;
 }
 
-static void adjust_brightness(float delta) {
-    io_service_t service = get_display_service();
-    if (!service) {
-        printf("tommydebug: no display service found\n");
-        return;
+static int adjust_brightness(float delta) {
+    if (force_keymap) {
+        printf("tommydebug: force_keymap enabled, skipping DisplayServices\n");
+        return -1;
     }
 
-    float current = 0.0;
-    IODisplayGetFloatParameter(service, kNilOptions, CFSTR(kIODisplayBrightnessKey), &current);
+    io_service_t display = get_display_service();
+    if (!display) {
+        printf("tommydebug: no IODisplay service found\n");
+        return -1;
+    }
 
-    float newval = current + delta;
-    if (newval > 1.0) newval = 1.0;
-    if (newval < 0.0) newval = 0.0;
+    static float brightness = 0.5f;
+    brightness += delta;
+    if (brightness < 0.0f) brightness = 0.0f;
+    if (brightness > 1.0f) brightness = 1.0f;
 
-    IODisplaySetFloatParameter(service, kNilOptions, CFSTR(kIODisplayBrightnessKey), newval);
+    IOReturn ret = IODisplaySetFloatParameter(display, kNilOptions,
+                                              CFSTR(kIODisplayBrightnessKey), brightness);
+    IOObjectRelease(display);
 
-    printf("tommydebug: brightness changed from %.2f to %.2f\n", current, newval);
+    printf("tommydebug: [IODisplay] set brightness=%.2f (ret=0x%x)\n", brightness, ret);
 
-    IOObjectRelease(service);
+    if (pSet) {
+        int sret = pSet(0, brightness);
+        printf("tommydebug: [DisplayServices] set brightness=%.2f (ret=%d)\n", brightness, sret);
+        return sret;
+    }
+
+    return -1; // 不支持 DisplayServices
 }
 
-// HID 输入报告回调
+// --- 模拟键盘事件 ---
+static void send_key(uint16_t keycode) {
+    CGEventRef down = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keycode, true);
+    CGEventRef up   = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keycode, false);
+    if (down && up) {
+        CGEventPost(kCGHIDEventTap, down);
+        CGEventPost(kCGHIDEventTap, up);
+        printf("tommydebug: [Fallback] sent keycode=0x%x\n", keycode);
+    }
+    if (down) CFRelease(down);
+    if (up) CFRelease(up);
+}
+
+// --- HID 回调 ---
 static void handle_input(void* context,
                          IOReturn result,
                          void* sender,
@@ -49,22 +97,30 @@ static void handle_input(void* context,
     IOHIDElementRef elem = IOHIDValueGetElement(value);
     if (!elem) return;
 
-    uint32_t scancode = IOHIDElementGetUsage(elem);
+    uint32_t usage = IOHIDElementGetUsage(elem);
+    uint32_t page  = IOHIDElementGetUsagePage(elem); // 新增 usage page
     CFIndex pressed = IOHIDValueGetIntegerValue(value);
 
-    printf("tommydebug: usage=0x%x pressed=%ld\n", scancode, (long)pressed);
-
-    // ⚡ 根据 usage 选择动作
     if (pressed) {
-        if (scancode == 0x20) {         // 假设 Fn+F6 -> 增加亮度
-            adjust_brightness(+0.1f);
-        } else if (scancode == 0x10) {  // 假设 Fn+F5 -> 减少亮度
-            adjust_brightness(-0.1f);
-        }
+        printf("tommydebug: usage=0x%x page=0x%x pressed=%ld\n", usage, page, (long)pressed);
+
+        // 只在 Keyboard/Keypad page 处理 Fn 键
+        
+            if (usage == 0x10 && page == 0xff31) {        // Fn+F5
+                if (adjust_brightness(-0.1f) != 0) {
+                    printf("tommydebug: 8888888\n");
+                    send_key(0x6b);  // 系统亮度减
+                }
+            } else if (usage == 0x20 && page == 0xff31) { // Fn+F6
+                if (adjust_brightness(+0.1f) != 0) {
+                    printf("tommydebug: 999999\n");
+                    send_key(0x71);  // 系统亮度加
+                }
+            }
+        
     }
 }
-
-// 创建匹配字典
+// 匹配字典
 static CFMutableDictionaryRef matching_dictionary(int vendor, int product) {
     CFMutableDictionaryRef dict = CFDictionaryCreateMutable(kCFAllocatorDefault, 0,
                                                            &kCFTypeDictionaryKeyCallBacks,
@@ -85,19 +141,25 @@ static CFMutableDictionaryRef matching_dictionary(int vendor, int product) {
     return dict;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    // 检查参数
+    if (argc > 1 && strcmp(argv[1], "--force-keymap") == 0) {
+        force_keymap = 1;
+        printf("tommydebug: running in force_keymap mode\n");
+    }
+
+    init_display_services();
+
     IOHIDManagerRef manager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
     if (!manager) {
         printf("tommydebug: failed to create IOHIDManager\n");
         return -1;
     }
 
-    // 匹配 Asus 键盘 (VID/PID)
     CFMutableDictionaryRef match = matching_dictionary(ASUS_VID, ASUS_PID);
     IOHIDManagerSetDeviceMatching(manager, match);
     if (match) CFRelease(match);
 
-    // 打开 HID Manager
     IOReturn ret = IOHIDManagerOpen(manager, kIOHIDOptionsTypeNone);
     if (ret != kIOReturnSuccess) {
         printf("tommydebug: IOHIDManagerOpen failed, ret=0x%x\n", ret);
@@ -105,10 +167,7 @@ int main() {
         return -1;
     }
 
-    // 注册输入值回调
     IOHIDManagerRegisterInputValueCallback(manager, handle_input, NULL);
-
-    // 获取 RunLoop
     IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 
     printf("tommydebug: daemon started, waiting for HID events...\n");
