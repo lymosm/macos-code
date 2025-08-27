@@ -7,6 +7,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/graphics/IOGraphicsLib.h>
 #include <ApplicationServices/ApplicationServices.h>  // CGEvent
+#include <IOKit/pwr_mgt/IOPMLib.h>
+#include <IOKit/IOMessage.h>
+
+
 
 #define ASUS_VID 0x0b05
 #define ASUS_PID 0x1854
@@ -89,6 +93,14 @@ static void send_key(uint16_t keycode) {
     if (up) CFRelease(up);
 }
 
+
+static void sleep_system() {
+    printf("tommydebug: Fn+F1 pressed, sleeping...\n");
+        // 调用系统命令触发睡眠
+        system("pmset sleepnow");
+}
+
+// --- HID 回调 ---
 // --- HID 回调 ---
 static void handle_input(void* context,
                          IOReturn result,
@@ -98,28 +110,34 @@ static void handle_input(void* context,
     if (!elem) return;
 
     uint32_t usage = IOHIDElementGetUsage(elem);
-    uint32_t page  = IOHIDElementGetUsagePage(elem); // 新增 usage page
+    uint32_t page  = IOHIDElementGetUsagePage(elem);
     CFIndex pressed = IOHIDValueGetIntegerValue(value);
 
     if (pressed) {
         printf("tommydebug: usage=0x%x page=0x%x pressed=%ld\n", usage, page, (long)pressed);
 
-        // 只在 Keyboard/Keypad page 处理 Fn 键
-        
-            if (usage == 0x10 && page == 0xff31) {        // Fn+F5
-                if (adjust_brightness(-0.1f) != 0) {
-                    printf("tommydebug: 8888888\n");
-                    send_key(0x6b);  // 系统亮度减
-                }
-            } else if (usage == 0x20 && page == 0xff31) { // Fn+F6
-                if (adjust_brightness(+0.1f) != 0) {
-                    printf("tommydebug: 999999\n");
-                    send_key(0x71);  // 系统亮度加
-                }
+        // 只处理 Asus Fn 键 (page=0xFF31)
+        if (page == 0xff31) {
+            if (usage == 0x10) {        // Fn+F5 亮度减
+                if (adjust_brightness(-0.1f) != 0) send_key(0x6B);
+            } else if (usage == 0x20) { // Fn+F6 亮度加
+                if (adjust_brightness(+0.1f) != 0) send_key(0x71);
+            } else if (usage == 0xC5) { // F3 背光减
+                send_key(0x6F); // 对应原生背光减
+                printf("tommydebug: F3 pressed, reduce keyboard backlight\n");
+            } else if (usage == 0xC4) { // F4 背光加
+                send_key(0x70); // 对应原生背光加
+                printf("tommydebug: F4 pressed, increase keyboard backlight\n");
             }
-        
+            
+            if (usage == 0x6c && page == 0xff31) { // Fn+F1
+                printf("tommydebug: Fn+F1 pressed, sleeping...\n");
+                sleep_system();
+            }
+        }
     }
 }
+
 // 匹配字典
 static CFMutableDictionaryRef matching_dictionary(int vendor, int product) {
     CFMutableDictionaryRef dict = CFDictionaryCreateMutable(kCFAllocatorDefault, 0,
