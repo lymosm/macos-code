@@ -6,6 +6,8 @@
 #include <IOKit/IOWorkLoop.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/hid/IOHIDKeys.h>
+#include <IOKit/hid/IOHIDDevice.h>
+
 
 // Vendor / Product (from your Windows observation)
 #define ASUS_VENDOR_ID  0x0B05
