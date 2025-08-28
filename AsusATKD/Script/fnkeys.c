@@ -50,7 +50,7 @@ static io_service_t get_display_service() {
 
 static int adjust_brightness(float delta) {
     if (force_keymap) {
-        printf("tommydebug: force_keymap enabled, skipping DisplayServices\n");
+       // printf("tommydebug: force_keymap enabled, skipping DisplayServices\n");
         return -1;
     }
 
@@ -69,11 +69,11 @@ static int adjust_brightness(float delta) {
                                               CFSTR(kIODisplayBrightnessKey), brightness);
     IOObjectRelease(display);
 
-    printf("tommydebug: [IODisplay] set brightness=%.2f (ret=0x%x)\n", brightness, ret);
+   // printf("tommydebug: [IODisplay] set brightness=%.2f (ret=0x%x)\n", brightness, ret);
 
     if (pSet) {
         int sret = pSet(0, brightness);
-        printf("tommydebug: [DisplayServices] set brightness=%.2f (ret=%d)\n", brightness, sret);
+       // printf("tommydebug: [DisplayServices] set brightness=%.2f (ret=%d)\n", brightness, sret);
         return sret;
     }
 
@@ -87,7 +87,7 @@ static void send_key(uint16_t keycode) {
     if (down && up) {
         CGEventPost(kCGHIDEventTap, down);
         CGEventPost(kCGHIDEventTap, up);
-        printf("tommydebug: [Fallback] sent keycode=0x%x\n", keycode);
+       // printf("tommydebug: [Fallback] sent keycode=0x%x\n", keycode);
     }
     if (down) CFRelease(down);
     if (up) CFRelease(up);
@@ -95,7 +95,7 @@ static void send_key(uint16_t keycode) {
 
 
 static void sleep_system() {
-    printf("tommydebug: Fn+F1 pressed, sleeping...\n");
+   // printf("tommydebug: Fn+F1 pressed, sleeping...\n");
         // 调用系统命令触发睡眠
         system("pmset sleepnow");
 }
@@ -114,7 +114,7 @@ static void handle_input(void* context,
     CFIndex pressed = IOHIDValueGetIntegerValue(value);
 
     if (pressed) {
-        printf("tommydebug: usage=0x%x page=0x%x pressed=%ld\n", usage, page, (long)pressed);
+       // printf("tommydebug: usage=0x%x page=0x%x pressed=%ld\n", usage, page, (long)pressed);
 
         // 只处理 Asus Fn 键 (page=0xFF31)
         if (page == 0xff31) {
@@ -124,14 +124,14 @@ static void handle_input(void* context,
                 if (adjust_brightness(+0.1f) != 0) send_key(0x71);
             } else if (usage == 0xC5) { // F3 背光减
                 send_key(0x6F); // 对应原生背光减
-                printf("tommydebug: F3 pressed, reduce keyboard backlight\n");
+               // printf("tommydebug: F3 pressed, reduce keyboard backlight\n");
             } else if (usage == 0xC4) { // F4 背光加
                 send_key(0x70); // 对应原生背光加
-                printf("tommydebug: F4 pressed, increase keyboard backlight\n");
+               // printf("tommydebug: F4 pressed, increase keyboard backlight\n");
             }
             
             if (usage == 0x6c && page == 0xff31) { // Fn+F1
-                printf("tommydebug: Fn+F1 pressed, sleeping...\n");
+               // printf("tommydebug: Fn+F1 pressed, sleeping...\n");
                 sleep_system();
             }
         }

@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-PLIST="/Library/LaunchAgents/com.asus.fnbrightness.plist"
-BIN="/usr/local/bin/fn-brightness-daemon"
+PLIST="/Library/LaunchAgents/com.asus.fnkeys.plist"
+BIN="/usr/local/bin/fnkeys"
 
 # 卸载 agent（尝试对当前控制台用户）
 USER_UID=$(stat -f "%u" /dev/console 2>/dev/null || echo "")
@@ -18,7 +18,7 @@ rm -f "$BIN"
 rm -f "$PLIST"
 
 # 忘记安装收据
-/usr/sbin/pkgutil --forget com.asus.fnbrightness 2>/dev/null || true
+/usr/sbin/pkgutil --forget com.asus.fnkeys 2>/dev/null || true
 
 echo "[INFO] Asus Fn Key Daemon 已卸载"
 exit 0

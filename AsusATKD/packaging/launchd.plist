@@ -5,12 +5,12 @@
 <dict>
    <!-- 唯一标识符 -->
    <key>Label</key>
-   <string>com.asus.fnbrightness</string>
+   <string>com.asus.fnkeys</string>
 
    <!-- 程序路径 + 参数，必须分开写 -->
    <key>ProgramArguments</key>
    <array>
-      <string>/usr/local/bin/fn-brightness-daemon</string>
+      <string>/usr/local/bin/fnkeys</string>
       <string>--force-keymap</string>
    </array>
 

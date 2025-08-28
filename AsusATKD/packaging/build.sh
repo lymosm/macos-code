@@ -14,8 +14,8 @@ mkdir -p "$PKGROOT/Library/LaunchAgents"
 mkdir -p "$TMP"
 
 # 源文件和输出二进制路径
-SRC_C="$PROJECT_DIR/Script/fn-brightness-daemon.c"
-DST_BIN="$PKGROOT/usr/local/bin/fn-brightness-daemon"
+SRC_C="$PROJECT_DIR/Script/fnkeys.c"
+DST_BIN="$PKGROOT/usr/local/bin/fnkeys"
 
 echo "[INFO] Compiling $SRC_C -> $DST_BIN"
 
@@ -27,16 +27,16 @@ chmod 755 "$DST_BIN"
 
 # 拷贝 plist 到 pkgroot 的 LaunchAgents（注意：只是拷贝到 pkgroot 下，安装时会放到 /Library/LaunchAgents）
 if [ -f "$PROJECT_DIR/packaging/launchd.plist" ]; then
-  cp "$PROJECT_DIR/packaging/launchd.plist" "$PKGROOT/Library/LaunchAgents/com.asus.fnbrightness.plist"
+  cp "$PROJECT_DIR/packaging/launchd.plist" "$PKGROOT/Library/LaunchAgents/com.asus.fnkeys.plist"
 else
   echo "[WARN] packaging/launchd.plist not found"
 fi
-chmod 644 "$PKGROOT/Library/LaunchAgents/com.asus.fnbrightness.plist" || true
+chmod 644 "$PKGROOT/Library/LaunchAgents/com.asus.fnkeys.plist" || true
 
 # 生成临时 install pkg（供 productbuild 使用）
-TMP_PKG="$TMP/fnbrightness.pkg"
+TMP_PKG="$TMP/fnkeys.pkg"
 pkgbuild --root "$PKGROOT" \
-  --identifier "com.asus.fnbrightness" \
+  --identifier "com.asus.fnkeys" \
   --version "1.0" \
   --install-location / \
   --scripts "$PROJECT_DIR/packaging" \
@@ -56,7 +56,7 @@ echo "[INFO] Created $OUT_DIR/installFnKey.pkg"
 
 # 生成卸载 pkg —— 使用 nopayload + uninstall_scripts 中的 postinstall
 pkgbuild --nopayload \
-  --identifier "com.asus.fnbrightness" \
+  --identifier "com.asus.fnkeys" \
   --version "1.0" \
   --scripts "$PROJECT_DIR/packaging/uninstall_scripts" \
   "$OUT_DIR/uninstallFnKey.pkg"

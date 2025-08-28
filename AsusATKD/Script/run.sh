@@ -1,6 +1,6 @@
 
 #!/bin/sh
-clang fn-brightness-daemon.c -o fn-brightness-daemon \
+clang fnkeys.c -o fnkeys \
     -framework IOKit -framework CoreFoundation -framework ApplicationServices
 
-sudo ./fn-brightness-daemon --force-keymap
+sudo ./fnkeys --force-keymap

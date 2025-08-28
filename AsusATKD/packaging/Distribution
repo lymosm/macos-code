@@ -7,8 +7,8 @@
     <line choice="default"/>
   </choices-outline>
   <choice id="default" visible="false" title="默认安装">
-    <pkg-ref id="com.asus.fnbrightness"/>
+    <pkg-ref id="com.asus.fnkeys"/>
   </choice>
-  <pkg-ref id="com.asus.fnbrightness" installKBytes="0" version="1.0">fnbrightness.pkg</pkg-ref>
+  <pkg-ref id="com.asus.fnkeys" installKBytes="0" version="1.0">fnkeys.pkg</pkg-ref>
 </installer-gui-script>
 
