@@ -1,0 +1,5 @@
+#!/bin/bash
+# 先卸载旧版本
+/bin/launchctl unload -w /Library/LaunchDaemons/com.asus.fnbrightness.plist || true
+exit 0
+

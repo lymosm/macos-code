@@ -87,20 +87,7 @@ bool AsusATKD::start(IOService* provider)
          *  2) 在对应 SDK 中查找该类所支持的注册回调函数，并在此处加入注册代码
          *  3) 回调实现（InputReportCallback）中解析 reportData，**只打印 usage page / usage / value**
          */
-        IOHIDDevice *hidDev = OSDynamicCast(IOHIDDevice, provider);
-                if (hidDev) {
-                    IOReturn ret = hidDev->registerInputReportHandler(
-                        this,
-                                                                      InputReportCallback,
-                        nullptr);
-                    if (ret == kIOReturnSuccess) {
-                        IOLog("[tommydebug] AsusATKD HID report handler registered OK\n");
-                    } else {
-                        IOLog("[tommydebug] AsusATKD failed to register HID handler, err=0x%x\n", ret);
-                    }
-                } else {
-                    IOLog("[tommydebug] AsusATKD provider is not IOHIDDevice\n");
-                }
+        
         IOLog("tommydebug: AsusATKD - Please adapt and call provider's HID registration API here.\n");
     } else {
         IOLog("tommydebug: AsusATKD provider VID/PID mismatch; not registering HID callbacks.\n");
