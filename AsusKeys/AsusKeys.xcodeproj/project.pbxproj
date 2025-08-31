@@ -7,30 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EDEFF762E633A9F00BF0AAA /* Info-vid-pid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEFF752E633A9F00BF0AAA /* Info-vid-pid.plist */; };
-		1EFBFCA32E60B6D200EB0C2D /* backup.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EFBFCA22E60B6D200EB0C2D /* backup.cpp */; };
-		1EFBFCA52E60B71900EB0C2D /* backup.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EFBFCA42E60B71400EB0C2D /* backup.hpp */; };
-		3573FE3225223B8500DFC9F4 /* AsusATKD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */; };
-		3573FE3425223B8500DFC9F4 /* AsusATKD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */; };
+		1E24CF0C2E6344F80061104A /* AsusKeysUserClient.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1E24CF0B2E6344F50061104A /* AsusKeysUserClient.hpp */; };
+		1E24CF0E2E6345150061104A /* AsusKeysUserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E24CF0D2E6345120061104A /* AsusKeysUserClient.cpp */; };
+		3573FE3225223B8500DFC9F4 /* AsusKeys.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* AsusKeys.hpp */; };
+		3573FE3425223B8500DFC9F4 /* AsusKeys.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* AsusKeys.cpp */; };
 		358E312F2523A1E400C409AD /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358E312E2523A1E400C409AD /* libkmod.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1EDEFF752E633A9F00BF0AAA /* Info-vid-pid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-vid-pid.plist"; sourceTree = "<group>"; };
+		1E1B316D2E63E17900B285AC /* AI2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AI2.md; sourceTree = "<group>"; };
+		1E24CF0A2E633D3D0061104A /* AI.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AI.md; sourceTree = "<group>"; };
+		1E24CF0B2E6344F50061104A /* AsusKeysUserClient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusKeysUserClient.hpp; sourceTree = "<group>"; };
+		1E24CF0D2E6345120061104A /* AsusKeysUserClient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusKeysUserClient.cpp; sourceTree = "<group>"; };
 		1EFBFCA12E60AB8800EB0C2D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1EFBFCA22E60B6D200EB0C2D /* backup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = backup.cpp; sourceTree = "<group>"; };
-		1EFBFCA42E60B71400EB0C2D /* backup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backup.hpp; sourceTree = "<group>"; };
-		1EFC44D62E62947900F8E428 /* Info-backup.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-backup.plist"; sourceTree = "<group>"; };
-		3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsusATKD.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusATKD.hpp; sourceTree = "<group>"; };
-		3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusATKD.cpp; sourceTree = "<group>"; };
+		3573FE2E25223B8500DFC9F4 /* AsusKeys.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsusKeys.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		3573FE3125223B8500DFC9F4 /* AsusKeys.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusKeys.hpp; sourceTree = "<group>"; };
+		3573FE3325223B8500DFC9F4 /* AsusKeys.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusKeys.cpp; sourceTree = "<group>"; };
 		3573FE3525223B8500DFC9F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		358E312E2523A1E400C409AD /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1E40C9012E5E1927006998FB /* Script */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Script; sourceTree = "<group>"; };
-		1E6918DE2E608D2700B091A9 /* packaging */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = packaging; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,9 +46,10 @@
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
-				1E6918DE2E608D2700B091A9 /* packaging */,
+				1E1B316D2E63E17900B285AC /* AI2.md */,
+				1E24CF0A2E633D3D0061104A /* AI.md */,
 				1E40C9012E5E1927006998FB /* Script */,
-				3573FE3025223B8500DFC9F4 /* AsusATKD */,
+				3573FE3025223B8500DFC9F4 /* AsusKeys */,
 				3573FE2F25223B8500DFC9F4 /* Products */,
 				358E312D2523A1E400C409AD /* Frameworks */,
 				1EFBFCA12E60AB8800EB0C2D /* README.md */,
@@ -60,23 +59,21 @@
 		3573FE2F25223B8500DFC9F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */,
+				3573FE2E25223B8500DFC9F4 /* AsusKeys.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3573FE3025223B8500DFC9F4 /* AsusATKD */ = {
+		3573FE3025223B8500DFC9F4 /* AsusKeys */ = {
 			isa = PBXGroup;
 			children = (
-				1EFBFCA42E60B71400EB0C2D /* backup.hpp */,
-				3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */,
-				3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */,
-				1EFBFCA22E60B6D200EB0C2D /* backup.cpp */,
+				1E24CF0D2E6345120061104A /* AsusKeysUserClient.cpp */,
+				1E24CF0B2E6344F50061104A /* AsusKeysUserClient.hpp */,
+				3573FE3125223B8500DFC9F4 /* AsusKeys.hpp */,
+				3573FE3325223B8500DFC9F4 /* AsusKeys.cpp */,
 				3573FE3525223B8500DFC9F4 /* Info.plist */,
-				1EDEFF752E633A9F00BF0AAA /* Info-vid-pid.plist */,
-				1EFC44D62E62947900F8E428 /* Info-backup.plist */,
 			);
-			path = AsusATKD;
+			path = AsusKeys;
 			sourceTree = "<group>";
 		};
 		358E312D2523A1E400C409AD /* Frameworks */ = {
@@ -94,33 +91,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EFBFCA32E60B6D200EB0C2D /* backup.cpp in Headers */,
-				1EFBFCA52E60B71900EB0C2D /* backup.hpp in Headers */,
-				3573FE3225223B8500DFC9F4 /* AsusATKD.hpp in Headers */,
+				1E24CF0C2E6344F80061104A /* AsusKeysUserClient.hpp in Headers */,
+				3573FE3225223B8500DFC9F4 /* AsusKeys.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3573FE2D25223B8500DFC9F4 /* AsusATKD */ = {
+		3573FE2D25223B8500DFC9F4 /* AsusKeys */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusATKD" */;
+			buildConfigurationList = 3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusKeys" */;
 			buildPhases = (
 				3573FE2925223B8500DFC9F4 /* Headers */,
 				3573FE2A25223B8500DFC9F4 /* Sources */,
 				3573FE2B25223B8500DFC9F4 /* Frameworks */,
 				3573FE2C25223B8500DFC9F4 /* Resources */,
 				CE36C7C1252B87670093C599 /* Archive */,
-				1E6918E62E608EA700B091A9 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AsusATKD;
+			name = AsusKeys;
 			productName = BrightnessKeys;
-			productReference = 3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */;
+			productReference = 3573FE2E25223B8500DFC9F4 /* AsusKeys.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +131,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusATKD" */;
+			buildConfigurationList = 3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusKeys" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3573FE2D25223B8500DFC9F4 /* AsusATKD */,
+				3573FE2D25223B8500DFC9F4 /* AsusKeys */,
 			);
 		};
 /* End PBXProject section */
@@ -159,30 +154,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EDEFF762E633A9F00BF0AAA /* Info-vid-pid.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E6918E62E608EA700B091A9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PROJECT_DIR/packaging/build.sh\"\n";
-		};
 		CE36C7C1252B87670093C599 /* Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,7 +185,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3573FE3425223B8500DFC9F4 /* AsusATKD.cpp in Sources */,
+				3573FE3425223B8500DFC9F4 /* AsusKeys.cpp in Sources */,
+				1E24CF0E2E6345150061104A /* AsusKeysUserClient.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,13 +322,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.1;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = AsusATKD/Info.plist;
+				INFOPLIST_FILE = AsusKeys/Info.plist;
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MODULE_NAME = tommy.AsusATKD;
+				MARKETING_VERSION = 1.0.1;
+				MODULE_NAME = tommy.AsusKeys;
 				MODULE_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusATKD;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusKeys;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
@@ -366,13 +345,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.1;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = AsusATKD/Info.plist;
+				INFOPLIST_FILE = AsusKeys/Info.plist;
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MODULE_NAME = tommy.AsusATKD;
+				MARKETING_VERSION = 1.0.1;
+				MODULE_NAME = tommy.AsusKeys;
 				MODULE_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusATKD;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusKeys;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
@@ -382,7 +362,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusATKD" */ = {
+		3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusKeys" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3573FE3625223B8500DFC9F4 /* Debug */,
@@ -391,7 +371,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusATKD" */ = {
+		3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusKeys" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3573FE3925223B8500DFC9F4 /* Debug */,

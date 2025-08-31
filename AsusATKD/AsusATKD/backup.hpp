@@ -52,4 +52,3 @@ public:
 };
 
 #endif /* _ASUSATKD_HPP */
-
