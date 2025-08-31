@@ -26,10 +26,10 @@
         <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
         <key>IOClass</key>
         <string>AsusKeys</string>
-              <key>IOMatchCategory</key>
-              <string>AsusKeys</string>
-              <key>IOProviderClass</key>
-              <string>IOResources</string>
+        <key>IOProviderClass</key>
+            <string>IOACPIPlatformDevice</string>
+            <key>IONameMatch</key>
+            <string>PNP0C09</string>
       </dict>
     </dict>
 
@@ -45,6 +45,8 @@
         <string>8.0.0</string>
         <key>com.apple.kpi.unsupported</key>
         <string>8.0.0</string>
+        <key>com.apple.iokit.IOACPIFamily</key>
+        <string>1.0.0</string>
     </dict>
     <key>OSBundleRequired</key>
     <string>Console</string>
