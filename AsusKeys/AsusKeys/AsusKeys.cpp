@@ -14,6 +14,8 @@ bool AsusKeys::init(OSDictionary* dict) {
         _commandGate = nullptr;
         _acpiNotifier = nullptr;
         _ec0Device = nullptr;
+        _atkDevice = nullptr;
+
     }
     return ok;
 }
@@ -30,6 +32,10 @@ void AsusKeys::free() {
     if (_ec0Device) {
         _ec0Device->release();
         _ec0Device = nullptr;
+    }
+    if (_atkDevice) {   // 释放 ATKD
+        _atkDevice->release();
+        _atkDevice = nullptr;
     }
 
     if (_commandGate) {
@@ -126,6 +132,10 @@ void AsusKeys::stop(IOService* provider) {
         _ec0Device->release();
         _ec0Device = nullptr;
     }
+    if (_atkDevice) {   // 释放 ATKD
+        _atkDevice->release();
+        _atkDevice = nullptr;
+    }
 
     if (_provider) {
         _provider->release();
@@ -191,7 +201,27 @@ bool AsusKeys::acpiPublishHandler(void* target, void* /*refCon*/, IOService* new
 
 void AsusKeys::onACPIDevicePublished(IOACPIPlatformDevice* dev) {
     if (!dev) return;
+    
+    const char* name = dev->getName();
+        if (!name) return;
 
+        // 保存 EC0
+        if (strcmp(name, "EC0") == 0 && !_ec0Device) {
+            dev->retain();
+            _ec0Device = dev;
+            IOLog("tommydebug: Bound EC0 device\n");
+            return;
+        }
+
+        // 保存 ATKD
+        if (strcmp(name, "ATKD") == 0 && !_atkDevice) {
+            dev->retain();
+            _atkDevice = dev;
+            IOLog("tommydebug: Bound ATKD device\n");
+            return;
+        }
+
+    /*
     // 如果已经绑定了 EC，就不重复绑定
     if (_ec0Device) return;
 
@@ -207,11 +237,13 @@ void AsusKeys::onACPIDevicePublished(IOACPIPlatformDevice* dev) {
         IOLog("tommydebug: ACPI device validateObject(_Q13) failed: 0x%x - releasing\n", v);
         dev->release();
     }
+    */
+    
 }
 
 void AsusKeys::handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed, uint32_t keycode) {
-    IOLog("tommydebug: received usage=0x%x page=0x%x pressed=%d keycode=0x%x\n",
-          usage, page, (int)pressed, keycode);
+ //   IOLog("tommydebug: received usage=0x%x page=0x%x pressed=%d keycode=0x%x\n",
+ //         usage, page, (int)pressed, keycode);
 
     // 这里假设 page==0xFF31 usage==0xC5 为 Fn+F3
     if (page == 0xFF31 && usage == 0xC5) {
@@ -228,29 +260,89 @@ void AsusKeys::handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed,
                 IOLog("tommydebug: command gate not available\n");
             }
         }
+    }else if (page == 0xFF31 && usage == 0xC4) {
+        if (pressed) {
+            // 使用 command gate 来在 workloop 上串行执行对硬件的交互
+            if (_commandGate) {
+                _commandGate->runAction([](OSObject* owner, void* /*arg0*/, void* /*arg1*/, void* /*arg2*/, void* /*arg3*/) -> IOReturn {
+                    AsusKeys* self = OSDynamicCast(AsusKeys, owner);
+                    if (!self) return kIOReturnBadArgument;
+                    self->increase_keyboard_backlight();
+                    return kIOReturnSuccess;
+                });
+            } else {
+                IOLog("tommydebug: command gate not available\n");
+            }
+        }
     }
+}
+
+IOReturn AsusKeys::evaluateAcpiFromUser(const char* device, const char* method) {
+    IOACPIPlatformDevice* target = nullptr;
+    IOLog("tommydebug: evaluateAcpiFromUser\n");
+    // 简单查找 EC0 或 ATKD，后面可扩展
+    if (strcmp(device, "EC0") == 0 && _ec0Device) {
+        target = _ec0Device;
+    } else if (strcmp(device, "ATKD") == 0 && _atkDevice) {
+        target = _atkDevice;
+    } else {
+        IOLog("tommydebug: unknown device %s\n", device);
+        return kIOReturnNotFound;
+    }
+
+    OSObject* result = nullptr;
+    IOReturn ret = target->evaluateObject(method, &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebug: evaluateObject(%s.%s) success\n", device, method);
+        if (result) result->release();
+    } else {
+        IOLog("tommydebug: evaluateObject(%s.%s) failed: 0x%x\n", device, method, ret);
+    }
+    return ret;
 }
 
 void AsusKeys::decrease_keyboard_backlight() {
     if (!_ec0Device) {
-        IOLog("tommydebug: Cannot call _Q13 - EC0 device not found\n");
+        IOLog("tommydebugfn: Cannot call _Q13 - EC0 device not found\n");
         return;
     }
 
     // 重要：这里我们在 command gate 上调用 ACPI method
-    IOLog("tommydebug: Calling _Q13 (from user request) in commandGate context\n");
+    // //IOLog("tommydebugfn: Calling _Q13 (from user request) in commandGate context\n");
 
     // 为安全起见，先用 evaluateObject 但不假设返回值类型
     OSObject* result = nullptr;
     IOReturn ret = _ec0Device->evaluateObject("_Q13", &result);
     if (ret == kIOReturnSuccess) {
-        IOLog("tommydebug: evaluateObject(_Q13) returned success\n");
+        IOLog("tommydebugfn: evaluateObject(_Q13) returned success\n");
         if (result) {
             result->release();
             result = nullptr;
         }
     } else {
-        IOLog("tommydebug: evaluateObject(_Q13) failed: 0x%x\n", ret);
+        IOLog("tommydebugfn: evaluateObject(_Q13) failed: 0x%x\n", ret);
     }
 }
 
+void AsusKeys::increase_keyboard_backlight() {
+    if (!_ec0Device) {
+        IOLog("tommydebugfn: Cannot call _Q14 - EC0 device not found\n");
+        return;
+    }
+
+    // 重要：这里我们在 command gate 上调用 ACPI method
+    IOLog("tommydebugfn: Calling _Q14 (from user request) in commandGate context\n");
+
+    // 为安全起见，先用 evaluateObject 但不假设返回值类型
+    OSObject* result = nullptr;
+    IOReturn ret = _ec0Device->evaluateObject("_Q14", &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebugfn: evaluateObject(_Q14) returned success\n");
+        if (result) {
+            result->release();
+            result = nullptr;
+        }
+    } else {
+        IOLog("tommydebugfn: evaluateObject(_Q13) failed: 0x%x\n", ret);
+    }
+}

@@ -45,8 +45,18 @@ public:
 
     enum {
         kLogUsage = 0,
+        kEvaluateAcpiMethod,
         kNumberOfMethods
+        
     };
+    
+    struct AcpiMethodInput {
+        char device[16];   // 设备名，比如 "EC0" 或 "ATKD"
+        char method[16];   // 方法名，比如 "_Q13"
+    };
+    
+    static IOReturn sEvaluateAcpiMethod(OSObject* target, void* reference, IOExternalMethodArguments* args);
+        IOReturn evaluateAcpiMethod(IOExternalMethodArguments* args);
 
     static const IOExternalMethodDispatch sMethods[kNumberOfMethods];
 };

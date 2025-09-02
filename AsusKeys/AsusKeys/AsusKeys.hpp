@@ -32,6 +32,9 @@ public:
     // called from userclient when user-space sends key events
     void handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed, uint32_t keycode);
     void decrease_keyboard_backlight(); // will be executed on command gate
+    void increase_keyboard_backlight();
+    IOReturn evaluateAcpiFromUser(const char* device, const char* method);
+
 
 private:
     IOService* _provider = nullptr;
@@ -40,6 +43,8 @@ private:
 
     IONotifier* _acpiNotifier = nullptr;
     IOACPIPlatformDevice* _ec0Device = nullptr;
+    IOACPIPlatformDevice* _atkDevice;   // 新增 ATKD 设备
+
 
     static bool acpiPublishHandler(void* target, void* refCon, IOService* newService, IONotifier* notifier);
     void onACPIDevicePublished(IOACPIPlatformDevice* dev);

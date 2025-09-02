@@ -29,7 +29,10 @@
         <key>IOProviderClass</key>
             <string>IOACPIPlatformDevice</string>
             <key>IONameMatch</key>
-            <string>PNP0C09</string>
+            <array>
+                <string>PNP0C09</string>
+                <string>ATK0100</string>
+            </array>
       </dict>
     </dict>
 

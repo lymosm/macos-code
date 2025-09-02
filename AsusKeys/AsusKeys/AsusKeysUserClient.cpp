@@ -17,7 +17,13 @@ const IOExternalMethodDispatch AsusKeysUserClient::sMethods[AsusKeysUserClient::
     { (IOExternalMethodAction) &AsusKeysUserClient::sLogUsage,  /* action */
       4,                 /* checkScalarInputCount */
       0, /* checkStructureInputSize */
-      0, 0 }             /* output counts/sizes */
+      0, 0 },             /* output counts/sizes */
+    // selector 1 -> sEvaluateAcpiMethod
+        { (IOExternalMethodAction)&AsusKeysUserClient::sEvaluateAcpiMethod,
+          0, /* scalarInputCount */
+          sizeof(AcpiMethodInput), /* structInputSize */
+          0, 0 }
+
 };
 
 bool AsusKeysUserClient::initWithTask(task_t owningTask, void* securityToken, UInt32 type) {
@@ -56,12 +62,34 @@ IOReturn AsusKeysUserClient::clientClose(void) {
     return kIOReturnSuccess;
 }
 
+IOReturn AsusKeysUserClient::sEvaluateAcpiMethod(OSObject* target, void* reference, IOExternalMethodArguments* args) {
+    AsusKeysUserClient* self = OSDynamicCast(AsusKeysUserClient, target);
+    if (!self) return kIOReturnBadArgument;
+    return self->evaluateAcpiMethod(args);
+}
+
+IOReturn AsusKeysUserClient::evaluateAcpiMethod(IOExternalMethodArguments* args) {
+    if (!args || args->structureInputSize < sizeof(AcpiMethodInput))
+        return kIOReturnBadArgument;
+
+    AcpiMethodInput* input = (AcpiMethodInput*)args->structureInput;
+    IOLog("tommydebug: evaluateAcpiMethod request device=%s method=%s\n", input->device, input->method);
+
+    if (!fProvider) return kIOReturnNotAttached;
+
+    return fProvider->evaluateAcpiFromUser(input->device, input->method);
+}
+
+
+
+
+
 IOReturn AsusKeysUserClient::externalMethod(uint32_t selector,
                                            IOExternalMethodArguments* arguments,
                                            IOExternalMethodDispatch* dispatch,
                                            OSObject* target,
                                            void* reference) {
-    IOLog("tommydebug: entering externalMethod with selector %u\n", selector);
+ //   IOLog("tommydebug: entering externalMethod with selector %u\n", selector);
 
     if (selector >= kNumberOfMethods) return kIOReturnBadArgument;
 
@@ -76,14 +104,14 @@ IOReturn AsusKeysUserClient::externalMethod(uint32_t selector,
 // static dispatch wrapper
 IOReturn AsusKeysUserClient::sLogUsage(OSObject* target, void* reference, IOExternalMethodArguments* args) {
     AsusKeysUserClient* self = OSDynamicCast(AsusKeysUserClient, target);
-    IOLog("tommydebug: sLogUsage in\n");
+  //  IOLog("tommydebug: sLogUsage in\n");
     if (!self) return kIOReturnBadArgument;
-    IOLog("tommydebug: go to logUsage\n");
+ //   IOLog("tommydebug: go to logUsage\n");
     return self->logUsage(args);
 }
 
 IOReturn AsusKeysUserClient::logUsage(IOExternalMethodArguments* args) {
-    IOLog("tommydebug: logUsage in\n");
+   // IOLog("tommydebug: logUsage in\n");
     if (!args || args->scalarInputCount < 4) {
             IOLog("tommydebug: logUsage - not enough scalars\n");
             return kIOReturnBadArgument;
@@ -94,8 +122,8 @@ IOReturn AsusKeysUserClient::logUsage(IOExternalMethodArguments* args) {
         uint32_t pressed   = (uint32_t)args->scalarInput[2];
         uint32_t keycode   = (uint32_t)args->scalarInput[3];
 
-        IOLog("tommydebug: logUsage scalar: usage=0x%x page=0x%x pressed=%u keycode=0x%x\n",
-              usage, page, pressed, keycode);
+      //  IOLog("tommydebug: logUsage scalar: usage=0x%x page=0x%x pressed=%u keycode=0x%x\n",
+      //        usage, page, pressed, keycode);
 
         if (fProvider) {
             fProvider->handleUserMessage(usage, page, pressed, keycode);
