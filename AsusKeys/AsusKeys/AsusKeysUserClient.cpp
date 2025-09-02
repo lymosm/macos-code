@@ -14,17 +14,13 @@ OSDefineMetaClassAndStructors(AsusKeysUserClient, IOUserClient)
 
 // dispatch table：selector 0 -> sLogUsage
 const IOExternalMethodDispatch AsusKeysUserClient::sMethods[AsusKeysUserClient::kNumberOfMethods] = {
-    { (IOExternalMethodAction) &AsusKeysUserClient::sLogUsage,  /* action */
-      4,                 /* checkScalarInputCount */
-      0, /* checkStructureInputSize */
-      0, 0 },             /* output counts/sizes */
-    // selector 1 -> sEvaluateAcpiMethod
-        { (IOExternalMethodAction)&AsusKeysUserClient::sEvaluateAcpiMethod,
-          0, /* scalarInputCount */
-          sizeof(AcpiMethodInput), /* structInputSize */
-          0, 0 }
+    { (IOExternalMethodAction)&AsusKeysUserClient::sLogUsage,
+      4, 0, 0, 0 },
 
+    { (IOExternalMethodAction)&AsusKeysUserClient::sEvaluateAcpiMethod,
+      0, sizeof(AcpiMethodInput), 0, sizeof(AcpiMethodOutput) }
 };
+
 
 bool AsusKeysUserClient::initWithTask(task_t owningTask, void* securityToken, UInt32 type) {
     if (!IOUserClient::initWithTask(owningTask, securityToken, type)) return false;
@@ -69,15 +65,67 @@ IOReturn AsusKeysUserClient::sEvaluateAcpiMethod(OSObject* target, void* referen
 }
 
 IOReturn AsusKeysUserClient::evaluateAcpiMethod(IOExternalMethodArguments* args) {
-    if (!args || args->structureInputSize < sizeof(AcpiMethodInput))
-        return kIOReturnBadArgument;
+    IOLog("tommydebug: evaluateAcpiMethod in\n");
+    if (!args) return kIOReturnBadArgument;
+
+        IOLog("tommydebug: evaluateAcpiMethod in\n");
+        IOLog("tommydebug: input size=%u expected=%lu\n",
+              args->structureInputSize, sizeof(AcpiMethodInput));
+
+        if (args->structureInputSize < sizeof(AcpiMethodInput))
+            return kIOReturnBadArgument;
+    AcpiMethodOutput* output = (AcpiMethodOutput*)args->structureOutput;
+    memset(output, 0, sizeof(AcpiMethodOutput));
 
     AcpiMethodInput* input = (AcpiMethodInput*)args->structureInput;
     IOLog("tommydebug: evaluateAcpiMethod request device=%s method=%s\n", input->device, input->method);
 
     if (!fProvider) return kIOReturnNotAttached;
+    // 构造参数数组
+        OSArray* params = nullptr;
+        if (input->argCount > 0) {
+            params = OSArray::withCapacity(input->argCount);
+            for (uint32_t i = 0; i < input->argCount; i++) {
+                AcpiMethodArg* arg = &input->args[i];
+                OSObject* obj = nullptr;
+                if (arg->type == ACPI_ARG_TYPE_INT) {
+                    obj = OSNumber::withNumber(arg->intValue, 32);
+                } else if (arg->type == ACPI_ARG_TYPE_STRING) {
+                    obj = OSString::withCString(arg->strValue);
+                }
+                if (obj) {
+                    params->setObject(obj);
+                    obj->release();
+                }
+            }
+        }
+    OSObject* result = nullptr;
+    IOReturn ret = fProvider->evaluateAcpiFromUser(input->device, input->method, params, &result);
 
-    return fProvider->evaluateAcpiFromUser(input->device, input->method);
+        if (params) params->release();
+    
+    /// 填充返回值
+    if (result) {
+        if (OSNumber* num = OSDynamicCast(OSNumber, result)) {
+            output->type = ACPI_RET_INT;
+            output->intValue = num->unsigned64BitValue();
+            IOLog("tommydebug: ACPI returned int=%llu\n", output->intValue);
+        } else if (OSString* str = OSDynamicCast(OSString, result)) {
+            output->type = ACPI_RET_STRING;
+            strncpy(output->strValue, str->getCStringNoCopy(), sizeof(output->strValue)-1);
+            IOLog("tommydebug: ACPI returned string=%s\n", output->strValue);
+        } else {
+            output->type = ACPI_RET_NONE;
+            IOLog("tommydebug: ACPI returned unsupported type\n");
+        }
+        result->release();
+    } else {
+        output->type = ACPI_RET_NONE;
+        IOLog("tommydebug: ACPI returned no value\n");
+    }
+
+    args->structureOutputSize = sizeof(AcpiMethodOutput);
+        return ret;
 }
 
 

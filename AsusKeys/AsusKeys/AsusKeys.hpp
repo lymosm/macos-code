@@ -33,7 +33,7 @@ public:
     void handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed, uint32_t keycode);
     void decrease_keyboard_backlight(); // will be executed on command gate
     void increase_keyboard_backlight();
-    IOReturn evaluateAcpiFromUser(const char* device, const char* method);
+    IOReturn evaluateAcpiFromUser(const char* device, const char* method, OSArray* params, OSObject** outResult);
 
 
 private:

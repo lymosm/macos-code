@@ -277,9 +277,9 @@ void AsusKeys::handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed,
     }
 }
 
-IOReturn AsusKeys::evaluateAcpiFromUser(const char* device, const char* method) {
+IOReturn AsusKeys::evaluateAcpiFromUser(const char* device, const char* method, OSArray* params, OSObject** outResult) {
     IOACPIPlatformDevice* target = nullptr;
-    IOLog("tommydebug: evaluateAcpiFromUser\n");
+    IOLog("tommydebug: evaluateObject(%s.%s) in\n", device, method);
     // 简单查找 EC0 或 ATKD，后面可扩展
     if (strcmp(device, "EC0") == 0 && _ec0Device) {
         target = _ec0Device;
@@ -290,11 +290,51 @@ IOReturn AsusKeys::evaluateAcpiFromUser(const char* device, const char* method) 
         return kIOReturnNotFound;
     }
 
-    OSObject* result = nullptr;
-    IOReturn ret = target->evaluateObject(method, &result);
+    // 将 method 字符串转换为 OSSymbol（evaluateObject 接受 OSSymbol）
+      //  OSSymbol* sym = OSSymbol::withCString(method);
+       // if (!sym) return kIOReturnNoMemory;
+
+        OSObject* result = nullptr;
+        IOReturn ret = kIOReturnError;
+
+        if (!params || params->getCount() == 0) {
+            IOLog("tommydebug: evaluateObject(%s.%s) no params\n", device, method);
+            // 无参数：传 nullptr + 0
+            ret = target->evaluateObject(method, &result, nullptr, 0);
+        } else {
+            // 有参数：把 OSArray 的元素取出组成 OSObject* 数组并传入
+            IOItemCount count = params->getCount();
+            const IOItemCount MAX_PARAMS = 16; // 根据需要调整
+            IOItemCount passCount = (count > MAX_PARAMS) ? MAX_PARAMS : count;
+            OSObject* argv[MAX_PARAMS]; // 在栈上，数量固定为 MAX_PARAMS
+            IOLog("tommydebug: method %s has %u params\n", method, (unsigned)passCount);
+
+            for (IOItemCount i = 0; i < passCount; ++i) {
+                OSObject* obj = params->getObject(i);
+                        
+
+                        if (OSNumber* num = OSDynamicCast(OSNumber, obj)) {
+                            IOLog("tommydebug: param[%u] = OSNumber %llu\n", (unsigned)i, num->unsigned64BitValue());
+                        } else if (OSString* str = OSDynamicCast(OSString, obj)) {
+                            IOLog("tommydebug: param[%u] = OSString %s\n", (unsigned)i, str->getCStringNoCopy());
+                        } else {
+                            IOLog("tommydebug: param[%u] = <%s>\n", (unsigned)i, obj->getMetaClass()->getClassName());
+                        }
+                // getObject 不会增加引用计数（返回当前持有的指针），
+                // 这里直接取出即可（保证 params 在调用时有效）
+                argv[i] = obj;
+            }
+            
+           
+
+            // 调用带 params[] 和 count 的 overload
+            ret = target->evaluateObject(method, &result, argv, passCount);
+        }
+    
     if (ret == kIOReturnSuccess) {
         IOLog("tommydebug: evaluateObject(%s.%s) success\n", device, method);
-        if (result) result->release();
+        
+        if (result) *outResult = result; // 调用方要负责 release
     } else {
         IOLog("tommydebug: evaluateObject(%s.%s) failed: 0x%x\n", device, method, ret);
     }

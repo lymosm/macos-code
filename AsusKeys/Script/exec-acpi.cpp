@@ -21,16 +21,30 @@ int main() {
     }
 
     AcpiMethodInput input;
+    AcpiMethodOutput output = {};
+    size_t outSize = sizeof(output);
     memset(&input, 0, sizeof(input));
-    strncpy(input.device, "EC0", sizeof(input.device)-1);
-    strncpy(input.method, "_Q13", sizeof(input.method)-1);
+    strncpy(input.device, "ATKD", sizeof(input.device)-1);
+    strncpy(input.method, "GLKB", sizeof(input.method)-1);
+    input.argCount = 1;
+    input.args[0].type = ACPI_ARG_TYPE_INT;
+    input.args[0].intValue = 1;
+    // input.args[1] = 456;
 
-    IOReturn ret = IOConnectCallStructMethod(
-        connect,
-        kEvaluateAcpiMethod,   // 注意不要再用 AsusKeysUserClient:: 前缀，直接用共享头文件里定义的枚举
-        &input, sizeof(input),
-        nullptr, nullptr);
+    IOReturn ret = IOConnectCallStructMethod(connect,
+                                             kEvaluateAcpiMethod,
+                                             &input, sizeof(input),
+                                             &output, &outSize);
 
+    if (ret == kIOReturnSuccess) {
+        if (output.type == ACPI_RET_INT) {
+            printf("ACPI returned int: %llu\n", output.intValue);
+        } else if (output.type == ACPI_RET_STRING) {
+            printf("ACPI returned string: %s\n", output.strValue);
+        } else {
+            printf("ACPI returned no value\n");
+        }
+    }
     printf("IOConnectCallStructMethod ret = 0x%x\n", ret);
 
     IOServiceClose(connect);
