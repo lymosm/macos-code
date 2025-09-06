@@ -1,0 +1,31 @@
+//
+//  AsusFnHIDEventDriver.cpp
+//  AsusSMC
+//
+//  Created by lymos on 2025/7/21.
+//  Copyright © 2025 Le Bao Hiep. All rights reserved.
+//
+
+// AsusFnHIDEventDriver.cpp
+
+#include "AsusFnHIDEventDriver.hpp"
+#include <IOKit/IOLib.h>
+
+#define super IOHIDEventDriver
+OSDefineMetaClassAndStructors(AsusFnHIDEventDriver, IOHIDEventDriver)
+
+IOReturn AsusFnHIDEventDriver::handleHIDEvent(IOHIDEvent * event, IOOptionBits options)
+{
+    IOLog("lymoskey AsusSMC [FnKey] Fn+F6 detected! Usage=\n");
+    if (event->getType() == kIOHIDEventTypeKeyboard) {
+        UInt32 usagePage = event->getIntegerValue(kIOHIDEventFieldKeyboardUsagePage);
+        UInt32 usage = event->getIntegerValue(kIOHIDEventFieldKeyboardUsage);
+        IOLog("lymoskey AsusSMC [FnKey] Fn+F6 detected! Usage=0x%X\n", usage);
+        if (usagePage == 0x07 && usage == 0x91) { // 0x07 = Keyboard/Keypad page
+            IOLog("lymoskey AsusSMC [FnKey] Fn+F6 detected! Usage=0x%X\n", usage);
+            // TODO: 调用调节亮度接口，或发送事件到用户空间
+        }
+    }
+
+    return handleHIDEvent(event, options);
+}

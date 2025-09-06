@@ -1,0 +1,24 @@
+//
+//  AsusFnHIDEventDriver.hpp
+//  AsusSMC
+//
+//  Created by lymos on 2025/7/21.
+//  Copyright © 2025 Le Bao Hiep. All rights reserved.
+//
+
+// AsusFnHIDEventDriver.hpp
+
+#ifndef AsusFnHIDEventDriver_hpp
+#define AsusFnHIDEventDriver_hpp
+
+#include <IOKit/hid/IOHIDEventDriver.h>
+
+class AsusFnHIDEventDriver : public IOHIDEventDriver
+{
+    OSDeclareDefaultStructors(AsusFnHIDEventDriver)
+
+public:
+    virtual IOReturn handleHIDEvent(IOHIDEvent * event, IOOptionBits options = 0);
+};
+
+#endif /* AsusFnHIDEventDriver_hpp */

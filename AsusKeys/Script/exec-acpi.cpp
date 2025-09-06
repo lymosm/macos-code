@@ -24,11 +24,11 @@ int main() {
     AcpiMethodOutput output = {};
     size_t outSize = sizeof(output);
     memset(&input, 0, sizeof(input));
-    strncpy(input.device, "ATKD", sizeof(input.device)-1);
-    strncpy(input.method, "GLKB", sizeof(input.method)-1);
+    strncpy(input.device, "EC0", sizeof(input.device)-1);
+    strncpy(input.method, "_Q13", sizeof(input.method)-1);
     input.argCount = 1;
     input.args[0].type = ACPI_ARG_TYPE_INT;
-    input.args[0].intValue = 1;
+    input.args[0].intValue = 3;
     // input.args[1] = 456;
 
     IOReturn ret = IOConnectCallStructMethod(connect,
