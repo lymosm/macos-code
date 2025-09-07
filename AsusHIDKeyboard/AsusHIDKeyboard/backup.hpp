@@ -20,9 +20,9 @@
 #define ASUS_VENDOR_ID  0x0B05
 #define ASUS_PRODUCT_ID 0x1854
 
-class AsusATKD : public IOService
+class AsusHIDKeyboard : public IOService
 {
-    OSDeclareDefaultStructors(AsusATKD)
+    OSDeclareDefaultStructors(AsusHIDKeyboard)
 
 private:
     IOWorkLoop*    _workLoop;

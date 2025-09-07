@@ -1,18 +1,18 @@
 //
 //  s.hpp
-//  AsusATKD
+//  AsusHIDKeyboard
 //
 //  Created by lymos on 2025/8/29.
 //
 
 
-#include "AsusATKD.hpp"
+#include "AsusHIDKeyboard.hpp"
 
 // define super for convenience
 #define super IOService
-OSDefineMetaClassAndStructors(AsusATKD, IOService);
+OSDefineMetaClassAndStructors(AsusHIDKeyboard, IOService);
 
-bool AsusATKD::init(OSDictionary* dict)
+bool AsusHIDKeyboard::init(OSDictionary* dict)
 {
     if (!super::init(dict)) return false;
     _workLoop = nullptr;
@@ -22,7 +22,7 @@ bool AsusATKD::init(OSDictionary* dict)
     return true;
 }
 
-void AsusATKD::free(void)
+void AsusHIDKeyboard::free(void)
 {
     IOLog("tommydebug: AsusATKD::free\n");
     if (_cmdGate) {
@@ -37,7 +37,7 @@ void AsusATKD::free(void)
     super::free();
 }
 
-IOService* AsusATKD::probe(IOService* provider, SInt32* score)
+IOService* AsusHIDKeyboard::probe(IOService* provider, SInt32* score)
 {
     IOLog("tommydebug: AsusATKD::probe provider=%s\n",
           provider ? provider->getName() : "(null)");
@@ -45,7 +45,7 @@ IOService* AsusATKD::probe(IOService* provider, SInt32* score)
     return super::probe(provider, score);
 }
 
-bool AsusATKD::start(IOService* provider)
+bool AsusHIDKeyboard::start(IOService* provider)
 {
     if (!super::start(provider)) return false;
     _provider = provider;
@@ -106,7 +106,7 @@ bool AsusATKD::start(IOService* provider)
     return true;
 }
 
-void AsusATKD::stop(IOService* provider)
+void AsusHIDKeyboard::stop(IOService* provider)
 {
     IOLog("tommydebug: AsusATKD::stop\n");
     // if you registered callbacks on provider, unregister them here
@@ -120,7 +120,7 @@ void AsusATKD::stop(IOService* provider)
 }
 
 // Static callback stub - adapt signature to provider API used
-void AsusATKD::InputReportCallback(void* target,
+void AsusHIDKeyboard::InputReportCallback(void* target,
                                    IOReturn status,
                                    void* refCon,
                                    UInt32 reportType,
@@ -130,7 +130,7 @@ void AsusATKD::InputReportCallback(void* target,
 {
     (void)status; (void)refCon; (void)reportType; (void)reportID; (void)reportData; (void)reportLength;
 
-    AsusATKD* self = OSDynamicCast(AsusATKD, (OSObject*)target);
+    AsusHIDKeyboard* self = OSDynamicCast(AsusHIDKeyboard, (OSObject*)target);
     if (!self) return;
 
     // TODO: 在这里解析 reportData -> 找到 usagePage / usage / value
@@ -147,7 +147,7 @@ void AsusATKD::InputReportCallback(void* target,
     self->safeLogUsage(usagePage, usage, value);
 }
 
-void AsusATKD::safeLogUsage(uint32_t usagePage, uint32_t usage, int64_t value)
+void AsusHIDKeyboard::safeLogUsage(uint32_t usagePage, uint32_t usage, int64_t value)
 {
     // concise kernel log with your prefix
     IOLog("tommydebug: AsusATKD usage_page=0x%04x usage=0x%04x value=%lld\n",

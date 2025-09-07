@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <!-- 唯一标识符 -->
+   <key>Label</key>
+   <string>tommy.asus.fnkeys</string>
+
+   <!-- 程序路径 + 参数，必须分开写 -->
+   <key>ProgramArguments</key>
+   <array>
+      <string>/usr/local/bin/fnkeys</string>
+   </array>
+
+   <!-- 系统启动时运行 -->
+   <key>RunAtLoad</key>
+   <true/>
+
+   <!-- 如果进程崩溃，自动重启 -->
+   <key>KeepAlive</key>
+   <true/>
+</dict>
+</plist>
+

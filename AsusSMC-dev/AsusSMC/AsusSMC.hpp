@@ -64,7 +64,7 @@ public:
     IOHIDInterface *hid_interface {nullptr};
     void asus_kbd_backlight_set(uint8_t val);
     void findHIDInterfaceDelayed(OSObject* owner, IOTimerEventSource* sender);  // 声明
-
+    void dispatchTCReport_stepToTarget(int code, int targetRawLevel);
 
     
     // lymos
@@ -171,7 +171,7 @@ private:
 
     IOReturn postKeyboardInputReport(const void *report, uint32_t reportSize);
     void dispatchCSMRReport(int code, int loop = 1);
-    void dispatchTCReport(int code, int loop = 1);
+    void dispatchTCReport(int code, int loop = 1, const char *type = "");
 
     IONotifier *_publishNotify {nullptr};
     IONotifier *_terminateNotify {nullptr};

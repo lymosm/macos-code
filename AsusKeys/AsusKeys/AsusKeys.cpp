@@ -275,6 +275,68 @@ void AsusKeys::handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed,
             }
         }
     }
+    
+    if (page == 0xFF31 && usage == 0x10) {
+        if (pressed) {
+            // 使用 command gate 来在 workloop 上串行执行对硬件的交互
+            if (_commandGate) {
+                _commandGate->runAction([](OSObject* owner, void* /*arg0*/, void* /*arg1*/, void* /*arg2*/, void* /*arg3*/) -> IOReturn {
+                    AsusKeys* self = OSDynamicCast(AsusKeys, owner);
+                    if (!self) return kIOReturnBadArgument;
+                    self->decrease_backlight();
+                    return kIOReturnSuccess;
+                });
+            } else {
+                IOLog("tommydebug: command gate not available\n");
+            }
+        }
+    }else if (page == 0xFF31 && usage == 0x20) {
+        if (pressed) {
+            // 使用 command gate 来在 workloop 上串行执行对硬件的交互
+            if (_commandGate) {
+                _commandGate->runAction([](OSObject* owner, void* /*arg0*/, void* /*arg1*/, void* /*arg2*/, void* /*arg3*/) -> IOReturn {
+                    AsusKeys* self = OSDynamicCast(AsusKeys, owner);
+                    if (!self) return kIOReturnBadArgument;
+                    self->increase_backlight();
+                    return kIOReturnSuccess;
+                });
+            } else {
+                IOLog("tommydebug: command gate not available\n");
+            }
+        }
+    }
+    
+    if (page == 0xFF31 && usage == 0x35) {
+        if (pressed) {
+            // 使用 command gate 来在 workloop 上串行执行对硬件的交互
+            if (_commandGate) {
+                _commandGate->runAction([](OSObject* owner, void* /*arg0*/, void* /*arg1*/, void* /*arg2*/, void* /*arg3*/) -> IOReturn {
+                    AsusKeys* self = OSDynamicCast(AsusKeys, owner);
+                    if (!self) return kIOReturnBadArgument;
+                    self->close_backlight();
+                    return kIOReturnSuccess;
+                });
+            } else {
+                IOLog("tommydebug: command gate not available\n");
+            }
+        }
+    }
+    
+    if (page == 0xFF31 && usage == 0x6b) {
+        if (pressed) {
+            // 使用 command gate 来在 workloop 上串行执行对硬件的交互
+            if (_commandGate) {
+                _commandGate->runAction([](OSObject* owner, void* /*arg0*/, void* /*arg1*/, void* /*arg2*/, void* /*arg3*/) -> IOReturn {
+                    AsusKeys* self = OSDynamicCast(AsusKeys, owner);
+                    if (!self) return kIOReturnBadArgument;
+                    self->toggle_touchpad();
+                    return kIOReturnSuccess;
+                });
+            } else {
+                IOLog("tommydebug: command gate not available\n");
+            }
+        }
+    }
 }
 
 IOReturn AsusKeys::evaluateAcpiFromUser(const char* device, const char* method, OSArray* params, OSObject** outResult) {
@@ -384,5 +446,98 @@ void AsusKeys::increase_keyboard_backlight() {
         }
     } else {
         IOLog("tommydebugfn: evaluateObject(_Q13) failed: 0x%x\n", ret);
+    }
+}
+
+
+void AsusKeys::decrease_backlight() {
+    if (!_ec0Device) {
+        IOLog("tommydebugfn: Cannot call _Q15 - EC0 device not found\n");
+        return;
+    }
+
+    // 重要：这里我们在 command gate 上调用 ACPI method
+    // //IOLog("tommydebugfn: Calling _Q13 (from user request) in commandGate context\n");
+
+    // 为安全起见，先用 evaluateObject 但不假设返回值类型
+    OSObject* result = nullptr;
+    IOReturn ret = _ec0Device->evaluateObject("_Q15", &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebugfn: evaluateObject(_Q15) returned success\n");
+        if (result) {
+            result->release();
+            result = nullptr;
+        }
+    } else {
+        IOLog("tommydebugfn: evaluateObject(_Q15) failed: 0x%x\n", ret);
+    }
+}
+
+void AsusKeys::increase_backlight() {
+    if (!_ec0Device) {
+        IOLog("tommydebugfn: Cannot call _Q16 - EC0 device not found\n");
+        return;
+    }
+
+    // 重要：这里我们在 command gate 上调用 ACPI method
+    IOLog("tommydebugfn: Calling _Q16 (from user request) in commandGate context\n");
+
+    // 为安全起见，先用 evaluateObject 但不假设返回值类型
+    OSObject* result = nullptr;
+    IOReturn ret = _ec0Device->evaluateObject("_Q16", &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebugfn: evaluateObject(_Q16) returned success\n");
+        if (result) {
+            result->release();
+            result = nullptr;
+        }
+    } else {
+        IOLog("tommydebugfn: evaluateObject(_Q16) failed: 0x%x\n", ret);
+    }
+}
+
+void AsusKeys::close_backlight() {
+    if (!_ec0Device) {
+        IOLog("tommydebugfn: Cannot call _Q17 - EC0 device not found\n");
+        return;
+    }
+
+    // 重要：这里我们在 command gate 上调用 ACPI method
+    // //IOLog("tommydebugfn: Calling _Q13 (from user request) in commandGate context\n");
+
+    // 为安全起见，先用 evaluateObject 但不假设返回值类型
+    OSObject* result = nullptr;
+    IOReturn ret = _ec0Device->evaluateObject("_Q17", &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebugfn: evaluateObject(_Q13) returned success\n");
+        if (result) {
+            result->release();
+            result = nullptr;
+        }
+    } else {
+        IOLog("tommydebugfn: evaluateObject(_Q17) failed: 0x%x\n", ret);
+    }
+}
+
+void AsusKeys::toggle_touchpad(){
+    if (!_ec0Device) {
+        IOLog("tommydebugfn: Cannot call _Q19 - EC0 device not found\n");
+        return;
+    }
+
+    // 重要：这里我们在 command gate 上调用 ACPI method
+    // //IOLog("tommydebugfn: Calling _Q13 (from user request) in commandGate context\n");
+
+    // 为安全起见，先用 evaluateObject 但不假设返回值类型
+    OSObject* result = nullptr;
+    IOReturn ret = _ec0Device->evaluateObject("_Q19", &result);
+    if (ret == kIOReturnSuccess) {
+        IOLog("tommydebugfn: evaluateObject(_Q19) returned success\n");
+        if (result) {
+            result->release();
+            result = nullptr;
+        }
+    } else {
+        IOLog("tommydebugfn: evaluateObject(_Q19) failed: 0x%x\n", ret);
     }
 }

@@ -30,6 +30,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1E40C9012E5E1927006998FB /* Script */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Script; sourceTree = "<group>"; };
+		1EE269D82E6C9C0A00C49C66 /* Pkg */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pkg; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +48,7 @@
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
+				1EE269D82E6C9C0A00C49C66 /* Pkg */,
 				1E1B5FDB2E6731BB007A4C1A /* AI3.md */,
 				1E1B316D2E63E17900B285AC /* AI2.md */,
 				1E24CF0A2E633D3D0061104A /* AI.md */,
@@ -110,6 +112,7 @@
 				3573FE2B25223B8500DFC9F4 /* Frameworks */,
 				3573FE2C25223B8500DFC9F4 /* Resources */,
 				CE36C7C1252B87670093C599 /* Archive */,
+				1E9D690A2E6D1F1900259225 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -162,6 +165,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E9D690A2E6D1F1900259225 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PROJECT_DIR/Pkg/build.sh\"\n";
+		};
 		CE36C7C1252B87670093C599 /* Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

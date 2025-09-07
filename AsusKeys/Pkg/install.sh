@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+# 安装后把 plist 放到 /Library/LaunchAgents（pkg 已经把文件放好了）
+PLIST="/Library/LaunchAgents/tommy.asus.fnkeys.plist"
+
+# 确保权限与属主
+if [ -f "$PLIST" ]; then
+  /usr/sbin/chown root:wheel "$PLIST" || true
+  /bin/chmod 644 "$PLIST" || true
+fi
+
+# 确保二进制权限
+if [ -f "/usr/local/bin/fnkeys" ]; then
+  /usr/sbin/chown root:wheel /usr/local/bin/fnkeys || true
+  /bin/chmod 755 /usr/local/bin/fnkeys || true
+fi
+
+# 尝试在当前登录用户 session 下立即加载 agent（当 pkg 在 GUI 下以管理员身份安装时，这里能生效）
+USER_UID=$(stat -f "%u" /dev/console 2>/dev/null || echo "")
+if [ -n "$USER_UID" ]; then
+  # 使用 bootstrap 以加载到当前用户 GUI session
+  /bin/launchctl bootstrap gui/$USER_UID "$PLIST" 2>/dev/null || true
+  /bin/launchctl kickstart -k "gui/$USER_UID/tommy.asus.fnkeys" 2>/dev/null || true
+fi
+
+exit 0

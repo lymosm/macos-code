@@ -13,6 +13,7 @@
 #include <VirtualSMCSDK/kern_vsmcapi.hpp>
 
 #define kSetKeyboardBacklightMessage 812002
+extern uint16_t lastBacklightValue; // 由 SMCKBrdBLightValue::update 更新
 
 static constexpr SMC_KEY KeyAL   = SMC_MAKE_IDENTIFIER('A','L','!',' ');
 static constexpr SMC_KEY KeyALI0 = SMC_MAKE_IDENTIFIER('A','L','I','0');
@@ -42,6 +43,8 @@ typedef enum {
 } LocationType;
 
 static constexpr int32_t DiagFunctionStrLen = 12;
+
+
 
 typedef struct fanTypeDescStruct {
     uint8_t type        {FAN_RPM};

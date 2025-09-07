@@ -268,7 +268,7 @@ IOReturn AsusSMC::message(uint32_t type, IOService *provider, void *argument) {
                 uint16_t rawBacklight = arg->unsigned16BitValue();  // 取出原始背光值
 
                 // 将原始背光值转换为 0～3 范围内的值
-                uint8_t backlightValue = rawBacklight / 64;  // 1638 是从最大值 4900 左右映射到 0～3 的缩放因子
+                uint8_t backlightValue = rawBacklight / 64;  // 1638 是从最大值 4091 左右映射到 0～3 的缩放因子
                 DBGLOG("tommydebug", "Original backlight value: %d", rawBacklight);
 
                 // 打印出计算的背光值，确保它在 0～3 之间
@@ -700,13 +700,13 @@ void AsusSMC::handleMessage(int code) {
 
         case 0xC5: // Keyboard Backlight Down
             if (hasKeyboardBacklight) {
-                dispatchTCReport(kHIDUsage_AV_TopCase_IlluminationDown);
+                dispatchTCReport(kHIDUsage_AV_TopCase_IlluminationDown, 1, "keyboard");
             }
             break;
 
         case 0xC4: // Keyboard Backlight Up
             if (hasKeyboardBacklight) {
-                dispatchTCReport(kHIDUsage_AV_TopCase_IlluminationUp);
+                dispatchTCReport(kHIDUsage_AV_TopCase_IlluminationUp, 1, "keyboard");
             }
             break;
 
@@ -730,6 +730,7 @@ void AsusSMC::toggleAirplaneMode() {
 }
 
 void AsusSMC::toggleTouchpad() {
+    DBGLOG("tommydebug", "toggleTouchpad in");
     dispatchMessage(kKeyboardGetTouchStatus, &isTouchpadEnabled);
     isTouchpadEnabled = !isTouchpadEnabled;
     dispatchMessage(kKeyboardSetTouchStatus, &isTouchpadEnabled);
@@ -766,6 +767,7 @@ void AsusSMC::toggleBatteryConservativeMode(bool state) {
 }
 
 void AsusSMC::displayOff() {
+    DBGLOG("tommydebug", "displayOff in");
     if (isPanelBackLightOn) {
         // Read Panel brigthness value to restore later with backlight toggle
         readPanelBrightnessValue();
@@ -894,15 +896,119 @@ void AsusSMC::dispatchCSMRReport(int code, int loop) {
     }
 }
 
-void AsusSMC::dispatchTCReport(int code, int loop) {
+
+void AsusSMC::dispatchTCReport(int code, int loop, const char *type) {
+    DBGLOG("tommydebug", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
     DBGLOG("atk", "Dispatched key %d(0x%x), loop %d time(s)", code, code, loop);
+    if(strcmp(type, "keyboard") == 0){
+        uint8_t asus_all_level = 3;
+       // OSNumber *arg = OSNumber::withNumber(*((uint16_t *)lastBacklightValue) / 16, 16);
+        // 获取原始背光值
+       
+        uint16_t rawBacklight = lastBacklightValue / 16;  // 取出原始背光值
+        // 将原始背光值转换为 0～3 范围内的值
+        uint8_t current_asus_kbkey_level = rawBacklight / 64;  // 1363 是从最大值 4091 左右映射到 0～3 的缩放因子
+        DBGLOG("tommydebug", "dispatchTCReport Original backlight value: %d", rawBacklight);
+        // 打印出计算的背光值，确保它在 0～3 之间
+        DBGLOG("tommydebug", "dispatchTCReport Calculated backlight level: %d", current_asus_kbkey_level);
+        /* 已知loop最大16，lastBacklightValue最大值4091，rawBacklight最大是4091/16=255，根据规则计算出当前loop的值，以实现每执行一次dispatchTCReport能确保
+        asus_kbkey_level在0-3之间变换
+         0-3
+         4-7
+         8-11
+         12-15
+         */
+        if(code == 0x8 && current_asus_kbkey_level >= 3){
+            return ;
+        }
+        uint8_t currentLevel = lastBacklightValue / 256;   // 0~15
+        uint8_t targetLevel  = currentLevel / 4;           // 0~3
+
+        /*
+        if (code == 0x8) { // 升
+            if (asus_all_level > current_asus_kbkey_level)
+                loop = targetLevel - asus_kbkey_level;
+        } else if (code == 0x9) { // 降
+            if (targetLevel < asus_kbkey_level)
+                loop = asus_kbkey_level - targetLevel;
+        }
+         */
+        loop = 4;
+       // DBGLOG("tommydebug", "dispatchTCReport: loop=%d (cur=%d target=%d)", loop, asus_kbkey_level, targetLevel);
+        
+    }
     while (loop--) {
+        DBGLOG("tommydebug", "postKeyboardInputReport: loop=%d", loop);
         tcreport.keys.insert(code);
         postKeyboardInputReport(&tcreport, sizeof(tcreport));
         tcreport.keys.erase(code);
         postKeyboardInputReport(&tcreport, sizeof(tcreport));
     }
 }
+
+
+/*
+void AsusSMC::dispatchTCReport(int code, int loop) {
+    DBGLOG("tommydebug", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
+
+    // 1. 算出当前 rawLevel
+    int rawLevel = (lastBacklightValue * 15) / 4091;
+    int osdLevel = rawLevel / 4; // 当前 0–3 档
+
+    int targetOsdLevel = osdLevel;
+
+    // 2. 根据按键方向确定目标档
+    if (code == 0x8 && osdLevel < 3) {
+        targetOsdLevel = osdLevel + 1;
+    } else if (code == 0x9 && osdLevel > 0) {
+        targetOsdLevel = osdLevel - 1;
+    } else {
+        DBGLOG("tommydebug", "dispatchTCReport: ignore key=%x at boundary (osd=%d)", code, osdLevel);
+        return;
+    }
+
+    // 3. 算目标 rawLevel (0,4,8,12)
+    int targetRawLevel = targetOsdLevel * 4;
+
+    DBGLOG("tommydebug", "dispatchTCReport: code=%x raw=%d osd=%d -> targetRaw=%d (osd=%d)",
+           code, rawLevel, osdLevel, targetRawLevel, targetOsdLevel);
+
+    // 4. 调用逐步按键函数（方案 2）
+    dispatchTCReport_stepToTarget(code, targetRawLevel);
+}
+ */
+ 
+void AsusSMC::dispatchTCReport_stepToTarget(int code, int targetRawLevel) {
+    const int MAX_STEPS = 32;
+    const int SLEEP_MS = 20;
+    DBGLOG("tommydebug", "dispatchTCReport_stepToTarget: in");
+    
+    for (int i = 0; i < MAX_STEPS; ++i) {
+        DBGLOG("tommydebug", " for: %d", i);
+        int currentRaw = (lastBacklightValue * 15) / 4091;
+        if (currentRaw == targetRawLevel) break;
+
+        // 发一次按键（只发一次，系统会把 raw +-1）
+        tcreport.keys.insert(code);
+        postKeyboardInputReport(&tcreport, sizeof(tcreport));
+        tcreport.keys.erase(code);
+        postKeyboardInputReport(&tcreport, sizeof(tcreport));
+
+        // 等待系统更新 lastBacklightValue（SMC update 回调）
+        IOSleep(SLEEP_MS);
+
+        // 检查是否被用户干预（比如 lastBacklightValue 不是预期方向）
+        int newRaw = (lastBacklightValue * 15) / 4091;
+        if (code == 0x8) {
+            // 如果系统反方向变化或跳太多，可能用户正在拖动，退出以避免错乱
+            if (newRaw <= currentRaw) break;
+        } else {
+            if (newRaw >= currentRaw) break;
+        }
+    }
+     
+}
+
 
 void AsusSMC::registerNotifications() {
     auto *key = OSSymbol::withCString(kDeliverNotifications);

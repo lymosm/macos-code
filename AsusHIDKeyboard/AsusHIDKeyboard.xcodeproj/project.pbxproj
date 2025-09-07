@@ -10,8 +10,8 @@
 		1EDEFF762E633A9F00BF0AAA /* Info-vid-pid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EDEFF752E633A9F00BF0AAA /* Info-vid-pid.plist */; };
 		1EFBFCA32E60B6D200EB0C2D /* backup.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EFBFCA22E60B6D200EB0C2D /* backup.cpp */; };
 		1EFBFCA52E60B71900EB0C2D /* backup.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EFBFCA42E60B71400EB0C2D /* backup.hpp */; };
-		3573FE3225223B8500DFC9F4 /* AsusATKD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */; };
-		3573FE3425223B8500DFC9F4 /* AsusATKD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */; };
+		3573FE3225223B8500DFC9F4 /* AsusHIDKeyboard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* AsusHIDKeyboard.hpp */; };
+		3573FE3425223B8500DFC9F4 /* AsusHIDKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* AsusHIDKeyboard.cpp */; };
 		358E312F2523A1E400C409AD /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358E312E2523A1E400C409AD /* libkmod.a */; };
 /* End PBXBuildFile section */
 
@@ -21,9 +21,9 @@
 		1EFBFCA22E60B6D200EB0C2D /* backup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = backup.cpp; sourceTree = "<group>"; };
 		1EFBFCA42E60B71400EB0C2D /* backup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backup.hpp; sourceTree = "<group>"; };
 		1EFC44D62E62947900F8E428 /* Info-backup.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-backup.plist"; sourceTree = "<group>"; };
-		3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsusATKD.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusATKD.hpp; sourceTree = "<group>"; };
-		3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusATKD.cpp; sourceTree = "<group>"; };
+		3573FE2E25223B8500DFC9F4 /* AsusHIDKeyboard.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsusHIDKeyboard.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		3573FE3125223B8500DFC9F4 /* AsusHIDKeyboard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusHIDKeyboard.hpp; sourceTree = "<group>"; };
+		3573FE3325223B8500DFC9F4 /* AsusHIDKeyboard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusHIDKeyboard.cpp; sourceTree = "<group>"; };
 		3573FE3525223B8500DFC9F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		358E312E2523A1E400C409AD /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,7 +50,7 @@
 			children = (
 				1E6918DE2E608D2700B091A9 /* packaging */,
 				1E40C9012E5E1927006998FB /* Script */,
-				3573FE3025223B8500DFC9F4 /* AsusATKD */,
+				3573FE3025223B8500DFC9F4 /* AsusHIDKeyboard */,
 				3573FE2F25223B8500DFC9F4 /* Products */,
 				358E312D2523A1E400C409AD /* Frameworks */,
 				1EFBFCA12E60AB8800EB0C2D /* README.md */,
@@ -60,23 +60,23 @@
 		3573FE2F25223B8500DFC9F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */,
+				3573FE2E25223B8500DFC9F4 /* AsusHIDKeyboard.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3573FE3025223B8500DFC9F4 /* AsusATKD */ = {
+		3573FE3025223B8500DFC9F4 /* AsusHIDKeyboard */ = {
 			isa = PBXGroup;
 			children = (
 				1EFBFCA42E60B71400EB0C2D /* backup.hpp */,
-				3573FE3125223B8500DFC9F4 /* AsusATKD.hpp */,
-				3573FE3325223B8500DFC9F4 /* AsusATKD.cpp */,
+				3573FE3125223B8500DFC9F4 /* AsusHIDKeyboard.hpp */,
+				3573FE3325223B8500DFC9F4 /* AsusHIDKeyboard.cpp */,
 				1EFBFCA22E60B6D200EB0C2D /* backup.cpp */,
 				3573FE3525223B8500DFC9F4 /* Info.plist */,
 				1EDEFF752E633A9F00BF0AAA /* Info-vid-pid.plist */,
 				1EFC44D62E62947900F8E428 /* Info-backup.plist */,
 			);
-			path = AsusATKD;
+			path = AsusHIDKeyboard;
 			sourceTree = "<group>";
 		};
 		358E312D2523A1E400C409AD /* Frameworks */ = {
@@ -96,16 +96,16 @@
 			files = (
 				1EFBFCA32E60B6D200EB0C2D /* backup.cpp in Headers */,
 				1EFBFCA52E60B71900EB0C2D /* backup.hpp in Headers */,
-				3573FE3225223B8500DFC9F4 /* AsusATKD.hpp in Headers */,
+				3573FE3225223B8500DFC9F4 /* AsusHIDKeyboard.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3573FE2D25223B8500DFC9F4 /* AsusATKD */ = {
+		3573FE2D25223B8500DFC9F4 /* AsusHIDKeyboard */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusATKD" */;
+			buildConfigurationList = 3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusHIDKeyboard" */;
 			buildPhases = (
 				3573FE2925223B8500DFC9F4 /* Headers */,
 				3573FE2A25223B8500DFC9F4 /* Sources */,
@@ -118,9 +118,9 @@
 			);
 			dependencies = (
 			);
-			name = AsusATKD;
+			name = AsusHIDKeyboard;
 			productName = BrightnessKeys;
-			productReference = 3573FE2E25223B8500DFC9F4 /* AsusATKD.kext */;
+			productReference = 3573FE2E25223B8500DFC9F4 /* AsusHIDKeyboard.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +136,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusATKD" */;
+			buildConfigurationList = 3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusHIDKeyboard" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3573FE2D25223B8500DFC9F4 /* AsusATKD */,
+				3573FE2D25223B8500DFC9F4 /* AsusHIDKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -208,7 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3573FE3425223B8500DFC9F4 /* AsusATKD.cpp in Sources */,
+				3573FE3425223B8500DFC9F4 /* AsusHIDKeyboard.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,13 +344,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.1;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = AsusATKD/Info.plist;
+				INFOPLIST_FILE = AsusHIDKeyboard/Info.plist;
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = tommy.AsusATKD;
 				MODULE_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusATKD;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusHIDKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
@@ -366,13 +366,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.1;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = AsusATKD/Info.plist;
+				INFOPLIST_FILE = AsusHIDKeyboard/Info.plist;
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = tommy.AsusATKD;
 				MODULE_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusATKD;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.AsusHIDKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = kext;
@@ -382,7 +382,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusATKD" */ = {
+		3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "AsusHIDKeyboard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3573FE3625223B8500DFC9F4 /* Debug */,
@@ -391,7 +391,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusATKD" */ = {
+		3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "AsusHIDKeyboard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3573FE3925223B8500DFC9F4 /* Debug */,

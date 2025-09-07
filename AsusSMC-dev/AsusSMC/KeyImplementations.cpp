@@ -8,6 +8,9 @@
 #include "KeyImplementations.hpp"
 #include "AsusSMC.hpp"
 
+// 真正定义
+uint16_t lastBacklightValue = 0;
+
 SMC_RESULT SMCALSValue::readAccess() {
    // DBGLOG("tommydebug", " SMCALSValue::readAccess");
     auto value = reinterpret_cast<Value *>(data);
@@ -37,7 +40,7 @@ SMC_RESULT SMCKBrdBLightValue::update(const SMC_DATA *src)  {
     // tval is in range [0x0, 0xffb]
     uint16_t tval = (value->val1 << 4) | (value->val2 >> 4);
     DBGLOG("tommydebug", " LKSB update %d", tval);
-
+    lastBacklightValue = tval;
     delete value;
 
     if (asusSMCInstance) {

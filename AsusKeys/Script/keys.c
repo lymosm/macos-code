@@ -10,6 +10,8 @@
 #include <IOKit/pwr_mgt/IOPMLib.h>
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOKitLib.h>
+#include "osd_bridge.h"
+
 
 // 你现有的代码保持不变...
 
@@ -19,6 +21,7 @@
 
 // IOService连接和发送数据函数
 static io_connect_t conn = IO_OBJECT_NULL;
+
 
 static void send_key_info_to_kernel(uint32_t usage, uint32_t page, uint32_t pressed) {
     if (conn == IO_OBJECT_NULL) {
@@ -66,9 +69,15 @@ static void handle_input(void* context,
     CFIndex pressed = IOHIDValueGetIntegerValue(value);
 
     if (pressed) {
+        if(page != 0xff31){
+            return ;
+        }
         // 输出按键信息
         printf("tommydebug: usage=0x%x page=0x%x pressed=%ld\n", usage, page, (long)pressed);
         
+        if(usage == 0x6c){
+            osd_gotoSleep();
+        }
         // 向内核发送按键信息
         send_key_info_to_kernel(usage, page, pressed); // page 可根据需要替换为其他信息，比如 keycode
     }

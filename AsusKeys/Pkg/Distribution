@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+  <title>Asus Fn Key Daemon</title>
+  <welcome>欢迎使用 Asus Fn Key 安装程序。本工具将安装 Fn+亮度键支持。</welcome>
+  <license>使用本软件需自行承担风险，键盘权限需要用户手动在系统偏好设置中启用。</license>
+  <choices-outline>
+    <line choice="default"/>
+  </choices-outline>
+  <choice id="default" visible="false" title="默认安装">
+    <pkg-ref id="tommy.asus.fnkeys"/>
+  </choice>
+  <pkg-ref id="tommy.asus.fnkeys" installKBytes="0" version="1.0">fnkeys.pkg</pkg-ref>
+</installer-gui-script>
+

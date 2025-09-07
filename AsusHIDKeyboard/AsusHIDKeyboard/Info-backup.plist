@@ -20,12 +20,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
     <key>IOKitPersonalities</key>
     <dict>
-      <key>AsusATKD</key>
+      <key>AsusHIDKeyboard</key>
       <dict>
         <key>CFBundleIdentifier</key>
         <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
         <key>IOClass</key>
-        <string>AsusATKD</string>
+        <string>AsusHIDKeyboard</string>
 
         <!-- 关键：匹配 HID 接口 -->
         <!-- provider class: 视 ioreg 上显示的 provider 而定（IOHIDDevice / IOHIDInterface 等） -->

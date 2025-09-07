@@ -33,6 +33,11 @@ public:
     void handleUserMessage(uint32_t usage, uint32_t page, int32_t pressed, uint32_t keycode);
     void decrease_keyboard_backlight(); // will be executed on command gate
     void increase_keyboard_backlight();
+    void decrease_backlight(); // will be executed on command gate
+    void increase_backlight();
+    void close_backlight();
+    void toggle_touchpad();
+
     IOReturn evaluateAcpiFromUser(const char* device, const char* method, OSArray* params, OSObject** outResult);
 
 
