@@ -1,4 +1,5 @@
-# AsusFn
+# AsusFn 
+# need AsusKeys.kext
 
 #### Credits
 - [hieplpvip](https://github.com/hieplpvip/AsusSMC)

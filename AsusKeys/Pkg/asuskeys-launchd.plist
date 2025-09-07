@@ -20,6 +20,12 @@
    <!-- 如果进程崩溃，自动重启 -->
    <key>KeepAlive</key>
    <true/>
+   
+   <key>StandardOutPath</key>
+   <string>/tmp/fnkeys.out</string>
+   <key>StandardErrorPath</key>
+   <string>/tmp/fnkeys.err</string>
+
 </dict>
 </plist>
 

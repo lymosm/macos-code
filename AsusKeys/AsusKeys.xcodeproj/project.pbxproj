@@ -15,9 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E1B316D2E63E17900B285AC /* AI2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AI2.md; sourceTree = "<group>"; };
-		1E1B5FDB2E6731BB007A4C1A /* AI3.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AI3.md; sourceTree = "<group>"; };
-		1E24CF0A2E633D3D0061104A /* AI.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AI.md; sourceTree = "<group>"; };
 		1E24CF0B2E6344F50061104A /* AsusKeysUserClient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AsusKeysUserClient.hpp; sourceTree = "<group>"; };
 		1E24CF0D2E6345120061104A /* AsusKeysUserClient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AsusKeysUserClient.cpp; sourceTree = "<group>"; };
 		1EFBFCA12E60AB8800EB0C2D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -49,9 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				1EE269D82E6C9C0A00C49C66 /* Pkg */,
-				1E1B5FDB2E6731BB007A4C1A /* AI3.md */,
-				1E1B316D2E63E17900B285AC /* AI2.md */,
-				1E24CF0A2E633D3D0061104A /* AI.md */,
 				1E40C9012E5E1927006998FB /* Script */,
 				3573FE3025223B8500DFC9F4 /* AsusKeys */,
 				3573FE2F25223B8500DFC9F4 /* Products */,

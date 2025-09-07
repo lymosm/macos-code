@@ -1,57 +1,88 @@
 #!/bin/bash
 set -euo pipefail
 
-# PROJECT_DIR 由 Xcode 环境传入，或回退到 packaging 上一级
 PROJECT_DIR="${PROJECT_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
 OUT_DIR="$PROJECT_DIR/dist-pkg"
 PKGROOT="$OUT_DIR/pkgroot"
 TMP="$OUT_DIR/tmp"
 
-# 清理旧产物（只清理本脚本产物，不碰 Xcode Build 目录）
 rm -rf "$PKGROOT" "$TMP"
-mkdir -p "$PKGROOT/usr/local/bin"
+mkdir -p "$PKGROOT/Applications"
 mkdir -p "$PKGROOT/Library/LaunchAgents"
 mkdir -p "$TMP"
 
-# 源文件和输出二进制路径
+# 源文件和输出路径
 SRC_C="$PROJECT_DIR/Script/keys.c"
 SRC_M="$PROJECT_DIR/Script/osd.m"
-DST_BIN="$PKGROOT/usr/local/bin/fnkeys"
+APP_DIR="$PKGROOT/Applications/FnKeys.app"
+BIN_DIR="$APP_DIR/Contents/MacOS"
+INFO_PLIST="$APP_DIR/Contents/Info.plist"
 
-echo "[INFO] Compiling $SRC_C -> $DST_BIN"
+mkdir -p "$BIN_DIR" "$APP_DIR/Contents/Resources"
 
-# 编译，包含你要求的 frameworks
-clang "$SRC_C" "$SRC_M" -o "$DST_BIN" \
+# 编译二进制
+echo "[INFO] Compiling -> $BIN_DIR/fnkeys"
+clang "$SRC_C" "$SRC_M" -o "$BIN_DIR/fnkeys" \
   -framework IOKit -framework CoreFoundation -framework ApplicationServices -framework Cocoa
+chmod 755 "$BIN_DIR/fnkeys"
 
-chmod 755 "$DST_BIN"
+# 生成 Info.plist
+cat > "$INFO_PLIST" <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>FnKeys</string>
+    <key>CFBundleIdentifier</key>
+    <string>tommy.asus.fnkeys</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSUIElement</key>
+    <true/>
+</dict>
+</plist>
+EOF
 
-# 拷贝 plist 到 pkgroot 的 LaunchAgents（注意：只是拷贝到 pkgroot 下，安装时会放到 /Library/LaunchAgents）
-if [ -f "$PROJECT_DIR/Pkg/asuskeys-launchd.plist" ]; then
-  cp "$PROJECT_DIR/Pkg/asuskeys-launchd.plist" "$PKGROOT/Library/LaunchAgents/tommy.asus.fnkeys.plist"
-else
-  echo "[WARN] Pkg/asuskeys-launchd.plist not found"
-fi
-chmod 644 "$PKGROOT/Library/LaunchAgents/tommy.asus.fnkeys.plist" || true
+# 签名（ad-hoc）
+codesign -s - --deep --force "$APP_DIR"
 
-# 生成临时 install pkg（供 productbuild 使用）
+# 安装 LaunchAgent（改用 APP 内部路径）
+cat > "$PKGROOT/Library/LaunchAgents/tommy.asus.fnkeys.plist" <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <key>Label</key>
+   <string>tommy.asus.fnkeys</string>
+   <key>ProgramArguments</key>
+   <array>
+      <string>/Applications/FnKeys.app/Contents/MacOS/fnkeys</string>
+   </array>
+   <key>RunAtLoad</key>
+   <true/>
+   <key>KeepAlive</key>
+   <true/>
+</dict>
+</plist>
+EOF
+chmod 644 "$PKGROOT/Library/LaunchAgents/tommy.asus.fnkeys.plist"
+
+# 生成 pkg
 TMP_PKG="$TMP/fnkeys.pkg"
 pkgbuild --root "$PKGROOT" \
   --identifier "tommy.asus.fnkeys" \
   --version "1.0" \
   --install-location / \
-  --scripts "$PROJECT_DIR/Pkg/install.sh" \
   "$TMP_PKG"
 
-# 用 productbuild 生成最终安装包（包含 GUI distribution）
-if [ -f "$PROJECT_DIR/Pkg/Distribution" ]; then
-  productbuild --distribution "$PROJECT_DIR/Pkg/Distribution" \
-    --package-path "$TMP" \
-    "$OUT_DIR/installFnKey.pkg"
-else
-  # fallback: 直接用 pkgbuild 的产物当 install 包
-  mv "$TMP_PKG" "$OUT_DIR/installFnKey.pkg"
-fi
+# 直接生成最终安装包
+mkdir -p "$OUT_DIR"
+mv "$TMP_PKG" "$OUT_DIR/installFnKey.pkg"
 
 echo "[INFO] Created $OUT_DIR/installFnKey.pkg"
 
@@ -69,3 +100,6 @@ rm -rf "$TMP"
 
 echo "[OK] Packages in $OUT_DIR"
 exit 0
+
+
+
