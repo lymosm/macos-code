@@ -561,6 +561,14 @@ void AsusFn::startATKDevice() {
     }
     setProperty("IsKeyboardBacklightSupported", hasKeyboardBacklight);
 
+    if (atkDevice->validateObject("GFAN") == kIOReturnSuccess) {
+        SYSLOG("GFAN", "GFAN is supported");
+        hasKeyboardBacklight = true;
+    } else {
+        hasKeyboardBacklight = false;
+        DBGLOG("GFAN", "GFAN is not supported");
+    }
+    
     // Turn on ALS sensor
     toggleALS(true);
     isALSEnabled = true;
@@ -590,35 +598,95 @@ bool AsusFn::refreshALS(bool post) {
         poller->setTimeoutMS(SensorUpdateTimeoutMS);
     }
 
-    DBGLOG("als", "refreshALS lux %u", lux);
+    // DBGLOG("als", "refreshALS lux %u", lux);
     return ret == kIOReturnSuccess;
 }
 
 bool AsusFn::refreshFan() {
     uint32_t speed = 10000;
-
+    uint32_t fan = 10000;
+    /*
+    isTACHAvailable = true;
     if (isTACHAvailable) {
         OSNumber *arg = OSNumber::withNumber(static_cast<uint32_t>(0), 32);
         IOReturn ret = ec0Device->evaluateInteger("TACH", &speed, (OSObject **)&arg, 1);
-        arg->release();
+        // IOReturn ret = ec0Device->evaluateInteger("GFAN", &speed, (OSObject **)&arg, 1);
 
+        arg->release();
+        DBGLOG("fanspeed", "refreshFan speed result: %u", speed);
         if (ret != kIOReturnSuccess) {
-            DBGLOG("fan", "read fan speed using TACH failed");
+            DBGLOG("fanspeed", "read fan speed using TACH failed");
             speed = 10000;
         }
     } else {
         int ret = wmi_get_devstate(ASUS_WMI_DEVID_CPU_FAN_CTRL);
+        DBGLOG("fanspeed", "wmi_get_devstate refreshFan speed %u", ret);
         if (ret == -1) {
-            DBGLOG("fan", "read fan speed using WMI failed");
+            DBGLOG("fanspeed", "read fan speed using WMI failed");
             speed = 10000;
         } else {
             speed = (ret & 0xffff) * 100;
         }
     }
+     */
+//    OSNumber *arg = OSNumber::withNumber(static_cast<uint32_t>(0), 32);
+    IOReturn ret = atkDevice->evaluateInteger("GFAN", &fan, nullptr, 0);
+    // IOReturn ret = atkDevice->evaluateObject("GFAN", &fan, nullptr, 0);
+    /*
+    OSObject *result = nullptr;
+    IOReturn ret = atkDevice->evaluateObject("GFAN", &result, nullptr, 0);
+    if (ret == kIOReturnSuccess && result) {
+        if (auto number = OSDynamicCast(OSNumber, result)) {
+            uint64_t fan = number->unsigned64BitValue();
+            DBGLOG("fanspeed", "fan speed: %llu", fan);
+        }
+        result->release();
+    }*/
+   
+    // arg->release();
+    
+    if (ret != kIOReturnSuccess) {
+        DBGLOG("fanspeed", "read fan speed using GFAN failed");
+        speed = 10000;
+    }else{
+        speed = (fan & 0xffff);
+        DBGLOG("fanspeed", "refreshFan speed fan: %u", fan);
+        DBGLOG("fanspeed", "refreshFan speed result: %u", speed);
+    }
+    
+    /*
+     Local5 = RRAM (0x0521)
+                             Local5 &= 0x40
+                             If ((Local5 != Zero))
+                             {
+                                 Local0 = 0xFF
+                                 Local0 |= 0x00010000
+                                 Return (Local0)
+                             }
+
+                             Local0 = F0TS
+                             Divide (0x008C6180, 0x80, Local1, Local2)
+                             Local3 = (0x3C * Local2)
+                             Local0 *= 0x02
+                             Divide (Local3, Local0, Local4, Local0)
+                             Divide (Local0, 0x64, Local4, Local0)
+                             If ((Local4 >= 0x32))
+                             {
+                                 Local0 += One
+                             }
+
+                             Local0 |= 0x00010000
+    fan_speed = (Local0 & 0xffff) * 100;
+                             Return (fan_speed)
+这个fan_speed最终会是类似2600这样整百的。我想能拿到个位数，例如：2643 这样，可以吗？怎么改？
+     当F0TS=0x242 fan_speed算得多少
+     
+     
+     */
 
     atomic_store_explicit(&currentFanSpeed, speed, memory_order_release);
 
-    DBGLOG("fan", "refreshFan speed %u", speed);
+    DBGLOG("fanspeed", "refreshFan speed %u", speed);
 
     return speed != 10000;
 }
@@ -912,7 +980,9 @@ void AsusFn::dispatchTCReport(int code, int loop, const char *type) {
          8-11
          12-15
          */
-        if(code == 0x8 && current_asus_kbkey_level >= 3){
+        if(code == 0x8 && current_asus_kbkey_level >= asus_all_level){
+            return ;
+        }else if(code == 0x9 && current_asus_kbkey_level <= 0){
             return ;
         }
         uint8_t currentLevel = lastBacklightValue / 256;   // 0~15
