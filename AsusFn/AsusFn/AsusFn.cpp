@@ -118,7 +118,7 @@ bool AsusFn::start(IOService *provider) {
     
     delaySource = IOTimerEventSource::timerEventSource(this,
         [](OSObject *object, IOTimerEventSource *sender) {
-        DBGLOG("tommydebug", "IOTimerEventSource findHIDInterfaceDelayed");
+        DBGLOG("tommy", "IOTimerEventSource findHIDInterfaceDelayed");
             auto ls = OSDynamicCast(AsusFn, object);
             if (ls) {
                 ls->findHIDInterfaceDelayed(object, sender);
@@ -152,12 +152,12 @@ bool AsusFn::start(IOService *provider) {
 
 void AsusFn::findHIDInterfaceDelayed(OSObject *owner, IOTimerEventSource *sender)
 {
-    SYSLOG("tommydebug", "findHIDInterfaceDelayed in");
+    SYSLOG("tommy", "findHIDInterfaceDelayed in");
     hid_interface = findHIDInterface(atkDevice);
     if (hid_interface) {
-        SYSLOG("tommydebug", "HID Interface found after delay.");
+        SYSLOG("tommy", "HID Interface found after delay.");
     } else {
-        SYSLOG("tommydebug", "HID Interface still not found after delay.");
+        SYSLOG("tommy", "HID Interface still not found after delay.");
     }
     
 
@@ -166,7 +166,7 @@ void AsusFn::findHIDInterfaceDelayed(OSObject *owner, IOTimerEventSource *sender
 
 IOHIDInterface *AsusFn::findHIDInterface(IOService *provider) {
     if (!provider) {
-        SYSLOG("tommydebug", "Provider is null");
+        SYSLOG("tommy", "Provider is null");
         return nullptr;
     }
 
@@ -183,7 +183,7 @@ IOHIDInterface *AsusFn::findHIDInterface(IOService *provider) {
             // 在找到的服务中检查是否是 HID 设备
             IOHIDInterface *hidInterface = OSDynamicCast(IOHIDInterface, service);
             if (hidInterface) {
-                SYSLOG("tommydebug", "HID Interface found: VendorID=2821, ProductID=6228");
+                SYSLOG("tommy", "HID Interface found: VendorID=2821, ProductID=6228");
                 iterator->release();  // 释放迭代器
                 return hidInterface;
             }
@@ -191,7 +191,7 @@ IOHIDInterface *AsusFn::findHIDInterface(IOService *provider) {
         iterator->release();  // 释放迭代器
     }
 
-    SYSLOG("tommydebug", "No matching HID device found for VendorID=2821 and ProductID=6228");
+    SYSLOG("tommy", "No matching HID device found for VendorID=2821 and ProductID=6228");
     return nullptr;
 }
 
@@ -228,17 +228,17 @@ void AsusFn::stop(IOService *provider) {
 
 IOReturn AsusFn::message(uint32_t type, IOService *provider, void *argument) {
 
-    DBGLOG("tommydebug", "Received message: %u Type %x Provider %s", *((uint32_t *)argument), type, provider ? provider->getName() : "unknown");
+    DBGLOG("tommy", "Received message: %u Type %x Provider %s", *((uint32_t *)argument), type, provider ? provider->getName() : "unknown");
     
     switch (type) {
         case kIOACPIMessageDeviceNotification:
         {
-            DBGLOG("tommydebug", " kIOACPIMessageDeviceNotification");
+            DBGLOG("tommy", " kIOACPIMessageDeviceNotification");
             if (directACPImessaging) {
-                DBGLOG("tommydebug", "directACPImessaging");
+                DBGLOG("tommy", "directACPImessaging");
                 handleMessage(*((uint32_t *)argument));
             } else {
-                DBGLOG("tommydebug", "no directACPImessaging in _WED");
+                DBGLOG("tommy", "no directACPImessaging in _WED");
                 uint32_t event = *((uint32_t *)argument);
                 OSNumber *arg = OSNumber::withNumber(event, 32);
                 uint32_t res;
@@ -255,19 +255,19 @@ IOReturn AsusFn::message(uint32_t type, IOService *provider, void *argument) {
 
         case kSetKeyboardBacklightMessage:
         {
-            DBGLOG("tommydebug", " kSetKeyboardBacklightMessage");
+            DBGLOG("tommy", " kSetKeyboardBacklightMessage");
             if (hasKeyboardBacklight) {
-                DBGLOG("tommydebug", " exec SKBV");
+                DBGLOG("tommy", " exec SKBV");
                 OSNumber *arg = OSNumber::withNumber(*((uint16_t *)argument) / 16, 16);
                 // 获取原始背光值
                 uint16_t rawBacklight = arg->unsigned16BitValue();  // 取出原始背光值
 
                 // 将原始背光值转换为 0～3 范围内的值
                 uint8_t backlightValue = rawBacklight / 64;  // 1638 是从最大值 4091 左右映射到 0～3 的缩放因子
-                DBGLOG("tommydebug", "Original backlight value: %d", rawBacklight);
+                DBGLOG("tommy", "Original backlight value: %d", rawBacklight);
 
                 // 打印出计算的背光值，确保它在 0～3 之间
-                DBGLOG("tommydebug", "Calculated backlight value: %d", backlightValue);
+                DBGLOG("tommy", "Calculated backlight value: %d", backlightValue);
                 asus_kbd_backlight_set(backlightValue);  // 传递 uint8_t 类型的背光值
 
                 atkDevice->evaluateObject("SKBV", NULL, (OSObject **)&arg, 1);
@@ -307,7 +307,7 @@ int AsusFn::wmi_parse_guid(const char *in, char *out) {
 }
 
 void AsusFn::asus_kbd_backlight_set(uint8_t val) {
-    DBGLOG("tommydebug", "asus_kbd_backlight_set: val=%d", val);
+    DBGLOG("tommy", "asus_kbd_backlight_set: val=%d", val);
 
     /*
     if (!(SUPPORT_KBD_BACKLIGHT & _kbd_function)) {
@@ -317,7 +317,7 @@ void AsusFn::asus_kbd_backlight_set(uint8_t val) {
      */
 
     if (!hid_interface) {
-        DBGLOG("tommydebug", "HID Interface is not available");
+        DBGLOG("tommy", "HID Interface is not available");
         return;
     }
 
@@ -326,7 +326,7 @@ void AsusFn::asus_kbd_backlight_set(uint8_t val) {
 
     IOBufferMemoryDescriptor *report = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, sizeof(buf));
     if (!report) {
-        DBGLOG("tommydebug", "asus_kbd_backlight_set: Could not allocate IOBufferMemoryDescriptor");
+        DBGLOG("tommy", "asus_kbd_backlight_set: Could not allocate IOBufferMemoryDescriptor");
         return;
     }
 
@@ -337,7 +337,7 @@ void AsusFn::asus_kbd_backlight_set(uint8_t val) {
 
     report->release();
 
-    DBGLOG("tommydebug", "Keyboard backlight report sent successfully");
+    DBGLOG("tommy", "Keyboard backlight report sent successfully");
 }
 
 
@@ -792,7 +792,7 @@ void AsusFn::toggleAirplaneMode() {
 }
 
 void AsusFn::toggleTouchpad() {
-    DBGLOG("tommydebug", "toggleTouchpad in");
+    DBGLOG("tommy", "toggleTouchpad in");
     dispatchMessage(kKeyboardGetTouchStatus, &isTouchpadEnabled);
     isTouchpadEnabled = !isTouchpadEnabled;
     dispatchMessage(kKeyboardSetTouchStatus, &isTouchpadEnabled);
@@ -829,7 +829,7 @@ void AsusFn::toggleBatteryConservativeMode(bool state) {
 }
 
 void AsusFn::displayOff() {
-    DBGLOG("tommydebug", "displayOff in");
+    DBGLOG("tommy", "displayOff in");
     if (isPanelBackLightOn) {
         // Read Panel brigthness value to restore later with backlight toggle
         readPanelBrightnessValue();
@@ -960,7 +960,7 @@ void AsusFn::dispatchCSMRReport(int code, int loop) {
 
 
 void AsusFn::dispatchTCReport(int code, int loop, const char *type) {
-    DBGLOG("tommydebug", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
+    DBGLOG("tommy", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
     DBGLOG("atk", "Dispatched key %d(0x%x), loop %d time(s)", code, code, loop);
     if(strcmp(type, "keyboard") == 0){
         uint8_t asus_all_level = 3;
@@ -970,9 +970,9 @@ void AsusFn::dispatchTCReport(int code, int loop, const char *type) {
         uint16_t rawBacklight = lastBacklightValue / 16;  // 取出原始背光值
         // 将原始背光值转换为 0～3 范围内的值
         uint8_t current_asus_kbkey_level = rawBacklight / 64;  // 1363 是从最大值 4091 左右映射到 0～3 的缩放因子
-        DBGLOG("tommydebug", "dispatchTCReport Original backlight value: %d", rawBacklight);
+        DBGLOG("tommy", "dispatchTCReport Original backlight value: %d", rawBacklight);
         // 打印出计算的背光值，确保它在 0～3 之间
-        DBGLOG("tommydebug", "dispatchTCReport Calculated backlight level: %d", current_asus_kbkey_level);
+        DBGLOG("tommy", "dispatchTCReport Calculated backlight level: %d", current_asus_kbkey_level);
         /* 已知loop最大16，lastBacklightValue最大值4091，rawBacklight最大是4091/16=255，根据规则计算出当前loop的值，以实现每执行一次dispatchTCReport能确保
         asus_kbkey_level在0-3之间变换
          0-3
@@ -998,11 +998,11 @@ void AsusFn::dispatchTCReport(int code, int loop, const char *type) {
         }
          */
         loop = 4;
-       // DBGLOG("tommydebug", "dispatchTCReport: loop=%d (cur=%d target=%d)", loop, asus_kbkey_level, targetLevel);
+       // DBGLOG("tommy", "dispatchTCReport: loop=%d (cur=%d target=%d)", loop, asus_kbkey_level, targetLevel);
         
     }
     while (loop--) {
-        DBGLOG("tommydebug", "postKeyboardInputReport: loop=%d", loop);
+        DBGLOG("tommy", "postKeyboardInputReport: loop=%d", loop);
         tcreport.keys.insert(code);
         postKeyboardInputReport(&tcreport, sizeof(tcreport));
         tcreport.keys.erase(code);
@@ -1013,7 +1013,7 @@ void AsusFn::dispatchTCReport(int code, int loop, const char *type) {
 
 /*
 void AsusFn::dispatchTCReport(int code, int loop) {
-    DBGLOG("tommydebug", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
+    DBGLOG("tommy", "dispatchTCReport: lastBacklightValue=%d)", lastBacklightValue);
 
     // 1. 算出当前 rawLevel
     int rawLevel = (lastBacklightValue * 15) / 4091;
@@ -1027,14 +1027,14 @@ void AsusFn::dispatchTCReport(int code, int loop) {
     } else if (code == 0x9 && osdLevel > 0) {
         targetOsdLevel = osdLevel - 1;
     } else {
-        DBGLOG("tommydebug", "dispatchTCReport: ignore key=%x at boundary (osd=%d)", code, osdLevel);
+        DBGLOG("tommy", "dispatchTCReport: ignore key=%x at boundary (osd=%d)", code, osdLevel);
         return;
     }
 
     // 3. 算目标 rawLevel (0,4,8,12)
     int targetRawLevel = targetOsdLevel * 4;
 
-    DBGLOG("tommydebug", "dispatchTCReport: code=%x raw=%d osd=%d -> targetRaw=%d (osd=%d)",
+    DBGLOG("tommy", "dispatchTCReport: code=%x raw=%d osd=%d -> targetRaw=%d (osd=%d)",
            code, rawLevel, osdLevel, targetRawLevel, targetOsdLevel);
 
     // 4. 调用逐步按键函数（方案 2）
@@ -1045,10 +1045,10 @@ void AsusFn::dispatchTCReport(int code, int loop) {
 void AsusFn::dispatchTCReport_stepToTarget(int code, int targetRawLevel) {
     const int MAX_STEPS = 32;
     const int SLEEP_MS = 20;
-    DBGLOG("tommydebug", "dispatchTCReport_stepToTarget: in");
+    DBGLOG("tommy", "dispatchTCReport_stepToTarget: in");
     
     for (int i = 0; i < MAX_STEPS; ++i) {
-        DBGLOG("tommydebug", " for: %d", i);
+        DBGLOG("tommy", " for: %d", i);
         int currentRaw = (lastBacklightValue * 15) / 4091;
         if (currentRaw == targetRawLevel) break;
 

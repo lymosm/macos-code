@@ -55,6 +55,7 @@ static void drain_queue(void) {
         if (event == 1) {
             log_now("LymosTimeSyncd", "wake event -> syncing time");
             int ret = system("/usr/bin/sntp -sS ntp.aliyun.com");
+            int ret2 = system("/usr/local/bin/active-audio");
             log_now("LymosTimeSyncd", "sntp returned %d", ret);
         }
     }

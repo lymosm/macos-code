@@ -1,0 +1,59 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "c4b6edc3b2591ca98a33c13581b00a12495c76797b739cf9b6f417fdff97e87a"
+    }
+  ],
+  "containerPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx15.5",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64h",
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Products",
+      "derivedDataPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/TommyState-atvjcnnnpfvnobclisvsbhzorgft/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/TommyState-atvjcnnnpfvnobclisvsbhzorgft/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "CLANG_COVERAGE_MAPPING" : "YES",
+          "CLANG_PROFILE_DATA_DIRECTORY" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/CodeCoverage/ProfileData",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

@@ -1,0 +1,567 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E5308182E7300820045EE94 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308172E7300770045EE94 /* readme.md */; };
+		1E5308292E732BF90045EE94 /* ai.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308282E732BEA0045EE94 /* ai.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E5307FB2E7300340045EE94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E5307E42E7300310045EE94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E5307EB2E7300310045EE94;
+			remoteInfo = TommyState;
+		};
+		1E5308052E7300340045EE94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E5307E42E7300310045EE94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E5307EB2E7300310045EE94;
+			remoteInfo = TommyState;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E5307EC2E7300310045EE94 /* TommyState.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TommyState.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E5307FA2E7300340045EE94 /* TommyStateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TommyStateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E5308042E7300340045EE94 /* TommyStateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TommyStateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E5308172E7300770045EE94 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		1E5308282E732BEA0045EE94 /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E5307EE2E7300310045EE94 /* TommyState */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TommyState;
+			sourceTree = "<group>";
+		};
+		1E5307FD2E7300340045EE94 /* TommyStateTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TommyStateTests;
+			sourceTree = "<group>";
+		};
+		1E5308072E7300340045EE94 /* TommyStateUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TommyStateUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E5307E92E7300310045EE94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5307F72E7300340045EE94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5308012E7300340045EE94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E5307E32E7300310045EE94 = {
+			isa = PBXGroup;
+			children = (
+				1E5308282E732BEA0045EE94 /* ai.md */,
+				1E5308172E7300770045EE94 /* readme.md */,
+				1E5307EE2E7300310045EE94 /* TommyState */,
+				1E5307FD2E7300340045EE94 /* TommyStateTests */,
+				1E5308072E7300340045EE94 /* TommyStateUITests */,
+				1E5307ED2E7300310045EE94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1E5307ED2E7300310045EE94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E5307EC2E7300310045EE94 /* TommyState.app */,
+				1E5307FA2E7300340045EE94 /* TommyStateTests.xctest */,
+				1E5308042E7300340045EE94 /* TommyStateUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1E5307EB2E7300310045EE94 /* TommyState */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E53080E2E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyState" */;
+			buildPhases = (
+				1E5307E82E7300310045EE94 /* Sources */,
+				1E5307E92E7300310045EE94 /* Frameworks */,
+				1E5307EA2E7300310045EE94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1E5307EE2E7300310045EE94 /* TommyState */,
+			);
+			name = TommyState;
+			packageProductDependencies = (
+			);
+			productName = TommyState;
+			productReference = 1E5307EC2E7300310045EE94 /* TommyState.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1E5307F92E7300340045EE94 /* TommyStateTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E5308112E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyStateTests" */;
+			buildPhases = (
+				1E5307F62E7300340045EE94 /* Sources */,
+				1E5307F72E7300340045EE94 /* Frameworks */,
+				1E5307F82E7300340045EE94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E5307FC2E7300340045EE94 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1E5307FD2E7300340045EE94 /* TommyStateTests */,
+			);
+			name = TommyStateTests;
+			packageProductDependencies = (
+			);
+			productName = TommyStateTests;
+			productReference = 1E5307FA2E7300340045EE94 /* TommyStateTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1E5308032E7300340045EE94 /* TommyStateUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E5308142E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyStateUITests" */;
+			buildPhases = (
+				1E5308002E7300340045EE94 /* Sources */,
+				1E5308012E7300340045EE94 /* Frameworks */,
+				1E5308022E7300340045EE94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E5308062E7300340045EE94 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1E5308072E7300340045EE94 /* TommyStateUITests */,
+			);
+			name = TommyStateUITests;
+			packageProductDependencies = (
+			);
+			productName = TommyStateUITests;
+			productReference = 1E5308042E7300340045EE94 /* TommyStateUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E5307E42E7300310045EE94 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					1E5307EB2E7300310045EE94 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					1E5307F92E7300340045EE94 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 1E5307EB2E7300310045EE94;
+					};
+					1E5308032E7300340045EE94 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 1E5307EB2E7300310045EE94;
+					};
+				};
+			};
+			buildConfigurationList = 1E5307E72E7300310045EE94 /* Build configuration list for PBXProject "TommyState" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1E5307E32E7300310045EE94;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1E5307ED2E7300310045EE94 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E5307EB2E7300310045EE94 /* TommyState */,
+				1E5307F92E7300340045EE94 /* TommyStateTests */,
+				1E5308032E7300340045EE94 /* TommyStateUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E5307EA2E7300310045EE94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E5308292E732BF90045EE94 /* ai.md in Resources */,
+				1E5308182E7300820045EE94 /* readme.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5307F82E7300340045EE94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5308022E7300340045EE94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E5307E82E7300310045EE94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5307F62E7300340045EE94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E5308002E7300340045EE94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E5307FC2E7300340045EE94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E5307EB2E7300310045EE94 /* TommyState */;
+			targetProxy = 1E5307FB2E7300340045EE94 /* PBXContainerItemProxy */;
+		};
+		1E5308062E7300340045EE94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E5307EB2E7300310045EE94 /* TommyState */;
+			targetProxy = 1E5308052E7300340045EE94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1E53080C2E7300340045EE94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1E53080D2E7300340045EE94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1E53080F2E7300340045EE94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyState;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1E5308102E7300340045EE94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyState;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1E5308122E7300340045EE94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyStateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TommyState.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TommyState";
+			};
+			name = Debug;
+		};
+		1E5308132E7300340045EE94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyStateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TommyState.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TommyState";
+			};
+			name = Release;
+		};
+		1E5308152E7300340045EE94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyStateUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TommyState;
+			};
+			name = Debug;
+		};
+		1E5308162E7300340045EE94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyStateUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TommyState;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E5307E72E7300310045EE94 /* Build configuration list for PBXProject "TommyState" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E53080C2E7300340045EE94 /* Debug */,
+				1E53080D2E7300340045EE94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E53080E2E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyState" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E53080F2E7300340045EE94 /* Debug */,
+				1E5308102E7300340045EE94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E5308112E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyStateTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E5308122E7300340045EE94 /* Debug */,
+				1E5308132E7300340045EE94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E5308142E7300340045EE94 /* Build configuration list for PBXNativeTarget "TommyStateUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E5308152E7300340045EE94 /* Debug */,
+				1E5308162E7300340045EE94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E5307E42E7300310045EE94 /* Project object */;
+}
