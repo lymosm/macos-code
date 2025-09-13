@@ -11,7 +11,7 @@ struct TommyState: App {
     private let statusController = StatusBarController.shared
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup ("TommyState Main"){
             // 这里放置主 panel（当点击 menu item 时会弹出 popover/window）
             ContentView()
                 .environmentObject(monitor)
@@ -30,7 +30,7 @@ struct TommyState: App {
                     statusController.setup(monitor: monitor)
                 }
         }
-        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+        .handlesExternalEvents(matching: ["main"])  // ✅ 用于 URL 唤起
         .commands {
             // 可选命令
         }

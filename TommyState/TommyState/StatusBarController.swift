@@ -47,7 +47,7 @@ final class StatusBarController {
             if fanItem == nil { createOrUpdateStatusItems() }
             if let btn = fanItem?.button {
                 let displayText: String
-                if let rpm = monitor.fanRPM { displayText = "\(rpm) RPM" }
+                if let rpm = monitor.fanRPM { displayText = "\(rpm)" }
                 else { displayText = "-- RPM" }
                 // use SF Symbol "fanblades" (available macOS 11+)
                 if let img = NSImage(systemSymbolName: "fanblades", accessibilityDescription: "Fan") {
@@ -93,10 +93,23 @@ final class StatusBarController {
     private func showMainWindow(selectTab: PanelView.Tab) {
         // 激活 app 并展示主 WindowGroup（ContentView），并把侧栏选为相应 tab
         DispatchQueue.main.async {
-            NSApp.activate(ignoringOtherApps: true)
-            // set a notification or user defaults so the ContentView knows which tab to select
-            NotificationCenter.default.post(name: .TommyStateOpenPanel, object: selectTab)
-        }
+                    print("[StatusBarController] 点击 \(selectTab) 图标，准备展示主窗口")
+                    NSApp.activate(ignoringOtherApps: true)
+
+                    // 找一个非 NSStatusBarWindow 的 SwiftUI 主窗口
+                    if let window = NSApp.windows.first(where: { String(describing: type(of: $0)) != "NSStatusBarWindow" }) {
+                        print("[StatusBarController] 找到现有 SwiftUI 窗口，bringToFront")
+                        window.makeKeyAndOrderFront(nil)
+                    } else {
+                        print("[StatusBarController] 没有找到主窗口，尝试通过 URL Scheme 创建")
+                        if let url = URL(string: "TommyState://main") {
+                            NSWorkspace.shared.open(url)
+                        }
+                    }
+
+                    NotificationCenter.default.post(name: .TommyStateOpenPanel, object: selectTab)
+                    print("[StatusBarController] 已发送 TommyStateOpenPanel 通知")
+                }
     }
 }
 

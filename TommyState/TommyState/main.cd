@@ -1,0 +1,44 @@
+// main.c
+#include "smc.h"
+#include <stdio.h>
+
+// --- Main Program ---
+int main(void) {
+    if (!SMCOpen()) {
+        fprintf(stderr, "Failed to open connection to SMC.\n");
+        return 1;
+    }
+
+    printf("Successfully opened connection to SMC. Reading Fan Speeds...\n");
+
+    C_SMCVal_t fnum_val;
+    int num_fans = 0;
+    if (SMCReadKey("FNum", &fnum_val) && fnum_val.dataSize > 0) {
+        // FNum is a single byte (uint8)
+        num_fans = (unsigned char)fnum_val.bytes[0];
+        printf("SMC reports %d fan(s).\n", num_fans);
+    } else {
+        fprintf(stderr, "Could not read 'FNum' key. Assuming 1 fan.\n");
+        num_fans = 1; // Fallback
+    }
+    num_fans = 1;
+    for (int i = 0; i < num_fans; i++) {
+        char fan_key[5];
+        snprintf(fan_key, 5, "F%dAc", i);
+
+        C_SMCVal_t fan_val;
+        if (SMCReadKey(fan_key, &fan_val)) {
+            if (strcmp(fan_val.dataType, "fpe2") == 0 && fan_val.dataSize >= 2) {
+                int rpm = (int)fpe2_to_float(fan_val.bytes);
+                printf("  - Fan %d Speed (%s): %d RPM\n", i, fan_key, rpm);
+            } else {
+                fprintf(stderr, "  - Read key '%s' but data type ('%s') or size (%u) is not correct for a fan.\n", fan_key, fan_val.dataType, fan_val.dataSize);
+            }
+        } else {
+            fprintf(stderr, "  - Failed to read key '%s' for Fan %d.\n", fan_key, i);
+        }
+    }
+    
+    SMCClose();
+    return 0;
+}

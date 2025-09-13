@@ -15,8 +15,9 @@ struct ContentView: View {
         PanelView(selectedTab: $selectedTab)
             .environmentObject(monitor)
             .onReceive(NotificationCenter.default.publisher(for: .TommyStateOpenPanel)) { note in
-                if let tab = note.object as? PanelView.Tab {
-                    selectedTab = tab
+                    if let tab = note.object as? PanelView.Tab {
+                        print("[ContentView] 收到通知，切换到 \(tab)")
+                        selectedTab = tab
                 }
             }
     }

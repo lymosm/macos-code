@@ -8,9 +8,33 @@
 		<data>
 		DtOZpTsUJ4Xp6NU0h62sISIUYks=
 		</data>
+		<key>Resources/ai2.md</key>
+		<data>
+		37xazIaIn105eHM50Ks4XR3+poc=
+		</data>
+		<key>Resources/fan</key>
+		<data>
+		79k1HR7x4Yo0hDSBZOS6qrlV/yM=
+		</data>
 		<key>Resources/readme.md</key>
 		<data>
 		w+UrWSsTcU9ZEbVrlX9IPUFkHwc=
+		</data>
+		<key>Resources/run-fan.sh</key>
+		<data>
+		rHKLkAP8kJa79oALcuJgyRuI5tQ=
+		</data>
+		<key>Resources/smctest</key>
+		<data>
+		SrVuTlicI1FtORWJzuZRuQxPJzE=
+		</data>
+		<key>Resources/smctest.sh</key>
+		<data>
+		/t0Cz/ItnnXDQLXNgeLnsUb9nh8=
+		</data>
+		<key>Resources/superio</key>
+		<data>
+		WA+Y7iwpQnWl6BA61AiLd5qip+8=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -19,7 +43,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			aPuaZ1JtXsFGwu5bKA0TywXlwDw=
+			6jbmPEGQtVGZKpHn0hV6/Alkow8=
 			</data>
 			<key>requirement</key>
 			<string>identifier "TommyState.debug" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: lymosm@163.com (D4N9J8SB5B)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -40,11 +64,53 @@
 			N1I1yvA2EDs6R+j7bOyVrcB+zEwm9CS2LgjVr/jG3pM=
 			</data>
 		</dict>
+		<key>Resources/ai2.md</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GTS1J6NzlECuIVskleM+LFl3MruqScjFYGWLO9vnh1g=
+			</data>
+		</dict>
+		<key>Resources/fan</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GQrsWSAzc9hZC63CVFPtgMLt3UaHq1nN52i4L8y7bJA=
+			</data>
+		</dict>
 		<key>Resources/readme.md</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			wXcdZnE+L0tTcS4Q2spepp5wtNDCBAmgcilgs3XJeZo=
+			</data>
+		</dict>
+		<key>Resources/run-fan.sh</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eixANlNsSK7QDiWytyhth+QkEo6ku95ZAjhBJTeVYCc=
+			</data>
+		</dict>
+		<key>Resources/smctest</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hvJzXp7HSvdToEd1yB2eJOS4GOP8eOHK1BcKzyzV+n0=
+			</data>
+		</dict>
+		<key>Resources/smctest.sh</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ElYHJVva4Co4p+PkIiKO9q3EysSwUhfRe6g5QPTXRTI=
+			</data>
+		</dict>
+		<key>Resources/superio</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+RoSYg1KrbdfK5B7Yhkev41URK27gi46AMscu73fTXs=
 			</data>
 		</dict>
 	</dict>

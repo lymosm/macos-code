@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <IOKit/IOKitLib.h>
+#include <CoreFoundation/CoreFoundation.h>
+
+int main(void) {
+    CFMutableDictionaryRef matching = IOServiceMatching("SMCSuperIO");
+    if (!matching) {
+        printf("Failed to create matching dictionary for SMCSuperIO\n");
+        return -1;
+    }
+
+    io_service_t service = IOServiceGetMatchingService(kIOMainPortDefault, matching);
+    if (!service) {
+        printf("SMCSuperIO service not found. Make sure SMCSuperIO.kext is loaded.\n");
+        return -2;
+    }
+
+    CFMutableDictionaryRef props = NULL;
+    kern_return_t kr = IORegistryEntryCreateCFProperties(service, &props, kCFAllocatorDefault, kNilOptions);
+    if (kr != KERN_SUCCESS || !props) {
+        printf("IORegistryEntryCreateCFProperties failed: 0x%x\n", kr);
+        IOObjectRelease(service);
+        return -3;
+    }
+
+    CFIndex count = CFDictionaryGetCount(props);
+    const void **keys = (const void **)malloc(sizeof(void *) * count);
+    const void **values = (const void **)malloc(sizeof(void *) * count);
+
+    CFDictionaryGetKeysAndValues(props, keys, values);
+
+    printf("=== SMCSuperIO properties ===\n");
+    for (CFIndex i = 0; i < count; i++) {
+        CFStringRef key = (CFStringRef)keys[i];
+        CFTypeRef value = values[i];
+
+        char keyStr[256];
+        if (CFStringGetCString(key, keyStr, sizeof(keyStr), kCFStringEncodingUTF8)) {
+            if (CFGetTypeID(value) == CFNumberGetTypeID()) {
+                int numVal;
+                CFNumberGetValue((CFNumberRef)value, kCFNumberIntType, &numVal);
+                printf("%s = %d\n", keyStr, numVal);
+            } else if (CFGetTypeID(value) == CFStringGetTypeID()) {
+                char valStr[256];
+                CFStringGetCString((CFStringRef)value, valStr, sizeof(valStr), kCFStringEncodingUTF8);
+                printf("%s = %s\n", keyStr, valStr);
+            } else {
+                printf("%s = <non-number property>\n", keyStr);
+            }
+        }
+    }
+
+    free(keys);
+    free(values);
+
+    CFRelease(props);
+    IOObjectRelease(service);
+
+    return 0;
+}

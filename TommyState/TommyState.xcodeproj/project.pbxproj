@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E5308182E7300820045EE94 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308172E7300770045EE94 /* readme.md */; };
 		1E5308292E732BF90045EE94 /* ai.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308282E732BEA0045EE94 /* ai.md */; };
+		1E8D27082E75B0D80014BCAB /* ai2.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E8D27072E75B0D00014BCAB /* ai2.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +35,54 @@
 		1E5308042E7300340045EE94 /* TommyStateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TommyStateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E5308172E7300770045EE94 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		1E5308282E732BEA0045EE94 /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
+		1E8D27072E75B0D00014BCAB /* ai2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai2.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1E37AFD52E745DFF00073678 /* Exceptions for "TommyState" folder in "TommyState" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				main.cd,
+			);
+			target = 1E5307EB2E7300310045EE94 /* TommyState */;
+		};
+		1E8D27002E754F360014BCAB /* Exceptions for "Script" folder in "TommyState" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"fan.c-bak",
+				"run-superio.sh",
+				"superio.c-bak",
+			);
+			target = 1E5307EB2E7300310045EE94 /* TommyState */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		1E8D27092E75B4CD0014BCAB /* Exceptions for "Script" folder in "Compile Sources" phase from "TommyState" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1E5307E82E7300310045EE94 /* Sources */;
+			membershipExceptions = (
+				"fan.c-bak",
+				"superio.c-bak",
+			);
+		};
+		1E8D270B2E75B9490014BCAB /* Exceptions for "TommyState" folder in "Compile Sources" phase from "TommyState" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1E5307E82E7300310045EE94 /* Sources */;
+			membershipExceptions = (
+				main.cd,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1E5307EE2E7300310045EE94 /* TommyState */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1E37AFD52E745DFF00073678 /* Exceptions for "TommyState" folder in "TommyState" target */,
+				1E8D270B2E75B9490014BCAB /* Exceptions for "TommyState" folder in "Compile Sources" phase from "TommyState" target */,
+			);
 			path = TommyState;
 			sourceTree = "<group>";
 		};
@@ -50,6 +94,15 @@
 		1E5308072E7300340045EE94 /* TommyStateUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TommyStateUITests;
+			sourceTree = "<group>";
+		};
+		1E8D26F52E754C840014BCAB /* Script */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1E8D27002E754F360014BCAB /* Exceptions for "Script" folder in "TommyState" target */,
+				1E8D27092E75B4CD0014BCAB /* Exceptions for "Script" folder in "Compile Sources" phase from "TommyState" target */,
+			);
+			path = Script;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,6 +135,8 @@
 		1E5307E32E7300310045EE94 = {
 			isa = PBXGroup;
 			children = (
+				1E8D27072E75B0D00014BCAB /* ai2.md */,
+				1E8D26F52E754C840014BCAB /* Script */,
 				1E5308282E732BEA0045EE94 /* ai.md */,
 				1E5308172E7300770045EE94 /* readme.md */,
 				1E5307EE2E7300310045EE94 /* TommyState */,
@@ -118,6 +173,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1E5307EE2E7300310045EE94 /* TommyState */,
+				1E8D26F52E754C840014BCAB /* Script */,
 			);
 			name = TommyState;
 			packageProductDependencies = (
@@ -184,6 +240,7 @@
 				TargetAttributes = {
 					1E5307EB2E7300310045EE94 = {
 						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 1640;
 					};
 					1E5307F92E7300340045EE94 = {
 						CreatedOnToolsVersion = 16.4;
@@ -222,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E5308292E732BF90045EE94 /* ai.md in Resources */,
+				1E8D27082E75B0D80014BCAB /* ai2.md in Resources */,
 				1E5308182E7300820045EE94 /* readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -413,6 +472,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TommyState/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -423,6 +483,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "TommyState/TommyState-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -432,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -440,6 +503,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TommyState/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,6 +514,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "TommyState/TommyState-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

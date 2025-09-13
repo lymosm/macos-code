@@ -42,7 +42,7 @@ final class MonitorManager: ObservableObject {
         stopUpdating()
 
         timer = DispatchSource.makeTimerSource(queue: queue)
-        timer?.schedule(deadline: .now(), repeating: 1.0) // 每秒刷新
+        timer?.schedule(deadline: .now(), repeating: 2.0) // 每秒刷新
         timer?.setEventHandler { [weak self] in
             guard let self = self else { return }
             self.fetchSensorValues()
@@ -60,13 +60,30 @@ final class MonitorManager: ObservableObject {
         // ====== 占位实现（用于 UI 开发与演示） ======
         // 我们在无法读取真实 SMC/IOKit 时，先用模拟值（平滑变化）
         // 真实环境下请在下面的 "真实实现示例" 区域里接入 IOKit/SMC/powermetrics 等代码/工具。
+        var newFanRPM: Int?
+            // try multiple fan indices (0,1) until find valid
+            for i in 0..<4 {
+                if let rpm = SMCWrapper.shared.getFanRPM(index: i) {
+                    newFanRPM = rpm
+                    break
+                }
+            }
 
-        let previousFan = self.fanRPM ?? 2000
+            // If we couldn't read, fallback to previous simulation
+            let previousFan = self.fanRPM ?? 2000
+            let newFan: Int
+            if let real = newFanRPM {
+                newFan = real
+            } else {
+                let fanDelta = Int.random(in: -120...120)
+                // newFan = max(0, previousFan + fanDelta)
+                newFan = 0
+            }
+
         let previousGPU = self.gpuUsagePercent ?? 12.0
 
         // 平滑随机波动（演示用）
         let fanDelta = Int.random(in: -120...120)
-        let newFan = max(0, previousFan + fanDelta)
         let gpuDelta = Double.random(in: -6...6)
         let newGPU = min(max(0.0, previousGPU + gpuDelta), 100.0)
 
