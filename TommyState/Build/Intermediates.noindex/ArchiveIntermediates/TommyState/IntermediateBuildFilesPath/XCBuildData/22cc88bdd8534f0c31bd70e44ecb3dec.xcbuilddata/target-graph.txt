@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'TommyState' in project 'TommyState'
+➜ Explicit dependency on target 'TommyTool' in project 'TommyState'
+Target 'TommyTool' in project 'TommyState' (no dependencies)

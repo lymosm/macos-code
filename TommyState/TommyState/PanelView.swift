@@ -1,4 +1,6 @@
 import SwiftUI
+import ServiceManagement
+
 
 struct PanelView: View {
     enum Tab: String, CaseIterable, Identifiable {
@@ -9,6 +11,8 @@ struct PanelView: View {
 
     @EnvironmentObject var monitor: MonitorManager
     @Binding var selectedTab: Tab
+    @State private var showExitSheet = false
+
 
     var body: some View {
         HStack(spacing: 0) {
@@ -20,8 +24,127 @@ struct PanelView: View {
     }
 }
 
+// 开机启动管理
+class LaunchAtLogin {
+    static var isEnabled: Bool {
+        if #available(macOS 13.0, *) {
+            return SMAppService.mainApp.status == .enabled
+        } else {
+            return false
+        }
+    }
+
+    static func setEnabled(_ enabled: Bool) {
+        if #available(macOS 13.0, *) {
+            do {
+                if enabled {
+                    try SMAppService.mainApp.register()
+                } else {
+                    try SMAppService.mainApp.unregister()
+                }
+            } catch {
+                print("LaunchAtLogin error: \(error)")
+            }
+        }
+    }
+}
+
+func enableLaunchDaemon(_ enabled: Bool) {
+    let plistPath = "/Library/LaunchDaemons/tommy.tommystate.plist"
+    let plistContent = """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+                           "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>tommy.tommystate</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Applications/TommyState.app/Contents/MacOS/TommyState</string>
+        </array>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>KeepAlive</key>
+        <true/>
+    </dict>
+    </plist>
+    """
+    do {
+        if enabled {
+            try plistContent.write(toFile: plistPath, atomically: true, encoding: .utf8)
+            _ = try runCommand("launchctl", args: ["load", plistPath])
+        } else {
+            _ = try runCommand("launchctl", args: ["unload", plistPath])
+        }
+    } catch {
+        print("LaunchDaemon setup failed: \(error)")
+    }
+}
+
+@discardableResult
+func runCommand(_ launchPath: String, args: [String]) throws -> String {
+    let process = Process()
+    process.launchPath = launchPath
+    process.arguments = args
+
+    let pipe = Pipe()
+    process.standardOutput = pipe
+    process.standardError = pipe
+
+    try process.run()
+    process.waitUntilExit()
+
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    return String(data: data, encoding: .utf8) ?? ""
+}
+
+
+func installHelper() {
+    var cfError: Unmanaged<CFError>?
+    let helperID = "tommy.TommyTool"
+    print("Helper install ing")
+    if SMJobBless(kSMDomainSystemLaunchd, helperID as CFString, nil, &cfError) {
+        print("✅ Helper installed successfully")
+    } else {
+        if let error = cfError?.takeRetainedValue() {
+            print("❌ SMJobBless failed:", error)
+        } else {
+            print("❌ SMJobBless failed with unknown error")
+        }
+    }
+    print("Helper install end")
+}
+
+func removeHelper() {
+    let plistPath = "/Library/LaunchDaemons/tommy.tommystate.plist"
+    let fm = FileManager.default
+    
+    if fm.fileExists(atPath: plistPath) {
+        do {
+            // 先 unload
+            let task = Process()
+            task.launchPath = "/bin/launchctl"
+            task.arguments = ["unload", plistPath]
+            try task.run()
+            task.waitUntilExit()
+            
+            // 再删除文件
+            try fm.removeItem(atPath: plistPath)
+            print("✅ Daemon plist removed")
+        } catch {
+            print("❌ Failed to remove LaunchDaemon:", error)
+        }
+    } else {
+        print("ℹ️ No plist found to remove")
+    }
+}
+
+
+
 // MARK: - 子视图
 extension PanelView {
+    
     @ViewBuilder
     private func sidebarView() -> some View {
         VStack(spacing: 8) {
@@ -79,16 +202,56 @@ extension PanelView {
         }
     }
 
+
     private func footerView() -> some View {
+        
         HStack {
-            Button("立即刷新") {
-                monitor.forceRefreshNow()
+                Button("立即刷新") {
+                    monitor.forceRefreshNow()
+                }
+            // 开机启动开关
+            // login item
+                    Toggle("开机启动", isOn: Binding(
+                        get: { LaunchAtLogin.isEnabled },
+                        set: { LaunchAtLogin.setEnabled($0) }
+                    ))
+                    .toggleStyle(.switch)
+                    .frame(width: 120)
+             
+            
+            // launch daemon
+            /*
+            Toggle("开机启动 (Daemon)", isOn: Binding(
+                get: {
+                    FileManager.default.fileExists(atPath: "/Library/LaunchDaemons/tommy.tommystate.plist")
+                },
+                set: { newValue, _ in
+                    if newValue {
+                        installHelper()
+                    } else {
+                        removeHelper()
+                    }
+                }
+            ))
+            .toggleStyle(.switch)
+*/
+            
+                Spacer()
+                Button("Exit") {
+                    showExitSheet = true
+                }
+                Text("TommyState • demo")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
-            Spacer()
-            Text("TommyState • demo")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
+            .confirmationDialog("确定要退出 TommyState 吗？",
+                                isPresented: $showExitSheet,
+                                titleVisibility: .visible) {
+                Button("退出", role: .destructive) {
+                    NSApplication.shared.terminate(nil)
+                }
+                Button("取消", role: .cancel) { }
+            }
     }
 
     private func tabButton(for tab: Tab) -> some View {

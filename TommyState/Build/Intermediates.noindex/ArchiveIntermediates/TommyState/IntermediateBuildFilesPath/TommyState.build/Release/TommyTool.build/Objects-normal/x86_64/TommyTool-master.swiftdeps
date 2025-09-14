@@ -1,0 +1,6 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "be7ba86a20095b0bce938ba24acd3968b2dd169e451f72ad9af7dcbdefc06044"
+build_start_time: [1757848605, 440171000]
+build_end_time: [1757848607, 13796000]
+inputs:
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyTool/main.swift": [1757820375, 121133026]

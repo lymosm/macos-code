@@ -1,0 +1,15 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "0a9002522c525854ec9a339c936c288d97f03338b2dcd2b41cba7c36e1ac2c0b"
+build_start_time: [1757848606, 234508000]
+build_end_time: [1757848613, 550768000]
+inputs:
+  ? "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/DerivedSources/GeneratedAssetSymbols.swift"
+  : [1757848606, 215352881]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/ContentView.swift": [1757684553, 816001645]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/MonitorManager.swift": [1757774657, 441427591]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/PanelView.swift": [1757845811, 242443576]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/SMCWrapper.swift": [1757772938, 163997473]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/StatusBarController.swift": [1757774689, 11395642]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/TommyStateApp.swift": [1757848488, 57122855]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/Utilities.swift": [1757599950, 348617373]
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/VisualEffectView.swift": [1757602840, 319970054]

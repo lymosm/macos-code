@@ -89,19 +89,19 @@ bool SMCOpen(void) {
         printf("IOIteratorNext failed\n");
         return false;
     }
-    printf("IOIteratorNext success\n");
+   // printf("IOIteratorNext success\n");
     
     io_name_t name;
     kern_return_t kr = IORegistryEntryGetName(device, name);
     if (kr == KERN_SUCCESS) {
-        printf("IOService device name: %s\n", name);
+       // printf("IOService device name: %s\n", name);
     } else {
         printf("IORegistryEntryGetName failed: 0x%x\n", kr);
     }
     
     result = IOServiceOpen(device, mach_task_self(), 0, &kIOConnection);
     IOObjectRelease(device);
-    printf("IOServiceOpen result = 0x%x (%d)\n", result, result);
+    //printf("IOServiceOpen result = 0x%x (%d)\n", result, result);
 
     // return true;
     if(result != kIOReturnSuccess){
@@ -164,7 +164,7 @@ int SMCGetFanRPM(int fanIndex){
     if (SMCReadKey(fan_key, &fan_val)) {
         if (strcmp(fan_val.dataType, "fpe2") == 0 && fan_val.dataSize >= 2) {
             rpm = (int)fpe2_to_float(fan_val.bytes);
-            printf("  - Fan Speed (%s): %d RPM\n", fan_key, rpm);
+          //  printf("  - Fan Speed (%s): %d RPM\n", fan_key, rpm);
         }
     }
     return rpm;

@@ -10,6 +10,8 @@
 		1E5308182E7300820045EE94 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308172E7300770045EE94 /* readme.md */; };
 		1E5308292E732BF90045EE94 /* ai.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E5308282E732BEA0045EE94 /* ai.md */; };
 		1E8D27082E75B0D80014BCAB /* ai2.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E8D27072E75B0D00014BCAB /* ai2.md */; };
+		1EBEBDC92E764B3A003D8D46 /* ai3.md in Resources */ = {isa = PBXBuildFile; fileRef = 1EBEBDC82E764B31003D8D46 /* ai3.md */; };
+		1EBEBDE32E766A66003D8D46 /* TommyTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EBEBDDA2E7669CC003D8D46 /* TommyTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +29,36 @@
 			remoteGlobalIDString = 1E5307EB2E7300310045EE94;
 			remoteInfo = TommyState;
 		};
+		1EBEBDE12E766A4F003D8D46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E5307E42E7300310045EE94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EBEBDD92E7669CC003D8D46;
+			remoteInfo = TommyTool;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EBEBDC32E76403E003D8D46 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				1EBEBDE32E766A66003D8D46 /* TommyTool in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EBEBDD82E7669CC003D8D46 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E5307EC2E7300310045EE94 /* TommyState.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TommyState.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +67,8 @@
 		1E5308172E7300770045EE94 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		1E5308282E732BEA0045EE94 /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
 		1E8D27072E75B0D00014BCAB /* ai2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai2.md; sourceTree = "<group>"; };
+		1EBEBDC82E764B31003D8D46 /* ai3.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai3.md; sourceTree = "<group>"; };
+		1EBEBDDA2E7669CC003D8D46 /* TommyTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TommyTool; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -105,6 +138,11 @@
 			path = Script;
 			sourceTree = "<group>";
 		};
+		1EBEBDDB2E7669CC003D8D46 /* TommyTool */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TommyTool;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,12 +167,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1EBEBDD72E7669CC003D8D46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1E5307E32E7300310045EE94 = {
 			isa = PBXGroup;
 			children = (
+				1EBEBDC82E764B31003D8D46 /* ai3.md */,
 				1E8D27072E75B0D00014BCAB /* ai2.md */,
 				1E8D26F52E754C840014BCAB /* Script */,
 				1E5308282E732BEA0045EE94 /* ai.md */,
@@ -142,6 +188,7 @@
 				1E5307EE2E7300310045EE94 /* TommyState */,
 				1E5307FD2E7300340045EE94 /* TommyStateTests */,
 				1E5308072E7300340045EE94 /* TommyStateUITests */,
+				1EBEBDDB2E7669CC003D8D46 /* TommyTool */,
 				1E5307ED2E7300310045EE94 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,6 +199,7 @@
 				1E5307EC2E7300310045EE94 /* TommyState.app */,
 				1E5307FA2E7300340045EE94 /* TommyStateTests.xctest */,
 				1E5308042E7300340045EE94 /* TommyStateUITests.xctest */,
+				1EBEBDDA2E7669CC003D8D46 /* TommyTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,10 +214,12 @@
 				1E5307E82E7300310045EE94 /* Sources */,
 				1E5307E92E7300310045EE94 /* Frameworks */,
 				1E5307EA2E7300310045EE94 /* Resources */,
+				1EBEBDC32E76403E003D8D46 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1EBEBDE22E766A4F003D8D46 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				1E5307EE2E7300310045EE94 /* TommyState */,
@@ -228,6 +278,28 @@
 			productReference = 1E5308042E7300340045EE94 /* TommyStateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1EBEBDD92E7669CC003D8D46 /* TommyTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EBEBDDE2E7669CC003D8D46 /* Build configuration list for PBXNativeTarget "TommyTool" */;
+			buildPhases = (
+				1EBEBDD62E7669CC003D8D46 /* Sources */,
+				1EBEBDD72E7669CC003D8D46 /* Frameworks */,
+				1EBEBDD82E7669CC003D8D46 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1EBEBDDB2E7669CC003D8D46 /* TommyTool */,
+			);
+			name = TommyTool;
+			packageProductDependencies = (
+			);
+			productName = TommyTool;
+			productReference = 1EBEBDDA2E7669CC003D8D46 /* TommyTool */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -250,6 +322,9 @@
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 1E5307EB2E7300310045EE94;
 					};
+					1EBEBDD92E7669CC003D8D46 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = 1E5307E72E7300310045EE94 /* Build configuration list for PBXProject "TommyState" */;
@@ -269,6 +344,7 @@
 				1E5307EB2E7300310045EE94 /* TommyState */,
 				1E5307F92E7300340045EE94 /* TommyStateTests */,
 				1E5308032E7300340045EE94 /* TommyStateUITests */,
+				1EBEBDD92E7669CC003D8D46 /* TommyTool */,
 			);
 		};
 /* End PBXProject section */
@@ -278,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EBEBDC92E764B3A003D8D46 /* ai3.md in Resources */,
 				1E5308292E732BF90045EE94 /* ai.md in Resources */,
 				1E8D27082E75B0D80014BCAB /* ai2.md in Resources */,
 				1E5308182E7300820045EE94 /* readme.md in Resources */,
@@ -322,6 +399,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1EBEBDD62E7669CC003D8D46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -334,6 +418,11 @@
 			isa = PBXTargetDependency;
 			target = 1E5307EB2E7300310045EE94 /* TommyState */;
 			targetProxy = 1E5308052E7300340045EE94 /* PBXContainerItemProxy */;
+		};
+		1EBEBDE22E766A4F003D8D46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EBEBDD92E7669CC003D8D46 /* TommyTool */;
+			targetProxy = 1EBEBDE12E766A4F003D8D46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -465,10 +554,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2MU5Q3N3P9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -481,6 +573,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyState;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "TommyState/TommyState-Bridging-Header.h";
@@ -496,10 +590,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TommyState/TommyState.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2MU5Q3N3P9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2MU5Q3N3P9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -512,6 +609,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyState;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "TommyState/TommyState-Bridging-Header.h";
@@ -587,6 +686,52 @@
 			};
 			name = Release;
 		};
+		1EBEBDDF2E7669CC003D8D46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "/Volumes/dev/macos-dev/macos-code/TommyState/TommyTool/Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"$(SRCROOT)/TommyTool/Info.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1EBEBDE02E7669CC003D8D46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2MU5Q3N3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "/Volumes/dev/macos-dev/macos-code/TommyState/TommyTool/Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"$(SRCROOT)/TommyTool/Info.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.TommyTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -622,6 +767,15 @@
 			buildConfigurations = (
 				1E5308152E7300340045EE94 /* Debug */,
 				1E5308162E7300340045EE94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EBEBDDE2E7669CC003D8D46 /* Build configuration list for PBXNativeTarget "TommyTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EBEBDDF2E7669CC003D8D46 /* Debug */,
+				1EBEBDE02E7669CC003D8D46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

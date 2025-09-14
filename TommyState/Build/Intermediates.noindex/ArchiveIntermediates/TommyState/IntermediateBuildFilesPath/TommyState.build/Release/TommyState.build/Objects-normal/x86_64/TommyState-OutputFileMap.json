@@ -1,0 +1,55 @@
+{
+  "" : {
+    "const-values" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master.swiftconstvalues",
+    "dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master.d",
+    "diagnostics" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master.dia",
+    "emit-module-dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master-emit-module.d",
+    "emit-module-diagnostics" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master-emit-module.dia",
+    "swift-dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyState-master.swiftdeps"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/GeneratedAssetSymbols.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/ContentView.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/ContentView.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/MonitorManager.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/MonitorManager.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/MonitorManager.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/MonitorManager.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/PanelView.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/PanelView.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/PanelView.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/PanelView.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/SMCWrapper.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/SMCWrapper.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/SMCWrapper.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/SMCWrapper.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/StatusBarController.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/StatusBarController.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/StatusBarController.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/StatusBarController.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/TommyStateApp.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyStateApp.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyStateApp.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/TommyStateApp.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/Utilities.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/Utilities.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/Utilities.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/Utilities.o"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/VisualEffectView.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/VisualEffectView.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/VisualEffectView.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyState.build/Objects-normal/x86_64/VisualEffectView.o"
+  }
+}

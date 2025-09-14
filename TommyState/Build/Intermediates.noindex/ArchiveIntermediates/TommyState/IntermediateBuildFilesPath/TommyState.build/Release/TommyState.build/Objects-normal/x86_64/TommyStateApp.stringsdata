@@ -1,0 +1,16 @@
+{
+  "source": "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/TommyStateApp.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "TommyState Main",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 10
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,15 @@
+{
+  "" : {
+    "const-values" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master.swiftconstvalues",
+    "dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master.d",
+    "diagnostics" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master.dia",
+    "emit-module-dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master-emit-module.d",
+    "emit-module-diagnostics" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master-emit-module.dia",
+    "swift-dependencies" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/TommyTool-master.swiftdeps"
+  },
+  "/Volumes/dev/macos-dev/macos-code/TommyState/TommyTool/main.swift" : {
+    "index-unit-output-path" : "/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/main.o",
+    "llvm-bc" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/main.bc",
+    "object" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath/TommyState.build/Release/TommyTool.build/Objects-normal/arm64/main.o"
+  }
+}

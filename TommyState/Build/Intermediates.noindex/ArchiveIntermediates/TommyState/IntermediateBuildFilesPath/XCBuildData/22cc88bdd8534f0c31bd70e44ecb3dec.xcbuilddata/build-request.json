@@ -1,0 +1,76 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "c4b6edc3b2591ca98a33c13581b00a12495c76797b739cf9b6f417fdff97e87a"
+    }
+  ],
+  "containerPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "install",
+    "activeArchitecture" : "undefined_arch",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : true,
+      "platform" : "macosx",
+      "sdk" : "macosx15.5",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "arm64",
+        "arm64e",
+        "x86_64",
+        "x86_64h"
+      ],
+      "targetArchitecture" : "undefined_arch"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Products",
+      "derivedDataPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/TommyState-atvjcnnnpfvnobclisvsbhzorgft/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/lymos/Library/Developer/Xcode/DerivedData/TommyState-atvjcnnnpfvnobclisvsbhzorgft/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "install",
+          "ASSET_PACK_FOLDER_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/InstallationBuildProductsLocation/OnDemandResources",
+          "ASSETCATALOG_COMPILER_FLATTENED_APP_ICON_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/ProductIcon.png",
+          "DEPLOYMENT_LOCATION" : "YES",
+          "DEPLOYMENT_POSTPROCESSING" : "YES",
+          "DSTROOT" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/InstallationBuildProductsLocation",
+          "EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE" : "NO",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_SIGNATURE_AGGREGATION" : "YES",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "INDEX_ENABLE_DATA_STORE" : "NO",
+          "MESSAGES_APPLICATION_EXTENSION_SUPPORT_FOLDER_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/MessagesApplicationExtensionSupport",
+          "MESSAGES_APPLICATION_SUPPORT_FOLDER_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/MessagesApplicationSupport",
+          "OBJROOT" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/IntermediateBuildFilesPath",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "SHARED_PRECOMPS_DIR" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/PrecompiledHeaders",
+          "SIGNATURE_METADATA_FOLDER_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/Signatures",
+          "SWIFT_STDLIB_TOOL_UNSIGNED_DESTINATION_DIR" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/SwiftSupport",
+          "SYMROOT" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath",
+          "WATCHKIT_2_SUPPORT_FOLDER_PATH" : "/Volumes/dev/macos-dev/macos-code/TommyState/Build/Intermediates.noindex/ArchiveIntermediates/TommyState/BuildProductsPath/WatchKitSupport2"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "archive",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

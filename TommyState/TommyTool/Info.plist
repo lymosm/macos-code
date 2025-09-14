@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>tommy.TommyTool</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleExecutable</key>
+    <string>TommyTool</string>
+    <key>CFBundleName</key>
+    <string>TommyTool</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <!-- 确保 helper 不会显示 Dock 图标或菜单栏图标 -->
+    <key>LSBackgroundOnly</key>
+    <true/>
+    <key>LSUIElement</key>
+    <true/>
+
+    <key>SMAuthorizedClients</key>
+    <array>
+        <string>anchor apple generic and identifier "tommy.TommyState" and (certificate leaf[field.1.2.840.113635.100.6.2.1] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "2MU5Q3N3P9")</string>
+    </array>
+</dict>
+</plist>

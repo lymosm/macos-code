@@ -4,5 +4,9 @@
 <dict>
 	<key>com.apple.security.device.smckey</key>
 	<true/>
+    <key>com.apple.security.privileged-helper</key>
+    <true/>
+    <key>com.apple.security.cs.bless-helper</key>
+        <string>tommy.TommyTool</string>
 </dict>
 </plist>

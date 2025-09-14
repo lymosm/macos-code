@@ -1,0 +1,128 @@
+{
+  "source": "/Volumes/dev/macos-dev/macos-code/TommyState/TommyState/PanelView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "TommyState",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 151
+        }
+      },
+      {
+        "comment": "",
+        "key": "确定要退出 TommyState 吗？",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 247
+        }
+      },
+      {
+        "comment": "",
+        "key": "TommyState • demo",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 243
+        }
+      },
+      {
+        "comment": "",
+        "key": "立即刷新",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 209
+        }
+      },
+      {
+        "comment": "",
+        "key": "开机启动",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 214
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exit",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "退出",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 250
+        }
+      },
+      {
+        "comment": "",
+        "key": "取消",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "每秒刷新 • 可配置 IOKit/SMC 接入",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 319
+        }
+      },
+      {
+        "comment": "",
+        "key": "风扇转速",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 307
+        }
+      },
+      {
+        "comment": "",
+        "key": "无法获取",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 313
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld RPM",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 309
+        }
+      },
+      {
+        "comment": "",
+        "key": "每秒刷新 • 需要 powermetrics 或 GPU driver 数据",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 354
+        }
+      },
+      {
+        "comment": "",
+        "key": "GPU 使用率",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 342
+        }
+      },
+      {
+        "comment": "",
+        "key": "无法获取",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 348
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -16,3 +16,7 @@
             TommyStateUITests.swift
             TommyStateUITestsLaunchTests.swift
 6. 请帮我写出每一个文件的完整代码和调试步骤
+
+
+
+"-sectcreate __TEXT __info_plist $(SRCROOT)/TommyHelper/Info.plist"
