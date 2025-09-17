@@ -3,4 +3,5 @@
 # 1. build & install installFnkey.pkg
 # 2. open FnKeys.app
 # need AsusFn.kext
+# cp Script/active-audio /usr/local/bin/active-audio
 

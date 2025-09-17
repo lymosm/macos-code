@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+  <title>Wake Sync Daemon</title>
+  <welcome>欢迎使用 WakeSync 安装程序。本工具将安装 启动睡眠唤醒同步时间激活声卡。</welcome>
+  <license>使用本软件需自行承担风险。</license>
+  <choices-outline>
+    <line choice="default"/>
+  </choices-outline>
+  <choice id="default" visible="false" title="默认安装">
+    <pkg-ref id="tommy.wakesync"/>
+  </choice>
+  <pkg-ref id="tommy.wakesync" installKBytes="0" version="1.0">WakeSync.pkg</pkg-ref>
+</installer-gui-script>
