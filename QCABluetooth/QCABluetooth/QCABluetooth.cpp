@@ -7,6 +7,7 @@
 #include "QCABluetooth.hpp"
 #include "hci.hpp"
 #include <IOKit/IOBufferMemoryDescriptor.h>
+#include "qca_firmware.h"
 extern const OSSymbol* gIOUSBHostInterfaceClass;
 
 #define super IOService
@@ -232,7 +233,102 @@ bool QCABluetooth::findAndOpenInterface() {
     return true;
 }
 
+
 bool QCABluetooth::uploadFirmware() {
+    IOLog("tommybt: uploadFirmware start\n");
+
+    // 1. rampatch
+    IOLog("tommybt: uploading rampatch, size=%lu\n", qca_rampatch_len);
+    if (!uploadFirmwareFile(qca_rampatch, qca_rampatch_len)) {
+        IOLog("tommybt: rampatch upload failed\n");
+        return false;
+    }
+
+    // 2. main firmware
+    IOLog("tommybt: uploading main firmware, size=%lu\n", qca_mainfw_len);
+    if (!uploadFirmwareFile(qca_mainfw, qca_mainfw_len)) {
+        IOLog("tommybt: main firmware upload failed\n");
+        return false;
+    }
+
+    IOLog("tommybt: firmware upload done ✅\n");
+    return true;
+}
+
+
+bool QCABluetooth::uploadFirmwareFile(const uint8_t* data, size_t len) {
+    size_t offset = 0;
+    while (offset < len) {
+        if (offset + 3 > len) break;
+
+        uint16_t opcode = data[offset] | (data[offset+1] << 8);
+        uint8_t plen = data[offset+2];
+        if (offset + 3 + plen > len) break;
+
+        const uint8_t* payload = &data[offset+3];
+        uint8_t buf[260];
+        buf[0] = 0x01;                // HCI command packet indicator
+        buf[1] = data[offset];
+        buf[2] = data[offset+1];
+        buf[3] = plen;
+        memcpy(&buf[4], payload, plen);
+        size_t cmdLen = 4 + plen;
+
+        IOReturn ret;
+        IOMemoryDescriptor* md = nullptr;
+
+        // --- 发送到 bulk out ---
+        md = IOMemoryDescriptor::withAddress(buf, cmdLen, kIODirectionOut);
+        if (!md) {
+            IOLog("tommybt: failed to create output memory descriptor\n");
+            break;
+        }
+        uint32_t bytesWritten = 0;
+        ret = _bulkOutPipe->io(md, (uint32_t)cmdLen, bytesWritten, 5000);
+        md->release();
+
+        if (ret != kIOReturnSuccess) {
+            IOLog("tommybt: bulkOut io failed, ret=0x%x\n", ret);
+            break;
+        }
+
+        // --- 等待 Command Complete ---
+        uint8_t evtBuf[260];
+        uint32_t evtLen = sizeof(evtBuf);
+        md = IOMemoryDescriptor::withAddress(evtBuf, evtLen, kIODirectionIn);
+        if (!md) {
+            IOLog("tommybt: failed to create input memory descriptor\n");
+            break;
+        }
+        uint32_t bytesRead = 0;
+        ret = _intInPipe->io(md, evtLen, bytesRead, 5000);
+        md->release();
+
+        if (ret != kIOReturnSuccess) {
+            IOLog("tommybt: intIn io failed, ret=0x%x\n", ret);
+            break;
+        }
+
+        if (bytesRead > 0 && evtBuf[0] == 0x0E) {
+            if (bytesRead >= 6) {
+                uint16_t rspOpcode = evtBuf[4] | (evtBuf[5] << 8);
+                if (rspOpcode != opcode) {
+                    IOLog("tommybt: opcode mismatch 0x%04x vs 0x%04x\n", rspOpcode, opcode);
+                }
+            }
+        } else if (bytesRead > 0) {
+            IOLog("tommybt: got non-CC event 0x%02x\n", evtBuf[0]);
+        }
+
+        offset += 3 + plen;
+    }
+
+    return (offset >= len);
+}
+
+
+/*
+bool QCABluetooth::uploadFirmware --old() {
     IOLog("tommybt: uploadFirmware start\n");
 
     OSData* fwData = OSData::withBytes(qca_firmware_hcd, qca_firmware_hcd_len);
@@ -325,6 +421,7 @@ bool QCABluetooth::uploadFirmware() {
     
     return (offset >= len);
 }
+ */
 
 /*
 bool QCABluetooth::uploadFirmware----old() {

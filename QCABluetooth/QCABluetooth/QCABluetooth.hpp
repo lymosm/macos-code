@@ -41,6 +41,7 @@ public:
     // Minimal helpers
     bool findAndOpenInterface();
     bool uploadFirmware();
+    bool uploadFirmwareFile(const uint8_t* data, size_t len);
     void handleUSBData(uint8_t* data, size_t len);
     
     IOUSBHostPipe* _intInPipe;                   // 事件输入 pipe

@@ -6,21 +6,77 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1E0CDB702E93979900BCC002 /* qca_firmware_gen */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1E0CDB712E93979900BCC002 /* Build configuration list for PBXAggregateTarget "qca_firmware_gen" */;
+			buildPhases = (
+				1E0CDB762E93992200BCC002 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = qca_firmware_gen;
+			packageProductDependencies = (
+			);
+			productName = qca_firmware_gen;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp */; };
-		1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp */; };
+		1E0CDB782E93A01000BCC002 /* qca_firmware.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E0CDB772E93A01000BCC002 /* qca_firmware.h */; };
+		1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp.bak in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */; };
+		1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp.bak in Headers */ = {isa = PBXBuildFile; fileRef = 1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */; };
 		3573FE3225223B8500DFC9F4 /* QCABluetooth.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */; };
 		3573FE3425223B8500DFC9F4 /* QCABluetooth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* QCABluetooth.cpp */; };
 		358E312F2523A1E400C409AD /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358E312E2523A1E400C409AD /* libkmod.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "QCABluetooth 2.cpp"; sourceTree = "<group>"; };
-		1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "QCABluetooth 2.hpp"; sourceTree = "<group>"; };
-		1E3FAA4E2E92A4A900108742 /* Info 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info 2.plist"; sourceTree = "<group>"; };
+		1E0CDB432E9382A300BCC002 /* ar3kbdaddr.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = ar3kbdaddr.pst; sourceTree = "<group>"; };
+		1E0CDB442E9382A300BCC002 /* PS_ASIC.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC.pst; sourceTree = "<group>"; };
+		1E0CDB452E9382A300BCC002 /* RamPatch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = RamPatch.txt; sourceTree = "<group>"; };
+		1E0CDB472E9382A300BCC002 /* ar3kbdaddr.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = ar3kbdaddr.pst; sourceTree = "<group>"; };
+		1E0CDB482E9382A300BCC002 /* PS_ASIC.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC.pst; sourceTree = "<group>"; };
+		1E0CDB492E9382A300BCC002 /* RamPatch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = RamPatch.txt; sourceTree = "<group>"; };
+		1E0CDB4B2E9382A300BCC002 /* ar3kbdaddr.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = ar3kbdaddr.pst; sourceTree = "<group>"; };
+		1E0CDB4C2E9382A300BCC002 /* PS_ASIC.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC.pst; sourceTree = "<group>"; };
+		1E0CDB4D2E9382A300BCC002 /* PS_ASIC_aclHighPri.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC_aclHighPri.pst; sourceTree = "<group>"; };
+		1E0CDB4E2E9382A300BCC002 /* PS_ASIC_aclLowPri.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC_aclLowPri.pst; sourceTree = "<group>"; };
+		1E0CDB4F2E9382A300BCC002 /* RamPatch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = RamPatch.txt; sourceTree = "<group>"; };
+		1E0CDB512E9382A300BCC002 /* ar3kbdaddr.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = ar3kbdaddr.pst; sourceTree = "<group>"; };
+		1E0CDB522E9382A300BCC002 /* PS_ASIC.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC.pst; sourceTree = "<group>"; };
+		1E0CDB532E9382A300BCC002 /* RamPatch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = RamPatch.txt; sourceTree = "<group>"; };
+		1E0CDB552E9382A300BCC002 /* PS_ASIC.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = PS_ASIC.pst; sourceTree = "<group>"; };
+		1E0CDB562E9382A300BCC002 /* RamPatch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = RamPatch.txt; sourceTree = "<group>"; };
+		1E0CDB582E9382A300BCC002 /* ramps_0x01020201_26_HighPriority.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020201_26_HighPriority.dfu; sourceTree = "<group>"; };
+		1E0CDB5A2E9382A300BCC002 /* AthrBT_0x01020001.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x01020001.dfu; sourceTree = "<group>"; };
+		1E0CDB5B2E9382A300BCC002 /* AthrBT_0x01020200.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x01020200.dfu; sourceTree = "<group>"; };
+		1E0CDB5C2E9382A300BCC002 /* AthrBT_0x01020201.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x01020201.dfu; sourceTree = "<group>"; };
+		1E0CDB5D2E9382A300BCC002 /* AthrBT_0x11020000.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x11020000.dfu; sourceTree = "<group>"; };
+		1E0CDB5E2E9382A300BCC002 /* AthrBT_0x11020100.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x11020100.dfu; sourceTree = "<group>"; };
+		1E0CDB5F2E9382A300BCC002 /* AthrBT_0x31010000.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x31010000.dfu; sourceTree = "<group>"; };
+		1E0CDB602E9382A300BCC002 /* AthrBT_0x31010100.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x31010100.dfu; sourceTree = "<group>"; };
+		1E0CDB612E9382A300BCC002 /* AthrBT_0x41020000.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthrBT_0x41020000.dfu; sourceTree = "<group>"; };
+		1E0CDB622E9382A300BCC002 /* ramps_0x01020001_26.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020001_26.dfu; sourceTree = "<group>"; };
+		1E0CDB632E9382A300BCC002 /* ramps_0x01020200_26.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020200_26.dfu; sourceTree = "<group>"; };
+		1E0CDB642E9382A300BCC002 /* ramps_0x01020200_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020200_40.dfu; sourceTree = "<group>"; };
+		1E0CDB652E9382A300BCC002 /* ramps_0x01020201_26.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020201_26.dfu; sourceTree = "<group>"; };
+		1E0CDB662E9382A300BCC002 /* ramps_0x01020201_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x01020201_40.dfu; sourceTree = "<group>"; };
+		1E0CDB672E9382A300BCC002 /* ramps_0x11020000_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x11020000_40.dfu; sourceTree = "<group>"; };
+		1E0CDB682E9382A300BCC002 /* ramps_0x11020100_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x11020100_40.dfu; sourceTree = "<group>"; };
+		1E0CDB692E9382A300BCC002 /* ramps_0x31010000_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x31010000_40.dfu; sourceTree = "<group>"; };
+		1E0CDB6A2E9382A300BCC002 /* ramps_0x31010100_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x31010100_40.dfu; sourceTree = "<group>"; };
+		1E0CDB6B2E9382A300BCC002 /* ramps_0x41020000_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x41020000_40.dfu; sourceTree = "<group>"; };
+		1E0CDB6D2E93866600BCC002 /* ai2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai2.md; sourceTree = "<group>"; };
+		1E0CDB6E2E93955900BCC002 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		1E0CDB6F2E9395A400BCC002 /* gen_qca_fw.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_qca_fw.sh; sourceTree = "<group>"; };
+		1E0CDB772E93A01000BCC002 /* qca_firmware.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qca_firmware.h; sourceTree = "<group>"; };
+		1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QCABluetooth 2.cpp.bak"; sourceTree = "<group>"; };
+		1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QCABluetooth 2.hpp.bak"; sourceTree = "<group>"; };
+		1E3FAA4E2E92A4A900108742 /* Info 2.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 2.plist.bak"; sourceTree = "<group>"; };
 		1E3FAA4F2E92C36400108742 /* hci.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hci.hpp; sourceTree = "<group>"; };
 		1E9234B22E916A2300FA267A /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
-		1ED72C002E9214B900D81D40 /* Info 3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info 3.plist"; sourceTree = "<group>"; };
+		1ED72C002E9214B900D81D40 /* Info 3.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 3.plist.bak"; sourceTree = "<group>"; };
 		1EFBFCA12E60AB8800EB0C2D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3573FE2E25223B8500DFC9F4 /* QCABluetooth.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCABluetooth.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = QCABluetooth.hpp; sourceTree = "<group>"; };
@@ -41,9 +97,104 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0CDB462E9382A300BCC002 /* 30000 */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB432E9382A300BCC002 /* ar3kbdaddr.pst */,
+				1E0CDB442E9382A300BCC002 /* PS_ASIC.pst */,
+				1E0CDB452E9382A300BCC002 /* RamPatch.txt */,
+			);
+			path = 30000;
+			sourceTree = "<group>";
+		};
+		1E0CDB4A2E9382A300BCC002 /* 30101 */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB472E9382A300BCC002 /* ar3kbdaddr.pst */,
+				1E0CDB482E9382A300BCC002 /* PS_ASIC.pst */,
+				1E0CDB492E9382A300BCC002 /* RamPatch.txt */,
+			);
+			path = 30101;
+			sourceTree = "<group>";
+		};
+		1E0CDB502E9382A300BCC002 /* 30101coex */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB4B2E9382A300BCC002 /* ar3kbdaddr.pst */,
+				1E0CDB4C2E9382A300BCC002 /* PS_ASIC.pst */,
+				1E0CDB4D2E9382A300BCC002 /* PS_ASIC_aclHighPri.pst */,
+				1E0CDB4E2E9382A300BCC002 /* PS_ASIC_aclLowPri.pst */,
+				1E0CDB4F2E9382A300BCC002 /* RamPatch.txt */,
+			);
+			path = 30101coex;
+			sourceTree = "<group>";
+		};
+		1E0CDB542E9382A300BCC002 /* 1020200 */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB512E9382A300BCC002 /* ar3kbdaddr.pst */,
+				1E0CDB522E9382A300BCC002 /* PS_ASIC.pst */,
+				1E0CDB532E9382A300BCC002 /* RamPatch.txt */,
+			);
+			path = 1020200;
+			sourceTree = "<group>";
+		};
+		1E0CDB572E9382A300BCC002 /* 1020201 */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB552E9382A300BCC002 /* PS_ASIC.pst */,
+				1E0CDB562E9382A300BCC002 /* RamPatch.txt */,
+			);
+			path = 1020201;
+			sourceTree = "<group>";
+		};
+		1E0CDB592E9382A300BCC002 /* 1020201coex */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB582E9382A300BCC002 /* ramps_0x01020201_26_HighPriority.dfu */,
+			);
+			path = 1020201coex;
+			sourceTree = "<group>";
+		};
+		1E0CDB6C2E9382A300BCC002 /* ar3k */ = {
+			isa = PBXGroup;
+			children = (
+				1E0CDB462E9382A300BCC002 /* 30000 */,
+				1E0CDB4A2E9382A300BCC002 /* 30101 */,
+				1E0CDB502E9382A300BCC002 /* 30101coex */,
+				1E0CDB542E9382A300BCC002 /* 1020200 */,
+				1E0CDB572E9382A300BCC002 /* 1020201 */,
+				1E0CDB592E9382A300BCC002 /* 1020201coex */,
+				1E0CDB5A2E9382A300BCC002 /* AthrBT_0x01020001.dfu */,
+				1E0CDB5B2E9382A300BCC002 /* AthrBT_0x01020200.dfu */,
+				1E0CDB5C2E9382A300BCC002 /* AthrBT_0x01020201.dfu */,
+				1E0CDB5D2E9382A300BCC002 /* AthrBT_0x11020000.dfu */,
+				1E0CDB5E2E9382A300BCC002 /* AthrBT_0x11020100.dfu */,
+				1E0CDB5F2E9382A300BCC002 /* AthrBT_0x31010000.dfu */,
+				1E0CDB602E9382A300BCC002 /* AthrBT_0x31010100.dfu */,
+				1E0CDB612E9382A300BCC002 /* AthrBT_0x41020000.dfu */,
+				1E0CDB622E9382A300BCC002 /* ramps_0x01020001_26.dfu */,
+				1E0CDB632E9382A300BCC002 /* ramps_0x01020200_26.dfu */,
+				1E0CDB642E9382A300BCC002 /* ramps_0x01020200_40.dfu */,
+				1E0CDB652E9382A300BCC002 /* ramps_0x01020201_26.dfu */,
+				1E0CDB662E9382A300BCC002 /* ramps_0x01020201_40.dfu */,
+				1E0CDB672E9382A300BCC002 /* ramps_0x11020000_40.dfu */,
+				1E0CDB682E9382A300BCC002 /* ramps_0x11020100_40.dfu */,
+				1E0CDB692E9382A300BCC002 /* ramps_0x31010000_40.dfu */,
+				1E0CDB6A2E9382A300BCC002 /* ramps_0x31010100_40.dfu */,
+				1E0CDB6B2E9382A300BCC002 /* ramps_0x41020000_40.dfu */,
+			);
+			path = ar3k;
+			sourceTree = "<group>";
+		};
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
+				1E0CDB772E93A01000BCC002 /* qca_firmware.h */,
+				1E0CDB6F2E9395A400BCC002 /* gen_qca_fw.sh */,
+				1E0CDB6E2E93955900BCC002 /* Makefile */,
+				1E0CDB6D2E93866600BCC002 /* ai2.md */,
+				1E0CDB6C2E9382A300BCC002 /* ar3k */,
 				1E9234B22E916A2300FA267A /* ai.md */,
 				3573FE3025223B8500DFC9F4 /* QCABluetooth */,
 				3573FE2F25223B8500DFC9F4 /* Products */,
@@ -65,12 +216,12 @@
 			children = (
 				1E3FAA4F2E92C36400108742 /* hci.hpp */,
 				3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */,
-				1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp */,
+				1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */,
 				3573FE3325223B8500DFC9F4 /* QCABluetooth.cpp */,
-				1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp */,
+				1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */,
 				3573FE3525223B8500DFC9F4 /* Info.plist */,
-				1E3FAA4E2E92A4A900108742 /* Info 2.plist */,
-				1ED72C002E9214B900D81D40 /* Info 3.plist */,
+				1E3FAA4E2E92A4A900108742 /* Info 2.plist.bak */,
+				1ED72C002E9214B900D81D40 /* Info 3.plist.bak */,
 			);
 			path = QCABluetooth;
 			sourceTree = "<group>";
@@ -90,8 +241,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E0CDB782E93A01000BCC002 /* qca_firmware.h in Headers */,
 				3573FE3225223B8500DFC9F4 /* QCABluetooth.hpp in Headers */,
-				1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp in Headers */,
+				1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp.bak in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +277,9 @@
 			attributes = {
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					1E0CDB702E93979900BCC002 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					3573FE2D25223B8500DFC9F4 = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -144,6 +299,7 @@
 			projectRoot = "";
 			targets = (
 				3573FE2D25223B8500DFC9F4 /* QCABluetooth */,
+				1E0CDB702E93979900BCC002 /* qca_firmware_gen */,
 			);
 		};
 /* End PBXProject section */
@@ -159,6 +315,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E0CDB762E93992200BCC002 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Typea script or drag a script file from your workspace to insert its path.\necho \"Gen Header\"\nmake -C \"${SRCROOT}\"\n";
+		};
 		CE36C7C1252B87670093C599 /* Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,7 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp in Sources */,
+				1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp.bak in Sources */,
 				3573FE3425223B8500DFC9F4 /* QCABluetooth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +365,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		1E0CDB722E93979900BCC002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1E0CDB732E93979900BCC002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		3573FE3625223B8500DFC9F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -361,6 +550,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E0CDB712E93979900BCC002 /* Build configuration list for PBXAggregateTarget "qca_firmware_gen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E0CDB722E93979900BCC002 /* Debug */,
+				1E0CDB732E93979900BCC002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "QCABluetooth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
