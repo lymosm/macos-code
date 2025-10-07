@@ -35,13 +35,16 @@ public:
     virtual bool init(OSDictionary* dict) override;
     virtual void free() override;
     virtual IOService* probe(IOService* provider, SInt32* score) override;
+    virtual IOReturn message(UInt32 type, IOService *provider, void *argument) override;
     virtual bool start(IOService* provider) override;
     virtual void stop(IOService* provider) override;
+    
 
     // Minimal helpers
     bool findAndOpenInterface();
     bool uploadFirmware();
     bool uploadFirmwareFile(const uint8_t* data, size_t len);
+    bool uploadFirmwareFile_ControlThenBulk(const uint8_t* data, size_t len);
     void handleUSBData(uint8_t* data, size_t len);
     
     IOUSBHostPipe* _intInPipe;                   // 事件输入 pipe
@@ -50,6 +53,9 @@ public:
 
     IOUSBHostPipe* _bulkOutPipe;   // 发 HCI 命令
     IOUSBHostPipe* _bulkInPipe;    // 接收 ACL (以后可用)
+    // member vars
+    IOUSBHostInterface* _usbInterface = nullptr;
+    uint16_t _bulkOutMaxPacket = 0;
 
     bool submitAsyncRead();
     void allocateEventRead();
@@ -57,5 +63,8 @@ public:
                            void* parameter,
                            IOReturn status,
                            uint32_t bytesTransferred);
+    IOReturn getDeviceStatus(IOService* forClient, USBStatus *status);
+    bool sendHCIResetAndWait();
+    IOReturn sendSmallBulkTest();
 
 };

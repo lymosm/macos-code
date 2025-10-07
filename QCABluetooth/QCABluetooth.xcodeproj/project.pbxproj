@@ -75,7 +75,10 @@
 		1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QCABluetooth 2.hpp.bak"; sourceTree = "<group>"; };
 		1E3FAA4E2E92A4A900108742 /* Info 2.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 2.plist.bak"; sourceTree = "<group>"; };
 		1E3FAA4F2E92C36400108742 /* hci.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hci.hpp; sourceTree = "<group>"; };
+		1E5042762E93D764007F5AFE /* ai3.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai3.md; sourceTree = "<group>"; };
 		1E9234B22E916A2300FA267A /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
+		1E94B0E22E93EE0500A7E0A2 /* ai4.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai4.md; sourceTree = "<group>"; };
+		1E9E3B482E9415E000F63198 /* ai5.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai5.md; sourceTree = "<group>"; };
 		1ED72C002E9214B900D81D40 /* Info 3.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 3.plist.bak"; sourceTree = "<group>"; };
 		1EFBFCA12E60AB8800EB0C2D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3573FE2E25223B8500DFC9F4 /* QCABluetooth.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCABluetooth.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +193,9 @@
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
+				1E9E3B482E9415E000F63198 /* ai5.md */,
+				1E94B0E22E93EE0500A7E0A2 /* ai4.md */,
+				1E5042762E93D764007F5AFE /* ai3.md */,
 				1E0CDB772E93A01000BCC002 /* qca_firmware.h */,
 				1E0CDB6F2E9395A400BCC002 /* gen_qca_fw.sh */,
 				1E0CDB6E2E93955900BCC002 /* Makefile */,
@@ -514,6 +520,7 @@
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0.1;
 				MODULE_NAME = tommy.QCABluetooth;
 				MODULE_VERSION = 1.0.1;
@@ -537,6 +544,7 @@
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0.1;
 				MODULE_NAME = tommy.QCABluetooth;
 				MODULE_VERSION = 1.0.1;
