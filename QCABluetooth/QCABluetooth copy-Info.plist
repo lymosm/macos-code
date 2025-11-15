@@ -13,69 +13,68 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>KEXT</string>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MODULE_VERSION)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(MODULE_VERSION)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>AsusFn</key>
+		<key>QCA-BroadcomTransport</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport</string>
+			<key>IOClass</key>
+			<string>BroadcomBluetoothHostControllerUSBTransport</string>
+			<key>IOProbeScore</key>
+			<integer>6000</integer>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostInterface</string>
+			<key>bInterfaceClass</key>
+			<integer>224</integer>
+			<key>bInterfaceProtocol</key>
+			<integer>1</integer>
+			<key>bInterfaceSubClass</key>
+			<integer>1</integer>
+			<key>idProduct</key>
+			<integer>12312</integer>
+			<key>idVendor</key>
+			<integer>1226</integer>
+		</dict>
+		<key>QCABluetooth</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>IOClass</key>
-			<string>AsusFn</string>
-			<key>IONameMatch</key>
-			<array>
-				<string>PNP0c14</string>
-				<string>PNP0C14</string>
-				<string>PnP0C14</string>
-				<string>pnp0c14</string>
-				<string>ASUS010</string>
-				<string>ASUS0100</string>
-				<string>ASUS0010</string>
-				<string>ATK0100</string>
-			</array>
+			<string>QCABluetooth</string>
+			<key>IOMatchCategory</key>
+			<string>QCABluetooth</string>
 			<key>IOProbeScore</key>
-			<integer>9999</integer>
+			<integer>4000</integer>
 			<key>IOProviderClass</key>
-			<string>IOACPIPlatformDevice</string>
+			<string>IOUSBHostDevice</string>
+			<key>idProduct</key>
+			<integer>12312</integer>
+			<key>idVendor</key>
+			<integer>1226</integer>
 		</dict>
 	</dict>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2025 Tommy. All rights reserved.</string>
-	<key>OSBundleCompatibleVersion</key>
-	<string>1.0.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>as.vit9696.Lilu</key>
-		<string>1.2.0</string>
-		<key>as.vit9696.VirtualSMC</key>
-		<string>1.0.0</string>
-		<key>com.apple.iokit.IOACPIFamily</key>
-		<string>1.0.0d1</string>
-		<key>com.apple.iokit.IOHIDFamily</key>
-		<string>2.0.0</string>
 		<key>com.apple.iokit.IOUSBHostFamily</key>
-		<string>1.0.1</string>
+		<string>1.2</string>
 		<key>com.apple.kpi.bsd</key>
 		<string>8.0.0</string>
-		<key>com.apple.kpi.dsep</key>
-		<string>8.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>8.0.0</string>
+		<string>16.7</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>8.0.0</string>
+		<string>16.7</string>
 		<key>com.apple.kpi.mach</key>
-		<string>8.0.0</string>
+		<string>16.7</string>
 		<key>com.apple.kpi.unsupported</key>
 		<string>8.0.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
-    
-    
-
 </dict>
 </plist>

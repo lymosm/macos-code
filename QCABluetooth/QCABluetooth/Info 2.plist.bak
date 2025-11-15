@@ -20,7 +20,7 @@
     <string>$(MARKETING_VERSION)</string>
 
     <key>OSBundleRequired</key>
-    <string>Console</string>
+    <string>Root</string>
 
     <key>IOKitPersonalities</key>
     <dict>
@@ -32,6 +32,8 @@
             <string>QCABluetooth</string>
             <key>IOMatchCategory</key>
             <string>QCABluetooth</string>
+            <key>IOProbeScore</key>
+            <integer>4000</integer>
             <key>IOProviderClass</key>
             <string>IOUSBHostDevice</string>
             <key>idVendor</key>
@@ -39,6 +41,7 @@
             <key>idProduct</key>
             <integer>12312</integer>
         </dict>
+        
     </dict>
 
     <key>OSBundleLibraries</key>
@@ -48,11 +51,11 @@
                 <key>com.apple.iokit.IOUSBHostFamily</key>
                 <string>1.2</string>
                 <key>com.apple.kpi.iokit</key>
-                <string>8.0.0</string>
+                <string>16.7</string>
                 <key>com.apple.kpi.libkern</key>
-                <string>8.0.0</string>
+                <string>16.7</string>
                 <key>com.apple.kpi.mach</key>
-                <string>8.0.0</string>
+                <string>16.7</string>
                 <key>com.apple.kpi.unsupported</key>
                 <string>8.0.0</string>
     </dict>

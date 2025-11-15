@@ -66,5 +66,6 @@ public:
     IOReturn getDeviceStatus(IOService* forClient, USBStatus *status);
     bool sendHCIResetAndWait();
     IOReturn sendSmallBulkTest();
+    void firmwareUploadComplete();
 
 };

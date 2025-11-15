@@ -23,25 +23,52 @@
     <string>Root</string>
 
     <key>IOKitPersonalities</key>
-    <dict>
-        <key>QCABluetooth</key>
         <dict>
-            <key>CFBundleIdentifier</key>
-            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-            <key>IOClass</key>
-            <string>QCABluetooth</string>
-            <key>IOMatchCategory</key>
-            <string>QCABluetooth</string>
-            <key>IOProbeScore</key>
-            <integer>4000</integer>
-            <key>IOProviderClass</key>
-            <string>IOUSBHostDevice</string>
-            <key>idVendor</key>
-            <integer>1226</integer>
-            <key>idProduct</key>
-            <integer>12312</integer>
+            <!-- QCABluetooth 固件加载器 -->
+            <key>QCABluetooth</key>
+            <dict>
+                <key>CFBundleIdentifier</key>
+                <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+                <key>IOClass</key>
+                <string>QCABluetooth</string>
+                <key>IOMatchCategory</key>
+                <string>QCABluetooth</string>
+                <key>IOProbeScore</key>
+                <integer>4000</integer>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1226</integer>
+                <key>idProduct</key>
+                <integer>12312</integer>
+            </dict>
+<!--
+            <key>QCA-BroadcomTransport</key>
+            <dict>
+                <key>CFBundleIdentifier</key>
+                <string>com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport</string>
+                <key>IOClass</key>
+                <string>BroadcomBluetoothHostControllerUSBTransport</string>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostInterface</string>
+
+                <key>idVendor</key>
+                <integer>1226</integer>
+                <key>idProduct</key>
+                <integer>12312</integer>
+
+                <key>bInterfaceClass</key>
+                <integer>224</integer>       
+                <key>bInterfaceSubClass</key>
+                <integer>1</integer>
+                <key>bInterfaceProtocol</key>
+                <integer>1</integer>
+
+                <key>IOProbeScore</key>
+                <integer>6000</integer>
+            </dict>
+-->
         </dict>
-    </dict>
 
     <key>OSBundleLibraries</key>
     <dict>

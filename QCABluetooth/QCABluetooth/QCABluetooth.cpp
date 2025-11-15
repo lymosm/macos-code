@@ -7,7 +7,8 @@
 #include "QCABluetooth.hpp"
 #include "hci.hpp"
 #include <IOKit/IOBufferMemoryDescriptor.h>
-#include "qca_firmware.h"
+// #include "qca_firmware.h"
+#include "QCAFirmwareLoader.hpp"
 extern const OSSymbol* gIOUSBHostInterfaceClass;
 
 #define super IOService
@@ -83,26 +84,85 @@ bool QCABluetooth::start(IOService* provider) {
     }
     
     
-    // Upload firmware if required
+    // Upload firmware if required /// use loader breow
+    /*
     if (! uploadFirmware()) {
         IOLog("tommybt: firmware upload failed (may still work if not required)\n");
         // continue — some devices might not require external firmware
         stop(provider);
         return false;
     }
+     */
+    
+    QCAFirmwareLoader* loader = new QCAFirmwareLoader;
+    if (loader->initWithInterface(_usbInterface, _bulkInPipe, _bulkOutPipe, _intInPipe, _device, this, _bulkOutMaxPacket)) {
+        if (loader->uploadFirmware()) {
+            firmwareUploadComplete();
+            loader->sendHciReset();
+        }
+       // loader->detachAndRelease();
+    }
+    loader->release();
+
     
     // 开始监听 Event (interrupt in pipe)
+    /*
     if (_intInPipe) {
         allocateEventRead();
     } else {
         IOLog("tommybt: no interrupt in pipe found, cannot receive events!\n");
     }
-
+     */
 
     // TODO: set up USB pipes and callbacks to receive HCI events
     IOLog("tommybt: started\n");
     registerService();
     return true;
+}
+
+void QCABluetooth::firmwareUploadComplete() {
+    IOLog("tommybt: firmwareUploadComplete()\n");
+
+    IOService *prov = getProvider(); // 通常你的 provider 是 IOUSBDevice 或 IOUSBInterface
+    if (prov) {
+        // 使用内核布尔常量写入 registry
+        prov->setProperty("QCAFirmwareLoaded", kOSBooleanTrue);
+        
+        // 2) 等待并在所有 IOUSBHostInterface 子节点上写入标记
+        const int MAX_WAIT_MS = 10000;   // 最大等待 10s，可按需调整
+        const int POLL_MS     = 200;     // 每 200ms 轮询一次
+        int elapsed = 0;
+        bool any_interface_seen = false;
+        
+        while (elapsed < MAX_WAIT_MS) {
+            OSIterator *iter = prov->getChildIterator(gIOServicePlane);
+            if (iter) {
+                IORegistryEntry *child = nullptr;
+                while ((child = (IORegistryEntry *)iter->getNextObject())) {
+                    IOUSBHostInterface *iiface = OSDynamicCast(IOUSBHostInterface, child);
+                    if (iiface) {
+                        // 在接口节点上设置属性（QCAUSBTransport 会匹配到这些节点）
+                        iiface->setProperty("QCAFirmwareLoaded", kOSBooleanTrue);
+                        any_interface_seen = true;
+                        IOLog("tommybt: set QCAFirmwareLoaded on interface (%s)\n",
+                              (iiface->getName() ? iiface->getName() : "unknown"));
+                    }
+                    // 注意：child 由 iterator 提供，不要对 child 调用 release()
+                }
+                iter->release();
+                if (any_interface_seen) break; // 找到并设好了，退出轮询
+            }
+            
+            IOSleep(POLL_MS);
+            elapsed += POLL_MS;
+        }
+        // 3) 强制驱动匹配/探测（建议）
+            // kIOServiceSynchronous 或 kIOServiceAsynchronous 可根据需要选择
+        prov->requestProbe(kIOServiceSynchronous);
+        IOLog("tommybt: set QCAFirmwareLoaded property on provider\n");
+    } else {
+        IOLog("tommybt: no provider to set QCAFirmwareLoaded\n");
+    }
 }
 
 bool QCABluetooth::findAndOpenInterface() {
@@ -325,6 +385,7 @@ IOReturn QCABluetooth::message(UInt32 type, IOService *provider, void *argument)
     return super::message(type, provider, argument);
 }
 
+/*
 bool QCABluetooth::uploadFirmware() {
     IOLog("tommybt: uploadFirmware start\n");
     
@@ -342,11 +403,10 @@ bool QCABluetooth::uploadFirmware() {
         return false;
     }
 
-    
-
     IOLog("tommybt: firmware upload done ✅\n");
     return true;
 }
+ */
 
 // 调试用：发送一个 1 字节的测试包到 bulk out
 IOReturn QCABluetooth::sendSmallBulkTest() {
@@ -380,6 +440,7 @@ IOReturn QCABluetooth::sendSmallBulkTest() {
     return r;
 }
 
+/*
 bool QCABluetooth::uploadFirmwareFile_ControlThenBulk(const uint8_t* data, size_t len) {
     if (!_bulkOutPipe) {
         IOLog("tommybt: uploadFirmwareFile_ControlThenBulk: no bulk out pipe\n");
@@ -460,7 +521,7 @@ bool QCABluetooth::uploadFirmwareFile_ControlThenBulk(const uint8_t* data, size_
     IOLog("tommybt: uploadFirmwareFile_ControlThenBulk: complete\n");
     return true;
 }
-
+*/
 
 
 bool QCABluetooth::uploadFirmwareFile(const uint8_t* data, size_t len) {
@@ -621,6 +682,7 @@ bool QCABluetooth::submitAsyncRead() {
 }
 
 void QCABluetooth::allocateEventRead() {
+    IOLog("tommybt: allocateEventRead in\n");
     const int bufSize = 260; // 足够存放 HCI event
     _eventBuffer = IOBufferMemoryDescriptor::withCapacity(bufSize, kIODirectionIn);
     if (!_eventBuffer) {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 73;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -24,12 +24,25 @@
 
 /* Begin PBXBuildFile section */
 		1E0CDB782E93A01000BCC002 /* qca_firmware.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E0CDB772E93A01000BCC002 /* qca_firmware.h */; };
+		1E347DA12E95CC6300624400 /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358E312E2523A1E400C409AD /* libkmod.a */; };
 		1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp.bak in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */; };
 		1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp.bak in Headers */ = {isa = PBXBuildFile; fileRef = 1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */; };
+		1EA5F1A92E94E7BB00BBA670 /* QCAFirmwareLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1EA5F1A82E94E7B500BBA670 /* QCAFirmwareLoader.hpp */; };
+		1EA5F1AB2E94E7EB00BBA670 /* QCAFirmwareLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5F1AA2E94E7E800BBA670 /* QCAFirmwareLoader.cpp */; };
 		3573FE3225223B8500DFC9F4 /* QCABluetooth.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */; };
 		3573FE3425223B8500DFC9F4 /* QCABluetooth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3573FE3325223B8500DFC9F4 /* QCABluetooth.cpp */; };
 		358E312F2523A1E400C409AD /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358E312E2523A1E400C409AD /* libkmod.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E4C937D2E95FDF600E8256A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3573FE2525223B8500DFC9F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3573FE2D25223B8500DFC9F4;
+			remoteInfo = QCABluetooth;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E0CDB432E9382A300BCC002 /* ar3kbdaddr.pst */ = {isa = PBXFileReference; lastKnownFileType = text; path = ar3kbdaddr.pst; sourceTree = "<group>"; };
@@ -67,19 +80,19 @@
 		1E0CDB692E9382A300BCC002 /* ramps_0x31010000_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x31010000_40.dfu; sourceTree = "<group>"; };
 		1E0CDB6A2E9382A300BCC002 /* ramps_0x31010100_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x31010100_40.dfu; sourceTree = "<group>"; };
 		1E0CDB6B2E9382A300BCC002 /* ramps_0x41020000_40.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; path = ramps_0x41020000_40.dfu; sourceTree = "<group>"; };
-		1E0CDB6D2E93866600BCC002 /* ai2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai2.md; sourceTree = "<group>"; };
 		1E0CDB6E2E93955900BCC002 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		1E0CDB6F2E9395A400BCC002 /* gen_qca_fw.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_qca_fw.sh; sourceTree = "<group>"; };
 		1E0CDB772E93A01000BCC002 /* qca_firmware.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qca_firmware.h; sourceTree = "<group>"; };
+		1E17E60D2E97CA0A00021FE4 /* QCAInjector.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCAInjector.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E347DA72E95CC6300624400 /* QCAUSBTransport.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCAUSBTransport.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E347DA82E95CC6300624400 /* QCABluetooth copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QCABluetooth copy-Info.plist"; path = "/Volumes/dev/macos-dev/macos-code/QCABluetooth/QCABluetooth copy-Info.plist"; sourceTree = "<absolute>"; };
+		1E39C2E82E956258007F25C3 /* Info 2.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 2.plist.bak"; sourceTree = "<group>"; };
 		1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QCABluetooth 2.cpp.bak"; sourceTree = "<group>"; };
 		1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QCABluetooth 2.hpp.bak"; sourceTree = "<group>"; };
-		1E3FAA4E2E92A4A900108742 /* Info 2.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 2.plist.bak"; sourceTree = "<group>"; };
 		1E3FAA4F2E92C36400108742 /* hci.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hci.hpp; sourceTree = "<group>"; };
-		1E5042762E93D764007F5AFE /* ai3.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai3.md; sourceTree = "<group>"; };
-		1E9234B22E916A2300FA267A /* ai.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai.md; sourceTree = "<group>"; };
-		1E94B0E22E93EE0500A7E0A2 /* ai4.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai4.md; sourceTree = "<group>"; };
-		1E9E3B482E9415E000F63198 /* ai5.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai5.md; sourceTree = "<group>"; };
-		1ED72C002E9214B900D81D40 /* Info 3.plist.bak */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info 3.plist.bak"; sourceTree = "<group>"; };
+		1E9234B22E916A2300FA267A /* ai1.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ai1.md; sourceTree = "<group>"; };
+		1EA5F1A82E94E7B500BBA670 /* QCAFirmwareLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = QCAFirmwareLoader.hpp; sourceTree = "<group>"; };
+		1EA5F1AA2E94E7E800BBA670 /* QCAFirmwareLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QCAFirmwareLoader.cpp; sourceTree = "<group>"; };
 		1EFBFCA12E60AB8800EB0C2D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3573FE2E25223B8500DFC9F4 /* QCABluetooth.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCABluetooth.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = QCABluetooth.hpp; sourceTree = "<group>"; };
@@ -88,7 +101,62 @@
 		358E312E2523A1E400C409AD /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1E17E6122E97CA0A00021FE4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1E17E60C2E97CA0A00021FE4 /* QCAInjector */;
+		};
+		1E347DAE2E95FB1A00624400 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				QCAUSBTransport.cpp,
+				QCAUSBTransport.hpp,
+			);
+			target = 1E347D962E95CC6300624400 /* QCAUSBTransport */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		1E347DB02E95FB2000624400 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1E347D972E95CC6300624400 /* Headers */;
+			membershipExceptions = (
+				QCAUSBTransport.cpp,
+			);
+		};
+		1E347DB32E95FB3700624400 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1E347D9C2E95CC6300624400 /* Sources */;
+			membershipExceptions = (
+				QCAUSBTransport.hpp,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E17E60E2E97CA0A00021FE4 /* QCAInjector */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1E17E6122E97CA0A00021FE4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = QCAInjector; sourceTree = "<group>"; };
+		1E347DA92E95CC7600624400 /* QCAUSBTransport */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1E347DAE2E95FB1A00624400 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1E347DB02E95FB2000624400 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, 1E347DB32E95FB3700624400 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = QCAUSBTransport; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		1E17E60A2E97CA0A00021FE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E347DA02E95CC6300624400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E347DA12E95CC6300624400 /* libkmod.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3573FE2B25223B8500DFC9F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,19 +261,18 @@
 		3573FE2425223B8500DFC9F4 = {
 			isa = PBXGroup;
 			children = (
-				1E9E3B482E9415E000F63198 /* ai5.md */,
-				1E94B0E22E93EE0500A7E0A2 /* ai4.md */,
-				1E5042762E93D764007F5AFE /* ai3.md */,
+				1E347DA92E95CC7600624400 /* QCAUSBTransport */,
 				1E0CDB772E93A01000BCC002 /* qca_firmware.h */,
 				1E0CDB6F2E9395A400BCC002 /* gen_qca_fw.sh */,
 				1E0CDB6E2E93955900BCC002 /* Makefile */,
-				1E0CDB6D2E93866600BCC002 /* ai2.md */,
 				1E0CDB6C2E9382A300BCC002 /* ar3k */,
-				1E9234B22E916A2300FA267A /* ai.md */,
+				1E9234B22E916A2300FA267A /* ai1.md */,
 				3573FE3025223B8500DFC9F4 /* QCABluetooth */,
+				1E17E60E2E97CA0A00021FE4 /* QCAInjector */,
 				3573FE2F25223B8500DFC9F4 /* Products */,
 				358E312D2523A1E400C409AD /* Frameworks */,
 				1EFBFCA12E60AB8800EB0C2D /* README.md */,
+				1E347DA82E95CC6300624400 /* QCABluetooth copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -213,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				3573FE2E25223B8500DFC9F4 /* QCABluetooth.kext */,
+				1E347DA72E95CC6300624400 /* QCAUSBTransport.kext */,
+				1E17E60D2E97CA0A00021FE4 /* QCAInjector.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,14 +289,15 @@
 		3573FE3025223B8500DFC9F4 /* QCABluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				1EA5F1AA2E94E7E800BBA670 /* QCAFirmwareLoader.cpp */,
+				1EA5F1A82E94E7B500BBA670 /* QCAFirmwareLoader.hpp */,
 				1E3FAA4F2E92C36400108742 /* hci.hpp */,
 				3573FE3125223B8500DFC9F4 /* QCABluetooth.hpp */,
 				1E3FAA4C2E92A48E00108742 /* QCABluetooth 2.hpp.bak */,
 				3573FE3325223B8500DFC9F4 /* QCABluetooth.cpp */,
 				1E3FAA4A2E92A06200108742 /* QCABluetooth 2.cpp.bak */,
 				3573FE3525223B8500DFC9F4 /* Info.plist */,
-				1E3FAA4E2E92A4A900108742 /* Info 2.plist.bak */,
-				1ED72C002E9214B900D81D40 /* Info 3.plist.bak */,
+				1E39C2E82E956258007F25C3 /* Info 2.plist.bak */,
 			);
 			path = QCABluetooth;
 			sourceTree = "<group>";
@@ -243,10 +313,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1E17E6082E97CA0A00021FE4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E347D972E95CC6300624400 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3573FE2925223B8500DFC9F4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA5F1A92E94E7BB00BBA670 /* QCAFirmwareLoader.hpp in Headers */,
 				1E0CDB782E93A01000BCC002 /* qca_firmware.h in Headers */,
 				3573FE3225223B8500DFC9F4 /* QCABluetooth.hpp in Headers */,
 				1E3FAA4D2E92A48E00108742 /* QCABluetooth 2.hpp.bak in Headers */,
@@ -256,6 +341,49 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1E17E60C2E97CA0A00021FE4 /* QCAInjector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E17E6132E97CA0A00021FE4 /* Build configuration list for PBXNativeTarget "QCAInjector" */;
+			buildPhases = (
+				1E17E6082E97CA0A00021FE4 /* Headers */,
+				1E17E6092E97CA0A00021FE4 /* Sources */,
+				1E17E60A2E97CA0A00021FE4 /* Frameworks */,
+				1E17E60B2E97CA0A00021FE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1E17E60E2E97CA0A00021FE4 /* QCAInjector */,
+			);
+			name = QCAInjector;
+			packageProductDependencies = (
+			);
+			productName = QCAInjector;
+			productReference = 1E17E60D2E97CA0A00021FE4 /* QCAInjector.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
+		1E347D962E95CC6300624400 /* QCAUSBTransport */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E347DA42E95CC6300624400 /* Build configuration list for PBXNativeTarget "QCAUSBTransport" */;
+			buildPhases = (
+				1E347D972E95CC6300624400 /* Headers */,
+				1E347D9C2E95CC6300624400 /* Sources */,
+				1E347DA02E95CC6300624400 /* Frameworks */,
+				1E347DA22E95CC6300624400 /* Resources */,
+				1E347DA32E95CC6300624400 /* Archive */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E4C937E2E95FDF600E8256A /* PBXTargetDependency */,
+			);
+			name = QCAUSBTransport;
+			productName = BrightnessKeys;
+			productReference = 1E347DA72E95CC6300624400 /* QCAUSBTransport.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		3573FE2D25223B8500DFC9F4 /* QCABluetooth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3573FE3825223B8500DFC9F4 /* Build configuration list for PBXNativeTarget "QCABluetooth" */;
@@ -286,13 +414,15 @@
 					1E0CDB702E93979900BCC002 = {
 						CreatedOnToolsVersion = 26.0;
 					};
+					1E17E60C2E97CA0A00021FE4 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					3573FE2D25223B8500DFC9F4 = {
 						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
 			buildConfigurationList = 3573FE2825223B8500DFC9F4 /* Build configuration list for PBXProject "QCABluetooth" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -300,17 +430,34 @@
 				Base,
 			);
 			mainGroup = 3573FE2425223B8500DFC9F4;
+			preferredProjectObjectVersion = 50;
 			productRefGroup = 3573FE2F25223B8500DFC9F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				3573FE2D25223B8500DFC9F4 /* QCABluetooth */,
 				1E0CDB702E93979900BCC002 /* qca_firmware_gen */,
+				1E347D962E95CC6300624400 /* QCAUSBTransport */,
+				1E17E60C2E97CA0A00021FE4 /* QCAInjector */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1E17E60B2E97CA0A00021FE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E347DA22E95CC6300624400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3573FE2C25223B8500DFC9F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -338,6 +485,24 @@
 			shellPath = /bin/sh;
 			shellScript = "# Typea script or drag a script file from your workspace to insert its path.\necho \"Gen Header\"\nmake -C \"${SRCROOT}\"\n";
 		};
+		1E347DA32E95CC6300624400 /* Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Archive;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${TARGET_BUILD_DIR}\"\n\ndist=(\"$FULL_PRODUCT_NAME\")\nif [ -d \"$DWARF_DSYM_FILE_NAME\" ]; then dist+=(\"$DWARF_DSYM_FILE_NAME\"); fi\n\narchive=\"${PRODUCT_NAME}-${MODULE_VERSION}-$(echo $CONFIGURATION | tr /a-z/ /A-Z/).zip\"\nrm -rf *.zip\nif [ \"$CONFIGURATION\" == \"Release\" ]; then strip -x -T \"${EXECUTABLE_PATH}\"; fi\nzip -qry -FS \"${archive}\" \"${dist[@]}\"\n";
+		};
 		CE36C7C1252B87670093C599 /* Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -359,16 +524,39 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1E17E6092E97CA0A00021FE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E347D9C2E95CC6300624400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3573FE2A25223B8500DFC9F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1E3FAA4B2E92A06200108742 /* QCABluetooth 2.cpp.bak in Sources */,
+				1EA5F1AB2E94E7EB00BBA670 /* QCAFirmwareLoader.cpp in Sources */,
 				3573FE3425223B8500DFC9F4 /* QCABluetooth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E4C937E2E95FDF600E8256A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3573FE2D25223B8500DFC9F4 /* QCABluetooth */;
+			targetProxy = 1E4C937D2E95FDF600E8256A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1E0CDB722E93979900BCC002 /* Debug */ = {
@@ -384,6 +572,118 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		1E17E6142E97CA0A00021FE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QCAInjector/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0.0;
+				MODULE_NAME = tommy.QCAInjector;
+				MODULE_START = QCAInjector_start;
+				MODULE_STOP = QCAInjector_stop;
+				MODULE_VERSION = 1.0.0d1;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.QCAInjector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		1E17E6152E97CA0A00021FE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QCAInjector/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0.0;
+				MODULE_NAME = tommy.QCAInjector;
+				MODULE_START = QCAInjector_start;
+				MODULE_STOP = QCAInjector_stop;
+				MODULE_VERSION = 1.0.0d1;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.QCAInjector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
+		1E347DA52E95CC6300624400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.1;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = QCAUSBTransport/Info.plist;
+				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.0.1;
+				MODULE_NAME = tommy.QCAUSBTransport;
+				MODULE_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.QCAUSBTransport;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		1E347DA62E95CC6300624400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.1;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = QCAUSBTransport/Info.plist;
+				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.0.1;
+				MODULE_NAME = tommy.QCAUSBTransport;
+				MODULE_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.QCAUSBTransport;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
 		};
@@ -563,6 +863,24 @@
 			buildConfigurations = (
 				1E0CDB722E93979900BCC002 /* Debug */,
 				1E0CDB732E93979900BCC002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E17E6132E97CA0A00021FE4 /* Build configuration list for PBXNativeTarget "QCAInjector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E17E6142E97CA0A00021FE4 /* Debug */,
+				1E17E6152E97CA0A00021FE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E347DA42E95CC6300624400 /* Build configuration list for PBXNativeTarget "QCAUSBTransport" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E347DA52E95CC6300624400 /* Debug */,
+				1E347DA62E95CC6300624400 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
